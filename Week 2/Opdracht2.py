@@ -1,2 +1,3 @@
-hallo u bent gehacked
-Oh noooooo!!
+def complex(x,y):
+    c = x + y * 'i'
+    return c

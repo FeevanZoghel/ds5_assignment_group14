@@ -21,7 +21,7 @@ def import_file() -> list:
 
     return records
 
-def gemiddelde_score(grade):
+def gemiddelde_score(records):
     """
     Print het gemiddelde cijfer van alle records
     """

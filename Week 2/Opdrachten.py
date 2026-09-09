@@ -13,10 +13,7 @@ with open(file_path, 'r') as file:
 total = sum(float(record['Grade']) for record in records)
 average = total / len(records)
 
-<<<<<<< HEAD
->>>>>>> f760b71aa4da231b107898180242c720055d2761
-=======
->>>>>>> 8a20a76c34e3a3ee4a3a78c122e49ea8e41de1af
+
 print(f"Average Grade: {average}")
 print("--------------------")
 
@@ -25,8 +22,7 @@ filtered_records = [record for record in records if float(record['Grade']) >= 80
 print("Student Report")
 print("--------------")
 
-<<<<<<< Updated upstream
-=======
+
 def print_records(filtered_records):
     """
     Print de naam en grade van elk record in een lijst
@@ -42,4 +38,3 @@ def print_records(filtered_records):
 
 
 print('Kleine verandering')
->>>>>>> Stashed changes

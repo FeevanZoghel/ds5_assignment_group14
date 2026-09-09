@@ -31,6 +31,9 @@ def print_records(filtered_records):
     Print de naam en grade van elk record in een lijst
 
     Returns: print alleen de records en geeft geen waarde
+
+    Julien 
+    
     """
     for record in filtered_records:
         print(f"Name: {record['Name']}")
@@ -38,6 +41,3 @@ def print_records(filtered_records):
         print("--------------------")
 
 
-print('Een verandering voor Fee')
-print('Nog een kleine verandering')
-print('Kleine verandering')

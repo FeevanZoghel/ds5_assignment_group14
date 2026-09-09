@@ -21,7 +21,7 @@ def import_file() -> list:
 
     return records
 
-def gemiddelde_score(records):
+def gemiddelde_score(records) -> float:
     """
     Print het gemiddelde cijfer van alle records
     """
@@ -29,6 +29,8 @@ def gemiddelde_score(records):
     average = total / len(records)
     print(f"Average Grade: {average}")
     print("--------------------")
+
+    return average
 
 def print(filtered_records)
     filtered_records = [record for record in records if float(record['Grade']) >= 80.0]

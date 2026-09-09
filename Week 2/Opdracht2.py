@@ -1,14 +1,11 @@
+import numpy as np
+
 def complex(x,y):
     c = x + y * 'i'
     return c
 
 x = np.linspace(-1.5,0.5,200)
 y = np.linspace(-1,1,200)
-
-
-
-
-
 
 
 

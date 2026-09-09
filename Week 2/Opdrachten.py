@@ -21,12 +21,14 @@ def import_file() -> list:
 
     return records
 
-total = sum(float(record['Grade']) for record in records)
-average = total / len(records)
-
-
-print(f"Average Grade: {average}")
-print("--------------------")
+def gemiddelde_score(grade):
+    """
+    Print het gemiddelde cijfer van alle records
+    """
+    total = sum(float(record['Grade']) for record in records)
+    average = total / len(records)
+    print(f"Average Grade: {average}")
+    print("--------------------")
 
 filtered_records = [record for record in records if float(record['Grade']) >= 80.0]
     """

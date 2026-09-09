@@ -29,9 +29,9 @@ print(f"Average Grade: {average}")
 print("--------------------")
 
 filtered_records = [record for record in records if float(record['Grade']) >= 80.0]
-"""
-Kijkt of een cijfer hoger is dan een 80.0 en filterd die eruit
-""""
+    """
+    Kijkt of een cijfer hoger is dan een 80.0 en filterd die eruit
+    """"
 
 print("Student Report")
 print("--------------")

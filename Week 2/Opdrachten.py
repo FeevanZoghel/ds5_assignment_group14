@@ -25,3 +25,21 @@ filtered_records = [record for record in records if float(record['Grade']) >= 80
 print("Student Report")
 print("--------------")
 
+<<<<<<< Updated upstream
+=======
+def print_records(filtered_records):
+    """
+    Print de naam en grade van elk record in een lijst
+
+    Returns: print alleen de records en geeft geen waarde
+    """
+    for record in filtered_records:
+        print(f"Name: {record['Name']}")
+        print(f"Grade: {record['Grade']}")
+        print("--------------------")
+
+
+
+
+print('Kleine verandering')
+>>>>>>> Stashed changes

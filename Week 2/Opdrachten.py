@@ -1,4 +1,13 @@
-file_path = input("Enter the path to the CSV file: ")
+def import_file(file_path):
+    """
+    Importeerd het csv bestand via een input statement.
+    
+    Fee
+    
+    """
+
+    file_path = input("Enter the path to the CSV file: ")
+
 records = []
 
 

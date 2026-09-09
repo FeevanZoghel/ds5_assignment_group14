@@ -28,6 +28,9 @@ def print_records(filtered_records):
     Print de naam en grade van elk record in een lijst
 
     Returns: print alleen de records en geeft geen waarde
+
+    Julien 
+    
     """
     for record in filtered_records:
         print(f"Name: {record['Name']}")

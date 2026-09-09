@@ -1,23 +1,25 @@
-def import_file(file_path):
+def import_file() -> list:
     """
-    Importeerd het csv bestand via een input statement.
-    
-    Fee
-    
-    """
+    Importeert een CSV-bestand via een input statement.
 
+    Returns:
+        list: Een lijst met alle records uit het CSV-bestand.
+
+    Fee
+    """
     file_path = input("Enter the path to the CSV file: ")
 
-records = []
+    records = []
 
+    with open(file_path, 'r') as file:
+        csv_reader = csv.DictReader(file)
 
-with open(file_path, 'r') as file:
-    csv_reader = csv.DictReader(file)
-    for row in csv_reader:
-        records.append(row)
-        total = sum(float(record['Grade']) for record in records)
-        average = total / len(records)
+        for row in csv_reader:
+            records.append(row)
+            total = sum(float(record['Grade']) for record in records)
+            average = total / len(records)
 
+    return records
 
 total = sum(float(record['Grade']) for record in records)
 average = total / len(records)

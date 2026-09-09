@@ -43,7 +43,7 @@ def Excellent_records(records):
     returns: 
         list: Een lijst met namen + gehaalde cijfers van studenten met een cijfer gelijk of hoger dan 80.0
 
-    """"
+    """
     filtered_records = [record for record in records if float(record['Grade']) >= 80.0]
     print("Student Report")
     print("--------------")

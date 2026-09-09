@@ -1,4 +1,4 @@
-# Reg 1-50 Julien
+# Reg 1-50 Julien (complexe getallen)
 def complex(x,y):
     c = x + y * 'i'
 
@@ -48,7 +48,7 @@ def complex(x,y):
 
 
 
-# Reg 51 - 100 Mathijs
+# Reg 51 - 100 Mathijs (iteratie & divergeren/convergere)
 
 
 complex_getal = 1 + 0j
@@ -129,7 +129,17 @@ def complex_limiet(complex_getal)->tuple()
 
 
 
-# Regel 101-150 Megin
+# Regel 101-150 Megin (overdracht)
+def Overdracht(complexe_getallen):
+    """
+    Uit de lijst met complexe getallen (def 1) wordt steeds het opeenvolgende 
+    getal gehaald. Dit complex getal wordt vervolgens door het iteratieproces 
+    (def 2) gehaald om te kijken als het divergeert/convergeert. 
+    Megin 
+    """
+
+    for z in complexe_getallen:
+        complex_limiet(z)
 
 
 
@@ -168,18 +178,7 @@ def complex_limiet(complex_getal)->tuple()
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-# Regel 151-200 Fee
+# Regel 151-200 Fee (afbeelding)
 
 
 

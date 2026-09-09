@@ -1,5 +1,7 @@
+# Reg 1-50 Julien
 def complex(x,y):
     c = x + y * 'i'
+
     return c
 
 
@@ -46,6 +48,7 @@ def complex(x,y):
 
 
 
+# Reg 51 - 100 Mathijs
 
 
 complex_getal = 1 + 0j
@@ -79,6 +82,104 @@ def complex_limiet(complex_getal)->tuple()
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+# Regel 101-150 Megin
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+# Regel 151-200 Fee
 
 
 

@@ -31,24 +31,16 @@ def gemiddelde_score(records):
     print("--------------------")
 
 def Excellent_records(records):
-    filtered_records = [record for record in records if float(record['Grade']) >= 80.0]
     """
     Kijkt of een cijfer hoger is dan een 80.0 en filterd die eruit
-    """
-
-print("Student Report")
-print("--------------")
-
-
-def print_records(filtered_records):
-    """
-    Print de naam en grade van elk record in een lijst
-
-    Returns: print alleen de records en geeft geen waarde
-
-    Julien 
     
-    """
+    returns: 
+        list: Een lijst met namen + gehaalde cijfers van studenten met een cijfer gelijk of hoger dan 80.0
+
+    """"
+    filtered_records = [record for record in records if float(record['Grade']) >= 80.0]
+    print("Student Report")
+    print("--------------")
     for record in filtered_records:
         print(f"Name: {record['Name']}")
         print(f"Grade: {record['Grade']}")

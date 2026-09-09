@@ -21,7 +21,7 @@ def import_file() -> list:
 
     return records
 
-def gemiddelde_score(records):
+def gemiddelde_score(records) -> float:
     """
     Print het gemiddelde cijfer van alle records
     """
@@ -30,7 +30,15 @@ def gemiddelde_score(records):
     print(f"Average Grade: {average}")
     print("--------------------")
 
+    return average
+
 def Excellent_records(records):
+    """
+    Kijkt of een cijfer hoger is dan een 80.0 en filterd die eruit
+    """
+    filtered_records = [record for record in records if float(record['Grade']) >= 80.0]
+    return filtered_records
+
     """
     Kijkt of een cijfer hoger is dan een 80.0 en filterd die eruit
     

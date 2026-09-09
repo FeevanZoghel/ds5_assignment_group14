@@ -1,3 +1,3 @@
 def complex(x,y):
-    c = x + y * 'i' 
-    return c 
+    c = x + y * 'i'
+    return c

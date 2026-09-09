@@ -5,7 +5,6 @@ def import_file() -> list:
     Returns:
         list: Een lijst met alle records uit het CSV-bestand.
 
-    Fee
     """
     file_path = input("Enter the path to the CSV file: ")
 
@@ -37,8 +36,7 @@ def Excellent_records(records):
     Kijkt of een cijfer hoger is dan een 80.0 en filterd die eruit
     """
     filtered_records = [record for record in records if float(record['Grade']) >= 80.0]
-    return filtered_records
-
+    
     """
     Kijkt of een cijfer hoger is dan een 80.0 en filterd die eruit
     
@@ -53,5 +51,8 @@ def Excellent_records(records):
         print(f"Name: {record['Name']}")
         print(f"Grade: {record['Grade']}")
         print("--------------------")
+
+    return filtered_records
+    
 
 

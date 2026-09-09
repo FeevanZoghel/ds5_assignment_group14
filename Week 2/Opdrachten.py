@@ -38,6 +38,3 @@ def print_records(filtered_records):
         print("--------------------")
 
 
-print('Een verandering voor Fee')
-print('Nog een kleine verandering')
-print('Kleine verandering')

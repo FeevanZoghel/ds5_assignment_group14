@@ -30,7 +30,7 @@ def gemiddelde_score(records) -> float:
     print(f"Average Grade: {average}")
     print("--------------------")
 
-return average
+    return average
 
 def Excellent_records(records):
     """

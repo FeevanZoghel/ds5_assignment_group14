@@ -5,7 +5,6 @@ def import_file() -> list:
     Returns:
         list: Een lijst met alle records uit het CSV-bestand.
 
-    Fee
     """
     file_path = input("Enter the path to the CSV file: ")
 

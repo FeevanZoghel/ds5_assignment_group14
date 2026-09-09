@@ -98,37 +98,6 @@ def complex_limiet(complex_getal)->tuple()
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 # Regel 101-150 Megin (overdracht)
 def Overdracht(complexe_getallen):
     """
@@ -140,6 +109,7 @@ def Overdracht(complexe_getallen):
 
     for z in complexe_getallen:
         complex_limiet(z)
+
 
 
 

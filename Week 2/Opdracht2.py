@@ -1,16 +1,44 @@
 # Reg 1-50 Julien (complexe getallen)
-def complex(x,y):
-    c = x + y * 'i'
+def complex_number(x,y):
+    """
+    Julien 
+    dit zorgt ervoor dat als er een input is voor x en y
+    dat er een complex getal van gemaakt word
+    """
+    return x + y * 1j
 
-    return c
+c = complex_number(3,2)
+print(c)
 
 
 
+# 200 waarde voor X en Y
+# bereik x = [-1.5 t/m 0.5]
+# bereik y = [-1 t/m 1]
+
+x_values = []
+y_values = []
+
+for i in range(200):
+    x = -1.5 + i * (0.5 - (-1.5)) / 199
+    x_values.append(x)
+    y = -1 + i * (1 - (-1)) / 199
+    y_values.append(y)
 
 
+def complex_number_list(x_values, y_values):
+    """
+    Dit maakt een complex lijst met een input van y punten en x punten
+    zip combineerd twee lijsten hun indexen met elkaar
+    de output is een complexe lijst
+    Julien
+    """
+    complex_list = [] 
+    for x, y in zip(x_values,y_values):
+        complex_list.append(x + y * 1j)
+    return complex_list
 
-
-
+# complex_list = complex_number_list(x_values, y_values)
 
 
 

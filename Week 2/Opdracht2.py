@@ -15,7 +15,7 @@ def complex_number(x,y):
 
 x_values = []
 y_values = []
-n = 200
+n = 800
 for i in range(n):
     x = -1.5 + i * (0.5 - (-1.5)) / (n-1)
     x_values.append(x)
@@ -102,61 +102,6 @@ plt.xlim(-1.5, 0.5)
 plt.ylim(-1, 1)
 plt.show()
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-# Regel 151-200 Fee (afbeelding)
-
-# import matplotlib.pyplot as plt
-
-# complex_list = complex_number_list(x_values, y_values)
-
-# x_plot = []
-# y_plot = []
-
-# for c in complex_list:
-#     x_plot.append(c.real)
-#     y_plot.append(c.imag)
-
-# plt.scatter(x_plot, y_plot)
-# plt.xlabel("x")
-# plt.ylabel("y")
-# plt.title("Complexe getallen uit onze huidige code")
-# plt.xlim(-1.5, 0.5)
-# plt.ylim(-1, 1)
-# plt.show()
 
 
 

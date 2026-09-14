@@ -81,7 +81,7 @@ def complex_number_list(x_values, y_values):
 
 complex_getal = 1 + 0j
 
-def complex_limiet(complex_getal)->tuple()
+def complex_limiet(complex_getal) -> tuple():
     '''
     Input: een complex getal, 
     Kijkt per getal of het convergeert of divergeert en voegt het daarna aan een lijst toe
@@ -178,8 +178,24 @@ def Overdracht(complexe_getallen):
 
 # Regel 151-200 Fee (afbeelding)
 
+import matplotlib.pyplot as plt
 
+complex_list = complex_number_list(x_values, y_values)
 
+x_plot = []
+y_plot = []
+
+for c in complex_list:
+    x_plot.append(c.real)
+    y_plot.append(c.imag)
+
+plt.scatter(x_plot, y_plot)
+plt.xlabel("x")
+plt.ylabel("y")
+plt.title("Complexe getallen uit onze huidige code")
+plt.xlim(-1.5, 0.5)
+plt.ylim(-1, 1)
+plt.show()
 
 
 

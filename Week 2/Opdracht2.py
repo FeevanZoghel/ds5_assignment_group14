@@ -15,7 +15,7 @@ def complex_number(x,y):
 
 x_values = []
 y_values = []
-n = 800
+n = 200
 for i in range(n):
     x = -1.5 + i * (0.5 - (-1.5)) / (n-1)
     x_values.append(x)

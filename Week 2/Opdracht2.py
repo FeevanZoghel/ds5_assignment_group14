@@ -1,4 +1,3 @@
-# Reg 1-50 Julien (complexe getallen)
 def complex_number(x,y):
     """
     Julien 
@@ -7,10 +6,8 @@ def complex_number(x,y):
     """
     return x + y * 1j
 
-c = complex_number(3,2)
-print(c)
-
-
+# c = complex_number(3,2)
+# print(c)
 
 # 200 waarde voor X en Y
 # bereik x = [-1.5 t/m 0.5]
@@ -18,12 +15,14 @@ print(c)
 
 x_values = []
 y_values = []
-
-for i in range(200):
-    x = -1.5 + i * (0.5 - (-1.5)) / 199
+n = 200
+for i in range(n):
+    x = -1.5 + i * (0.5 - (-1.5)) / (n-1)
     x_values.append(x)
-    y = -1 + i * (1 - (-1)) / 199
+    y = -1 + i * (1 - (-1)) / (n-1)
     y_values.append(y)
+
+
 
 
 def complex_number_list(x_values, y_values):
@@ -33,55 +32,17 @@ def complex_number_list(x_values, y_values):
     de output is een complexe lijst
     Julien
     """
-    complex_list = [] 
-    for x, y in zip(x_values,y_values):
-        complex_list.append(x + y * 1j)
+    complex_list = []
+    for x in x_values:
+        for y in y_values:
+            complex_list.append(x + y * 1j)
     return complex_list
 
-# complex_list = complex_number_list(x_values, y_values)
+complex_list = complex_number_list(x_values, y_values)
 
+#complex_getal = 1 + 0j
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-# Reg 51 - 100 Mathijs (iteratie & divergeren/convergere)
-
-
-complex_getal = 1 + 0j
-
-def complex_limiet(complex_getal) -> tuple():
+def complex_limiet(complex_list) -> list():
     '''
     Input: een complex getal, 
     Kijkt per getal of het convergeert of divergeert en voegt het daarna aan een lijst toe
@@ -93,109 +54,54 @@ def complex_limiet(complex_getal) -> tuple():
     diverges = []
     convergers = []
     A0 = 0 
-    for i in range(1,100):
-        if i==1:
-            An = A0 + complex_getal
+    for complex_getal in complex_list:
+        for i in range(1,100):
+            if i==1:
+                An = A0 + complex_getal
+            else: 
+                An = (An)**2 + complex_getal
+            if abs(An)>2:
+                diverges.append(complex_getal)
+                break
         else: 
-            An = (An)**2 + complex_getal
-        if abs(An)>2:
-            diverges.append(complex_getal)
-            break
-    if abs(An)<=2:   
-        convergers.append(complex_getal)
+            convergers.append(complex_getal)
     return diverges, convergers
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-# Regel 101-150 Megin (overdracht)
 def Overdracht(complexe_getallen):
     """
-    Uit de lijst met complexe getallen (def 1) wordt steeds het opeenvolgende 
-    getal gehaald. Dit complex getal wordt vervolgens door het iteratieproces 
-    (def 2) gehaald om te kijken als het divergeert/convergeert. 
-    Megin 
-    """
+        Uit de lijst met complexe getallen (def 1) wordt steeds het opeenvolgende 
 
-    for z in complexe_getallen:
-        complex_limiet(z)
+        getal gehaald. Dit complex getal wordt vervolgens door het iteratieproces 
+        (def 2) gehaald om te kijken als het divergeert/convergeert. 
+        Megin 
+        """
+    return complex_limiet(complexe_getallen)
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-# Regel 151-200 Fee (afbeelding)
-
+diverges, convergers = Overdracht(complex_list)
 import matplotlib.pyplot as plt
 
 complex_list = complex_number_list(x_values, y_values)
 
-x_plot = []
-y_plot = []
+x_plot_div = [z.real for z in diverges]
+y_plot_div = [z.imag for z in diverges]
 
-for c in complex_list:
-    x_plot.append(c.real)
-    y_plot.append(c.imag)
+x_plot_conv = [z.real for z in convergers]
+y_plot_conv = [z.imag for z in convergers]
 
-plt.scatter(x_plot, y_plot)
-plt.xlabel("x")
-plt.ylabel("y")
-plt.title("Complexe getallen uit onze huidige code")
+# for c in complex_list:
+#     x_plot.append(c.real)
+#     y_plot.append(c.imag)
+
+plt.scatter(x_plot_div, y_plot_div, color = 'blue', s = 3)
+plt.scatter(x_plot_conv, y_plot_conv, color = 'black', s = 3)
+plt.xlabel("reel")
+plt.ylabel("imag")
+plt.title("Mandelbrott set")
 plt.xlim(-1.5, 0.5)
 plt.ylim(-1, 1)
 plt.show()
+
 
 
 

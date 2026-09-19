@@ -1,4 +1,4 @@
-Print('hoi')
+print('hoi')
 
 import networkx as nx
 import matplotlib.pyplot as plt
@@ -72,6 +72,7 @@ def create_network(n: int, m: int) -> nx.Graph:
     return G
 
 G = create_network(20, 2)
+
 
 nx.draw(G, with_labels=True)
 plt.show()

@@ -55,13 +55,13 @@ def complex_limiet(complex_list) -> list():
     convergers = []
     A0 = 0 
     for complex_getal in complex_list:
-        for i in range(1,100):
+        for i in range(1,101):
             if i==1:
                 An = A0 + complex_getal
             else: 
                 An = (An)**2 + complex_getal
             if abs(An)>2:
-                diverges.append(complex_getal)
+                diverges.append((complex_getal, i))
                 break
         else: 
             convergers.append(complex_getal)
@@ -79,28 +79,54 @@ def Overdracht(complexe_getallen):
     return complex_limiet(complexe_getallen)
 
 diverges, convergers = Overdracht(complex_list)
+
+import matplotlib.pyplot as plt
+
+complex_list = complex_number_list(x_values, y_values)
+def draw_mandel(width):
+    x_values = []
+    y_values = []
+    n = width
+    for i in range(n):
+        x = -1.5 + i * (0.5 - (-1.5)) / (n-1)
+        x_values.append(x)
+        y = -1 + i * (1 - (-1)) / (n-1)
+        y_values.append(y)
+
+    xmin = -1.5
+    xmax = .5
+    ymin = -1
+    ymax = 1
+    x_plot_div = [z[0].real for z in diverges]
+    y_plot_div = [z[0].imag for z in diverges]
+
+    x_plot_conv = [z.real for z in convergers]
+    y_plot_conv = [z.imag for z in convergers]
+    index = [z[1] for z in diverges]
+
+    # for c in complex_list:
+    #     x_plot.append(c.real)
+    #     y_plot.append(c.imag)
+
+    plt.scatter(x_plot_div, y_plot_div, c = index, cmap='Blues_r', s = 3)
+
+    plt.scatter(x_plot_conv, y_plot_conv, color = 'black', s = 3)
+    plt.xlabel("reel")
+    plt.ylabel("imag")
+    plt.title("Mandelbrott set")
+    plt.xlim(xmin, xmax)
+    plt.ylim(ymin, ymax)
+    
+    return plt.show()
+
+complex_list = complex_number_list(x_values, y_values)
+diverges, convergers = Overdracht(complex_list)
 import matplotlib.pyplot as plt
 
 complex_list = complex_number_list(x_values, y_values)
 
-x_plot_div = [z.real for z in diverges]
-y_plot_div = [z.imag for z in diverges]
+draw_mandel(800)
 
-x_plot_conv = [z.real for z in convergers]
-y_plot_conv = [z.imag for z in convergers]
-
-# for c in complex_list:
-#     x_plot.append(c.real)
-#     y_plot.append(c.imag)
-
-plt.scatter(x_plot_div, y_plot_div, color = 'blue', s = 3)
-plt.scatter(x_plot_conv, y_plot_conv, color = 'black', s = 3)
-plt.xlabel("reel")
-plt.ylabel("imag")
-plt.title("Mandelbrott set")
-plt.xlim(-1.5, 0.5)
-plt.ylim(-1, 1)
-plt.show()
 
 
 

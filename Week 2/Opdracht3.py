@@ -34,6 +34,7 @@ def create_network(k : int, N: int, M: int) -> nx.Graph:
 
 
     Parameters:
+        k: Het aantal verbindingen voor de 1e node.
         n: Het totale aantal nodes.
         m: Het aantal verbindingen voor elke nieuwe node.
 

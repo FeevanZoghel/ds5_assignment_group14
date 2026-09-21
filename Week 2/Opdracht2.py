@@ -111,7 +111,7 @@ def draw_mandel(width):
     plt.scatter(x_plot_div, y_plot_div, c = index, cmap='Blues_r', s = 3)
 
     plt.scatter(x_plot_conv, y_plot_conv, color = 'black', s = 3)
-    plt.xlabel("reel")
+    plt.xlabel("reeël")
     plt.ylabel("imag")
     plt.title("Mandelbrott set")
     plt.xlim(xmin, xmax)
@@ -125,7 +125,7 @@ import matplotlib.pyplot as plt
 
 complex_list = complex_number_list(x_values, y_values)
 
-draw_mandel(800)
+draw_mandel(80)
 
 
 

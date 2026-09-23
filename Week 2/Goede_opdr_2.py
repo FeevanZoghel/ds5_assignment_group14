@@ -19,7 +19,7 @@ def complex_number(x: float, y: float) -> complex:
     return x + y * 1j
 
 
-# Mathijs
+# Matthijs
 def complex_limiet(complex_getal: complex) -> int:
     """
     Bepaalt de diverging index van een complex getal.

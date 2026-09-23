@@ -1188,7 +1188,7 @@ else:
         )
 
 
-    # ========================================================
+       # ========================================================
     # PAGE 2
     # MENU + PRICES
     # ========================================================
@@ -1197,32 +1197,27 @@ else:
 
         st.markdown(
             """
-            <h1 style="
-                color:#102a56;
-            ">
+            <h1 style="color:#102a56;">
                 🍦 Menu + Prices
             </h1>
 
             <p style="
                 color:#405d83;
                 font-size:17px;
+                margin-bottom:30px;
             ">
-                Choose your favorite ice cream and
-                add it to your shopping cart.
+                Choose your favorite ice cream and add it to your shopping cart.
             </p>
             """,
             unsafe_allow_html=True
         )
 
 
-        st.write("")
-
-
         # ====================================================
-        # FIRST PRODUCT ROW
+        # FIRST ROW
         # ====================================================
 
-        col1, col2, col3 = st.columns(3)
+        col1, col2, col3 = st.columns(3, gap="medium")
 
 
         # ----------------------------------------------------
@@ -1231,46 +1226,37 @@ else:
 
         with col1:
 
-            product = products["Strawberry"]
+            st.markdown(
+                "<div style='text-align:center; font-size:75px;'>🍓</div>",
+                unsafe_allow_html=True
+            )
 
             st.markdown(
-                f"""
-                <div class="product-card">
+                "<h3 style='text-align:center; color:#102a56;'>Strawberry</h3>",
+                unsafe_allow_html=True
+            )
 
-                    <div class="product-emoji">
-                        {product["emoji"]}
-                    </div>
+            st.markdown(
+                "<p style='text-align:center; color:#405d83;'>"
+                "Sweet strawberry ice cream"
+                "</p>",
+                unsafe_allow_html=True
+            )
 
-                    <div class="product-name">
-                        Strawberry
-                    </div>
-
-                    <div class="product-description">
-                        {product["description"]}
-                    </div>
-
-                    <div class="product-price">
-                        €{product["price"]:.2f}
-                    </div>
-
-                </div>
-                """,
+            st.markdown(
+                "<h2 style='text-align:center; color:#102a56;'>€2.95</h2>",
                 unsafe_allow_html=True
             )
 
             if st.button(
-                "Add to cart 🛒",
+                "Add Strawberry 🛒",
                 key="add_strawberry",
                 use_container_width=True
             ):
 
-                st.session_state.cart.append(
-                    "Strawberry"
-                )
+                st.session_state.cart.append("Strawberry")
 
-                st.toast(
-                    "🍓 Strawberry added!"
-                )
+                st.toast("🍓 Strawberry added!")
 
                 st.rerun()
 
@@ -1281,46 +1267,37 @@ else:
 
         with col2:
 
-            product = products["Chocolate"]
+            st.markdown(
+                "<div style='text-align:center; font-size:75px;'>🍫</div>",
+                unsafe_allow_html=True
+            )
 
             st.markdown(
-                f"""
-                <div class="product-card">
+                "<h3 style='text-align:center; color:#102a56;'>Chocolate</h3>",
+                unsafe_allow_html=True
+            )
 
-                    <div class="product-emoji">
-                        {product["emoji"]}
-                    </div>
+            st.markdown(
+                "<p style='text-align:center; color:#405d83;'>"
+                "Rich chocolate ice cream"
+                "</p>",
+                unsafe_allow_html=True
+            )
 
-                    <div class="product-name">
-                        Chocolate
-                    </div>
-
-                    <div class="product-description">
-                        {product["description"]}
-                    </div>
-
-                    <div class="product-price">
-                        €{product["price"]:.2f}
-                    </div>
-
-                </div>
-                """,
+            st.markdown(
+                "<h2 style='text-align:center; color:#102a56;'>€3.25</h2>",
                 unsafe_allow_html=True
             )
 
             if st.button(
-                "Add to cart 🛒",
+                "Add Chocolate 🛒",
                 key="add_chocolate",
                 use_container_width=True
             ):
 
-                st.session_state.cart.append(
-                    "Chocolate"
-                )
+                st.session_state.cart.append("Chocolate")
 
-                st.toast(
-                    "🍫 Chocolate added!"
-                )
+                st.toast("🍫 Chocolate added!")
 
                 st.rerun()
 
@@ -1331,46 +1308,37 @@ else:
 
         with col3:
 
-            product = products["Cookie Crunch"]
+            st.markdown(
+                "<div style='text-align:center; font-size:75px;'>🍪</div>",
+                unsafe_allow_html=True
+            )
 
             st.markdown(
-                f"""
-                <div class="product-card">
+                "<h3 style='text-align:center; color:#102a56;'>Cookie Crunch</h3>",
+                unsafe_allow_html=True
+            )
 
-                    <div class="product-emoji">
-                        {product["emoji"]}
-                    </div>
+            st.markdown(
+                "<p style='text-align:center; color:#405d83;'>"
+                "Vanilla ice cream with cookie pieces"
+                "</p>",
+                unsafe_allow_html=True
+            )
 
-                    <div class="product-name">
-                        Cookie Crunch
-                    </div>
-
-                    <div class="product-description">
-                        {product["description"]}
-                    </div>
-
-                    <div class="product-price">
-                        €{product["price"]:.2f}
-                    </div>
-
-                </div>
-                """,
+            st.markdown(
+                "<h2 style='text-align:center; color:#102a56;'>€3.50</h2>",
                 unsafe_allow_html=True
             )
 
             if st.button(
-                "Add to cart 🛒",
+                "Add Cookie Crunch 🛒",
                 key="add_cookie",
                 use_container_width=True
             ):
 
-                st.session_state.cart.append(
-                    "Cookie Crunch"
-                )
+                st.session_state.cart.append("Cookie Crunch")
 
-                st.toast(
-                    "🍪 Cookie Crunch added!"
-                )
+                st.toast("🍪 Cookie Crunch added!")
 
                 st.rerun()
 
@@ -1380,10 +1348,10 @@ else:
 
 
         # ====================================================
-        # SECOND PRODUCT ROW
+        # SECOND ROW
         # ====================================================
 
-        col4, col5, col6 = st.columns(3)
+        col4, col5, col6 = st.columns(3, gap="medium")
 
 
         # ----------------------------------------------------
@@ -1392,150 +1360,121 @@ else:
 
         with col4:
 
-            product = products["Rainbow"]
+            st.markdown(
+                "<div style='text-align:center; font-size:75px;'>🌈</div>",
+                unsafe_allow_html=True
+            )
 
             st.markdown(
-                f"""
-                <div class="product-card">
+                "<h3 style='text-align:center; color:#102a56;'>Rainbow</h3>",
+                unsafe_allow_html=True
+            )
 
-                    <div class="product-emoji">
-                        {product["emoji"]}
-                    </div>
+            st.markdown(
+                "<p style='text-align:center; color:#405d83;'>"
+                "Elmo's colorful special"
+                "</p>",
+                unsafe_allow_html=True
+            )
 
-                    <div class="product-name">
-                        Rainbow
-                    </div>
-
-                    <div class="product-description">
-                        {product["description"]}
-                    </div>
-
-                    <div class="product-price">
-                        €{product["price"]:.2f}
-                    </div>
-
-                </div>
-                """,
+            st.markdown(
+                "<h2 style='text-align:center; color:#102a56;'>€3.75</h2>",
                 unsafe_allow_html=True
             )
 
             if st.button(
-                "Add to cart 🛒",
+                "Add Rainbow 🛒",
                 key="add_rainbow",
                 use_container_width=True
             ):
 
-                st.session_state.cart.append(
-                    "Rainbow"
-                )
+                st.session_state.cart.append("Rainbow")
 
-                st.toast(
-                    "🌈 Rainbow added!"
-                )
+                st.toast("🌈 Rainbow added!")
 
                 st.rerun()
 
 
         # ----------------------------------------------------
-        # VANILLA
+        # VANILLA DREAM
         # ----------------------------------------------------
 
         with col5:
 
-            product = products["Vanilla Dream"]
+            st.markdown(
+                "<div style='text-align:center; font-size:75px;'>🍦</div>",
+                unsafe_allow_html=True
+            )
 
             st.markdown(
-                f"""
-                <div class="product-card">
+                "<h3 style='text-align:center; color:#102a56;'>Vanilla Dream</h3>",
+                unsafe_allow_html=True
+            )
 
-                    <div class="product-emoji">
-                        {product["emoji"]}
-                    </div>
+            st.markdown(
+                "<p style='text-align:center; color:#405d83;'>"
+                "Classic creamy vanilla"
+                "</p>",
+                unsafe_allow_html=True
+            )
 
-                    <div class="product-name">
-                        Vanilla Dream
-                    </div>
-
-                    <div class="product-description">
-                        {product["description"]}
-                    </div>
-
-                    <div class="product-price">
-                        €{product["price"]:.2f}
-                    </div>
-
-                </div>
-                """,
+            st.markdown(
+                "<h2 style='text-align:center; color:#102a56;'>€2.75</h2>",
                 unsafe_allow_html=True
             )
 
             if st.button(
-                "Add to cart 🛒",
+                "Add Vanilla Dream 🛒",
                 key="add_vanilla",
                 use_container_width=True
             ):
 
-                st.session_state.cart.append(
-                    "Vanilla Dream"
-                )
+                st.session_state.cart.append("Vanilla Dream")
 
-                st.toast(
-                    "🍦 Vanilla Dream added!"
-                )
+                st.toast("🍦 Vanilla Dream added!")
 
                 st.rerun()
 
 
         # ----------------------------------------------------
-        # CHERRY
+        # CHERRY SUNDAE
         # ----------------------------------------------------
 
         with col6:
 
-            product = products["Cherry Sundae"]
+            st.markdown(
+                "<div style='text-align:center; font-size:75px;'>🍒</div>",
+                unsafe_allow_html=True
+            )
 
             st.markdown(
-                f"""
-                <div class="product-card">
+                "<h3 style='text-align:center; color:#102a56;'>Cherry Sundae</h3>",
+                unsafe_allow_html=True
+            )
 
-                    <div class="product-emoji">
-                        {product["emoji"]}
-                    </div>
+            st.markdown(
+                "<p style='text-align:center; color:#405d83;'>"
+                "Ice cream sundae with cherry"
+                "</p>",
+                unsafe_allow_html=True
+            )
 
-                    <div class="product-name">
-                        Cherry Sundae
-                    </div>
-
-                    <div class="product-description">
-                        {product["description"]}
-                    </div>
-
-                    <div class="product-price">
-                        €{product["price"]:.2f}
-                    </div>
-
-                </div>
-                """,
+            st.markdown(
+                "<h2 style='text-align:center; color:#102a56;'>€4.25</h2>",
                 unsafe_allow_html=True
             )
 
             if st.button(
-                "Add to cart 🛒",
+                "Add Cherry Sundae 🛒",
                 key="add_cherry",
                 use_container_width=True
             ):
 
-                st.session_state.cart.append(
-                    "Cherry Sundae"
-                )
+                st.session_state.cart.append("Cherry Sundae")
 
-                st.toast(
-                    "🍒 Cherry Sundae added!"
-                )
+                st.toast("🍒 Cherry Sundae added!")
 
                 st.rerun()
-
-
     # ========================================================
     # PAGE 3
     # SHOPPING CART

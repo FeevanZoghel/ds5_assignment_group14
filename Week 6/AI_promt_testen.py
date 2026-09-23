@@ -19,10 +19,7 @@ st.set_page_config(
 # FILE PATHS
 # ============================================================
 
-# Folder where this Python file is located
 BASE_DIR = Path(__file__).resolve().parent
-
-# Elmo image in the same folder as this Python file
 ELMO_IMAGE = BASE_DIR / "elmo.png"
 
 
@@ -33,20 +30,18 @@ ELMO_IMAGE = BASE_DIR / "elmo.png"
 st.markdown("""
 <style>
 
-/* ==========================================================
-   BACKGROUND
-========================================================== */
+/* BACKGROUND */
 
 .stApp {
     background:
         radial-gradient(
             circle at 15% 15%,
-            rgba(255, 255, 255, 0.30) 0%,
+            rgba(255,255,255,0.30) 0%,
             transparent 32%
         ),
         radial-gradient(
             circle at 85% 10%,
-            rgba(255, 255, 255, 0.20) 0%,
+            rgba(255,255,255,0.20) 0%,
             transparent 30%
         ),
         linear-gradient(
@@ -60,9 +55,7 @@ st.markdown("""
 }
 
 
-/* ==========================================================
-   PAGE
-========================================================== */
+/* PAGE */
 
 .block-container {
     max-width: 1400px;
@@ -75,9 +68,7 @@ header[data-testid="stHeader"] {
 }
 
 
-/* ==========================================================
-   BRAND
-========================================================== */
+/* BRAND */
 
 .brand {
     font-size: 22px;
@@ -91,9 +82,7 @@ header[data-testid="stHeader"] {
 }
 
 
-/* ==========================================================
-   LEFT SIDE
-========================================================== */
+/* CREATE ACCOUNT LEFT SIDE */
 
 .hero-title {
     font-family: Georgia, serif;
@@ -120,9 +109,7 @@ header[data-testid="stHeader"] {
 }
 
 
-/* ==========================================================
-   CENTER
-========================================================== */
+/* TITLES */
 
 .lock-icon {
     width: 65px;
@@ -134,7 +121,7 @@ header[data-testid="stHeader"] {
 
     border-radius: 50%;
 
-    background: rgba(255, 255, 255, 0.55);
+    background: rgba(255,255,255,0.55);
 
     display: flex;
     align-items: center;
@@ -159,9 +146,7 @@ header[data-testid="stHeader"] {
 }
 
 
-/* ==========================================================
-   INPUT FIELDS
-========================================================== */
+/* INPUT */
 
 .stTextInput label {
     color: #172b4d !important;
@@ -185,22 +170,18 @@ div[data-baseweb="input"] input::placeholder {
 }
 
 
-/* ==========================================================
-   PASSWORD REQUIREMENTS
-========================================================== */
+/* PASSWORD REQUIREMENTS */
 
 .requirements {
-    background: rgba(255, 255, 255, 0.70);
+    background: rgba(255,255,255,0.70);
 
     border:
         1px solid
-        rgba(255, 255, 255, 0.60);
+        rgba(255,255,255,0.60);
 
     border-radius: 14px;
 
-    padding:
-        16px
-        20px;
+    padding: 16px 20px;
 
     margin-top: 10px;
     margin-bottom: 15px;
@@ -225,14 +206,12 @@ div[data-baseweb="input"] input::placeholder {
 }
 
 
-/* ==========================================================
-   BUTTONS
-========================================================== */
+/* BUTTONS */
 
 .stButton > button {
 
     width: 100%;
-    height: 49px;
+    min-height: 47px;
 
     border: none !important;
     border-radius: 10px !important;
@@ -251,7 +230,7 @@ div[data-baseweb="input"] input::placeholder {
 
     box-shadow:
         0 8px 18px
-        rgba(36, 99, 212, 0.20);
+        rgba(36,99,212,0.20);
 
     transition: all 0.2s ease;
 }
@@ -262,24 +241,19 @@ div[data-baseweb="input"] input::placeholder {
 
     box-shadow:
         0 10px 24px
-        rgba(36, 99, 212, 0.30);
+        rgba(36,99,212,0.30);
 }
 
 
-/* ==========================================================
-   ALERT MESSAGES
-========================================================== */
+/* ALERT */
 
-/* Darker text so the success message is easier to read */
 div[data-testid="stAlert"] p {
     color: #14532d !important;
     font-weight: 700 !important;
 }
 
 
-/* ==========================================================
-   RIGHT SIDE
-========================================================== */
+/* RIGHT SIDE */
 
 .right-title {
     color: #102a56;
@@ -300,9 +274,21 @@ div[data-testid="stAlert"] p {
 }
 
 
-/* ==========================================================
-   FOOTER
-========================================================== */
+/* SHOP */
+
+.shop-title {
+    color: #102a56;
+    font-size: 42px;
+    font-weight: 800;
+}
+
+.shop-subtitle {
+    color: #405d83;
+    font-size: 17px;
+}
+
+
+/* FOOTER */
 
 .footer-text {
     text-align: center;
@@ -313,97 +299,7 @@ div[data-testid="stAlert"] p {
 }
 
 
-/* ==========================================================
-   ICE CREAM SHOP
-========================================================== */
-
-.shop-title {
-    font-size: 42px;
-    font-weight: 800;
-    color: #102a56;
-    padding-top: 10px;
-}
-
-.shop-subtitle {
-    color: #405d83;
-    font-size: 17px;
-}
-
-.welcome-shop {
-    background: rgba(255, 255, 255, 0.60);
-    padding: 18px 25px;
-    border-radius: 15px;
-    margin-bottom: 25px;
-}
-
-.welcome-shop-title {
-    font-size: 21px;
-    font-weight: 700;
-    color: #102a56;
-}
-
-.welcome-shop-text {
-    color: #405d83;
-    margin-top: 5px;
-}
-
-.product-card {
-    text-align: center;
-    background: rgba(255, 255, 255, 0.72);
-    padding: 25px 15px;
-    border-radius: 18px;
-    min-height: 230px;
-    border: 1px solid rgba(255,255,255,0.55);
-    box-shadow: 0 8px 20px rgba(16,42,86,0.08);
-}
-
-.product-emoji {
-    font-size: 65px;
-}
-
-.product-name {
-    color: #102a56;
-    font-size: 22px;
-    font-weight: 700;
-    margin-top: 10px;
-}
-
-.product-description {
-    color: #526b91;
-    font-size: 14px;
-    min-height: 45px;
-}
-
-.product-price {
-    color: #102a56;
-    font-size: 25px;
-    font-weight: 800;
-    margin-top: 12px;
-}
-
-.elmo-message {
-    background: rgba(255,255,255,0.72);
-    padding: 25px;
-    border-radius: 18px;
-    margin-top: 10px;
-}
-
-.elmo-message-title {
-    font-size: 21px;
-    font-weight: 700;
-    color: #102a56;
-}
-
-.elmo-message-text {
-    color: #405d83;
-    margin-top: 8px;
-    font-size: 16px;
-}
-
-
-/* ==========================================================
-   PROGRESS BAR
-========================================================== */
+/* PROGRESS */
 
 .stProgress > div > div > div > div {
     background-color: #2563eb;
@@ -414,7 +310,7 @@ div[data-testid="stAlert"] p {
 
 
 # ============================================================
-# EMAIL VALIDATION
+# FUNCTIONS
 # ============================================================
 
 def validate_email(email):
@@ -477,10 +373,6 @@ def validate_email(email):
     return True, "Valid email address."
 
 
-# ============================================================
-# PASSWORD CHECKS
-# ============================================================
-
 def password_checks(password):
 
     special_characters = "!@#$%^&*()_+-=[]{};:,.?"
@@ -506,10 +398,6 @@ def password_checks(password):
     }
 
 
-# ============================================================
-# PASSWORD VALIDATION
-# ============================================================
-
 def validate_password(password):
 
     if password == "":
@@ -524,10 +412,6 @@ def validate_password(password):
 
     return True, "Valid password."
 
-
-# ============================================================
-# PASSWORD STRENGTH
-# ============================================================
 
 def password_strength(password):
 
@@ -561,6 +445,17 @@ if "show_balloons" not in st.session_state:
 if "cart" not in st.session_state:
     st.session_state.cart = []
 
+# IMPORTANT:
+# This remembers which shop page the user is on
+if "shop_page" not in st.session_state:
+    st.session_state.shop_page = "Home"
+
+if "order_total" not in st.session_state:
+    st.session_state.order_total = 0
+
+if "order_items" not in st.session_state:
+    st.session_state.order_items = []
+
 
 # ============================================================
 # BRAND
@@ -587,10 +482,7 @@ if not st.session_state.account_created:
     )
 
 
-    # ========================================================
-    # LEFT SIDE
-    # ========================================================
-
+    # LEFT
     with left:
 
         st.markdown(
@@ -616,10 +508,7 @@ if not st.session_state.account_created:
         )
 
 
-    # ========================================================
     # CENTER
-    # ========================================================
-
     with center:
 
         st.markdown(
@@ -642,7 +531,6 @@ if not st.session_state.account_created:
         )
 
 
-        # EMAIL
         email = st.text_input(
             "Email address",
             placeholder="name@example.com",
@@ -650,7 +538,6 @@ if not st.session_state.account_created:
         )
 
 
-        # PASSWORD
         password = st.text_input(
             "Password",
             type="password",
@@ -659,7 +546,6 @@ if not st.session_state.account_created:
         )
 
 
-        # CONFIRM PASSWORD
         repeat_password = st.text_input(
             "Confirm password",
             type="password",
@@ -668,10 +554,7 @@ if not st.session_state.account_created:
         )
 
 
-        # ====================================================
         # PASSWORD REQUIREMENTS
-        # ====================================================
-
         checks = password_checks(password)
 
         requirement_html = ""
@@ -695,25 +578,18 @@ if not st.session_state.account_created:
                 )
 
 
-        requirements_box = (
+        st.markdown(
             '<div class="requirements">'
             '<div class="requirements-title">'
             'Password requirements'
             '</div>'
             + requirement_html +
-            '</div>'
-        )
-
-        st.markdown(
-            requirements_box,
+            '</div>',
             unsafe_allow_html=True
         )
 
 
-        # ====================================================
         # PASSWORD STRENGTH
-        # ====================================================
-
         if password:
 
             strength = password_strength(password)
@@ -737,19 +613,18 @@ if not st.session_state.account_created:
             st.progress(strength)
 
 
-        # ====================================================
-        # CREATE ACCOUNT BUTTON
-        # ====================================================
-
+        # CREATE ACCOUNT
         if st.button(
-            "Create Account  →",
+            "Create Account →",
             type="primary",
             use_container_width=True
         ):
 
             email_valid, email_message = validate_email(email)
 
-            password_valid, password_message = validate_password(password)
+            password_valid, password_message = validate_password(
+                password
+            )
 
             if not email_valid:
 
@@ -768,18 +643,13 @@ if not st.session_state.account_created:
             else:
 
                 st.session_state.saved_email = email.strip()
-
                 st.session_state.saved_password = password
-
                 st.session_state.account_created = True
 
                 st.rerun()
 
 
-    # ========================================================
-    # RIGHT SIDE
-    # ========================================================
-
+    # RIGHT
     with right:
 
         st.markdown(
@@ -831,6 +701,19 @@ elif not st.session_state.logged_in:
 
     with login:
 
+        # BACK TO CREATE ACCOUNT
+        if st.button(
+            "← Back to create account",
+            use_container_width=True
+        ):
+
+            st.session_state.account_created = False
+            st.session_state.saved_email = ""
+            st.session_state.saved_password = ""
+
+            st.rerun()
+
+
         st.markdown(
             '<div class="lock-icon">🔐</div>',
             unsafe_allow_html=True
@@ -855,7 +738,6 @@ elif not st.session_state.logged_in:
         )
 
 
-        # LOGIN EMAIL
         login_email = st.text_input(
             "Email address",
             placeholder="name@example.com",
@@ -863,7 +745,6 @@ elif not st.session_state.logged_in:
         )
 
 
-        # LOGIN PASSWORD
         login_password = st.text_input(
             "Password",
             type="password",
@@ -872,7 +753,6 @@ elif not st.session_state.logged_in:
         )
 
 
-        # LOGIN BUTTON
         if st.button(
             "Log in →",
             type="primary",
@@ -888,8 +768,10 @@ elif not st.session_state.logged_in:
             ):
 
                 st.session_state.logged_in = True
-
                 st.session_state.show_balloons = True
+
+                # Start on Home
+                st.session_state.shop_page = "Home"
 
                 st.rerun()
 
@@ -901,17 +783,15 @@ elif not st.session_state.logged_in:
 
 
 # ============================================================
-# ELMO'S ICE CREAM SHOP
+# SHOP
 # ============================================================
 
 else:
 
-    # ========================================================
-    # BALLOONS AFTER LOGIN
-    # ========================================================
-
     if st.session_state.show_balloons:
+
         st.balloons()
+
         st.session_state.show_balloons = False
 
 
@@ -920,6 +800,7 @@ else:
     # ========================================================
 
     products = {
+
         "Strawberry": {
             "emoji": "🍓",
             "description": "Sweet strawberry ice cream",
@@ -965,10 +846,12 @@ else:
     with st.sidebar:
 
         if ELMO_IMAGE.exists():
+
             st.image(
                 str(ELMO_IMAGE),
                 width=120
             )
+
 
         st.markdown("## 🍦 Elmo's")
         st.caption("Ice Cream Shop")
@@ -977,24 +860,60 @@ else:
 
         st.markdown("### Navigation")
 
-        cart_amount = len(st.session_state.cart)
 
-        page = st.radio(
-            "Choose a page",
-            [
-                "🏠 Home",
-                "🍦 Menu + Prices",
-                f"🛒 Shopping Cart ({cart_amount})"
-            ],
-            label_visibility="collapsed"
-        )
+        # ----------------------------------------------------
+        # HOME
+        # ----------------------------------------------------
+
+        if st.button(
+            "🏠 Home",
+            use_container_width=True
+        ):
+
+            st.session_state.shop_page = "Home"
+            st.rerun()
+
+
+        # ----------------------------------------------------
+        # MENU
+        # ----------------------------------------------------
+
+        if st.button(
+            "🍦 Menu + Prices",
+            use_container_width=True
+        ):
+
+            st.session_state.shop_page = "Menu"
+            st.rerun()
+
+
+        # ----------------------------------------------------
+        # CART
+        # ----------------------------------------------------
+
+        if st.button(
+            f"🛒 Shopping Cart ({len(st.session_state.cart)})",
+            use_container_width=True
+        ):
+
+            st.session_state.shop_page = "Cart"
+            st.rerun()
+
 
         st.divider()
 
         st.caption("Logged in as:")
-        st.write(st.session_state.saved_email)
+
+        st.write(
+            st.session_state.saved_email
+        )
 
         st.write("")
+
+
+        # ----------------------------------------------------
+        # LOG OUT
+        # ----------------------------------------------------
 
         if st.button(
             "🚪 Log out",
@@ -1002,7 +921,7 @@ else:
         ):
 
             st.session_state.logged_in = False
-            st.session_state.cart = []
+            st.session_state.shop_page = "Home"
 
             st.rerun()
 
@@ -1011,15 +930,21 @@ else:
     # HEADER
     # ========================================================
 
-    header1, header2 = st.columns([5, 1])
+    header1, header2 = st.columns(
+        [5, 1]
+    )
+
 
     with header1:
 
-        st.markdown("# 🍦 Elmo's Ice Cream Shop")
-
         st.markdown(
-            "### The coolest ice cream in town!"
+            "# 🍦 Elmo's Ice Cream Shop"
         )
+
+        st.write(
+            "The coolest ice cream in town!"
+        )
+
 
     with header2:
 
@@ -1028,15 +953,26 @@ else:
             len(st.session_state.cart)
         )
 
+
     st.divider()
 
 
     # ========================================================
-    # PAGE 1
     # HOME
     # ========================================================
 
-    if page == "🏠 Home":
+    if st.session_state.shop_page == "Home":
+
+        # BACK BUTTON
+        if st.button(
+            "← Back to login",
+            key="home_back"
+        ):
+
+            st.session_state.logged_in = False
+
+            st.rerun()
+
 
         st.success(
             "👋 Welcome to Elmo's Ice Cream Shop!"
@@ -1047,16 +983,16 @@ else:
             + st.session_state.saved_email
         )
 
+
         st.write("")
 
-        # ====================================================
-        # ELMO + WELCOME TEXT
-        # ====================================================
 
+        # ELMO + TEXT
         elmo_col, text_col = st.columns(
             [1, 2],
             gap="large"
         )
+
 
         with elmo_col:
 
@@ -1071,11 +1007,6 @@ else:
 
                 st.error(
                     "Elmo image could not be found."
-                )
-
-                st.caption(
-                    "Make sure elmo.png is in the same "
-                    "folder as this Python file."
                 )
 
 
@@ -1111,45 +1042,67 @@ else:
 
         st.write("")
         st.divider()
-        st.write("")
 
 
-        # ====================================================
         # TODAY'S SPECIAL
-        # ====================================================
-
-        special_left, special_center, special_right = st.columns(
+        center1, center2, center3 = st.columns(
             [1, 2, 1]
         )
 
-        with special_center:
+        with center2:
 
             st.markdown(
-                "<p style='text-align:center; font-size:60px;'>🍓 🍦 🍫</p>",
+                "<p style='text-align:center; font-size:60px;'>"
+                "🍓 🍦 🍫"
+                "</p>",
                 unsafe_allow_html=True
             )
 
             st.markdown(
-                "<h2 style='text-align:center; color:#102a56;'>"
+                "<h2 style='text-align:center;'>"
                 "Today's Special"
                 "</h2>",
                 unsafe_allow_html=True
             )
 
             st.markdown(
-                "<p style='text-align:center; color:#405d83; font-size:18px;'>"
+                "<p style='text-align:center; font-size:18px;'>"
                 "Strawberry Special — only €2.95"
                 "</p>",
                 unsafe_allow_html=True
             )
 
 
+        # NEXT BUTTON
+        st.write("")
+
+        if st.button(
+            "View Menu →",
+            type="primary",
+            use_container_width=True
+        ):
+
+            st.session_state.shop_page = "Menu"
+
+            st.rerun()
+
+
     # ========================================================
-    # PAGE 2
     # MENU + PRICES
     # ========================================================
 
-    elif page == "🍦 Menu + Prices":
+    elif st.session_state.shop_page == "Menu":
+
+        # BACK BUTTON
+        if st.button(
+            "← Back to Home",
+            key="menu_back"
+        ):
+
+            st.session_state.shop_page = "Home"
+
+            st.rerun()
+
 
         st.markdown("# 🍦 Menu + Prices")
 
@@ -1162,305 +1115,161 @@ else:
 
 
         # ====================================================
-        # FIRST ROW
+        # PRODUCT DISPLAY FUNCTION
         # ====================================================
 
+        def show_product(
+            name,
+            button_key
+        ):
+
+            product = products[name]
+
+
+            st.markdown(
+                f"<div style='"
+                f"text-align:center;"
+                f"font-size:75px;"
+                f"'>"
+                f"{product['emoji']}"
+                f"</div>",
+                unsafe_allow_html=True
+            )
+
+
+            st.markdown(
+                f"<h3 style='text-align:center;'>"
+                f"{name}"
+                f"</h3>",
+                unsafe_allow_html=True
+            )
+
+
+            st.markdown(
+                f"<p style='text-align:center;'>"
+                f"{product['description']}"
+                f"</p>",
+                unsafe_allow_html=True
+            )
+
+
+            st.markdown(
+                f"<h2 style='text-align:center;'>"
+                f"€{product['price']:.2f}"
+                f"</h2>",
+                unsafe_allow_html=True
+            )
+
+
+            if st.button(
+                "Add to cart 🛒",
+                key=button_key,
+                use_container_width=True
+            ):
+
+                st.session_state.cart.append(
+                    name
+                )
+
+                # IMPORTANT:
+                # Stay on menu after rerun
+                st.session_state.shop_page = "Menu"
+
+                st.toast(
+                    product["emoji"]
+                    + " "
+                    + name
+                    + " added!"
+                )
+
+                st.rerun()
+
+
+        # FIRST ROW
         col1, col2, col3 = st.columns(
             3,
             gap="medium"
         )
 
-
-        # ----------------------------------------------------
-        # STRAWBERRY
-        # ----------------------------------------------------
-
         with col1:
-
-            st.markdown(
-                "<div style='text-align:center; font-size:75px;'>🍓</div>",
-                unsafe_allow_html=True
+            show_product(
+                "Strawberry",
+                "add_strawberry"
             )
-
-            st.markdown(
-                "<h3 style='text-align:center;'>Strawberry</h3>",
-                unsafe_allow_html=True
-            )
-
-            st.markdown(
-                "<p style='text-align:center;'>"
-                "Sweet strawberry ice cream"
-                "</p>",
-                unsafe_allow_html=True
-            )
-
-            st.markdown(
-                "<h2 style='text-align:center;'>€2.95</h2>",
-                unsafe_allow_html=True
-            )
-
-            if st.button(
-                "Add Strawberry 🛒",
-                key="add_strawberry",
-                use_container_width=True
-            ):
-
-                st.session_state.cart.append(
-                    "Strawberry"
-                )
-
-                st.toast(
-                    "🍓 Strawberry added!"
-                )
-
-                st.rerun()
-
-
-        # ----------------------------------------------------
-        # CHOCOLATE
-        # ----------------------------------------------------
 
         with col2:
-
-            st.markdown(
-                "<div style='text-align:center; font-size:75px;'>🍫</div>",
-                unsafe_allow_html=True
+            show_product(
+                "Chocolate",
+                "add_chocolate"
             )
-
-            st.markdown(
-                "<h3 style='text-align:center;'>Chocolate</h3>",
-                unsafe_allow_html=True
-            )
-
-            st.markdown(
-                "<p style='text-align:center;'>"
-                "Rich chocolate ice cream"
-                "</p>",
-                unsafe_allow_html=True
-            )
-
-            st.markdown(
-                "<h2 style='text-align:center;'>€3.25</h2>",
-                unsafe_allow_html=True
-            )
-
-            if st.button(
-                "Add Chocolate 🛒",
-                key="add_chocolate",
-                use_container_width=True
-            ):
-
-                st.session_state.cart.append(
-                    "Chocolate"
-                )
-
-                st.toast(
-                    "🍫 Chocolate added!"
-                )
-
-                st.rerun()
-
-
-        # ----------------------------------------------------
-        # COOKIE CRUNCH
-        # ----------------------------------------------------
 
         with col3:
-
-            st.markdown(
-                "<div style='text-align:center; font-size:75px;'>🍪</div>",
-                unsafe_allow_html=True
+            show_product(
+                "Cookie Crunch",
+                "add_cookie"
             )
-
-            st.markdown(
-                "<h3 style='text-align:center;'>Cookie Crunch</h3>",
-                unsafe_allow_html=True
-            )
-
-            st.markdown(
-                "<p style='text-align:center;'>"
-                "Vanilla ice cream with cookie pieces"
-                "</p>",
-                unsafe_allow_html=True
-            )
-
-            st.markdown(
-                "<h2 style='text-align:center;'>€3.50</h2>",
-                unsafe_allow_html=True
-            )
-
-            if st.button(
-                "Add Cookie Crunch 🛒",
-                key="add_cookie",
-                use_container_width=True
-            ):
-
-                st.session_state.cart.append(
-                    "Cookie Crunch"
-                )
-
-                st.toast(
-                    "🍪 Cookie Crunch added!"
-                )
-
-                st.rerun()
 
 
         st.write("")
         st.write("")
 
 
-        # ====================================================
         # SECOND ROW
-        # ====================================================
-
         col4, col5, col6 = st.columns(
             3,
             gap="medium"
         )
 
-
-        # ----------------------------------------------------
-        # RAINBOW
-        # ----------------------------------------------------
-
         with col4:
-
-            st.markdown(
-                "<div style='text-align:center; font-size:75px;'>🌈</div>",
-                unsafe_allow_html=True
+            show_product(
+                "Rainbow",
+                "add_rainbow"
             )
-
-            st.markdown(
-                "<h3 style='text-align:center;'>Rainbow</h3>",
-                unsafe_allow_html=True
-            )
-
-            st.markdown(
-                "<p style='text-align:center;'>"
-                "Elmo's colorful special"
-                "</p>",
-                unsafe_allow_html=True
-            )
-
-            st.markdown(
-                "<h2 style='text-align:center;'>€3.75</h2>",
-                unsafe_allow_html=True
-            )
-
-            if st.button(
-                "Add Rainbow 🛒",
-                key="add_rainbow",
-                use_container_width=True
-            ):
-
-                st.session_state.cart.append(
-                    "Rainbow"
-                )
-
-                st.toast(
-                    "🌈 Rainbow added!"
-                )
-
-                st.rerun()
-
-
-        # ----------------------------------------------------
-        # VANILLA DREAM
-        # ----------------------------------------------------
 
         with col5:
-
-            st.markdown(
-                "<div style='text-align:center; font-size:75px;'>🍦</div>",
-                unsafe_allow_html=True
+            show_product(
+                "Vanilla Dream",
+                "add_vanilla"
             )
-
-            st.markdown(
-                "<h3 style='text-align:center;'>Vanilla Dream</h3>",
-                unsafe_allow_html=True
-            )
-
-            st.markdown(
-                "<p style='text-align:center;'>"
-                "Classic creamy vanilla"
-                "</p>",
-                unsafe_allow_html=True
-            )
-
-            st.markdown(
-                "<h2 style='text-align:center;'>€2.75</h2>",
-                unsafe_allow_html=True
-            )
-
-            if st.button(
-                "Add Vanilla Dream 🛒",
-                key="add_vanilla",
-                use_container_width=True
-            ):
-
-                st.session_state.cart.append(
-                    "Vanilla Dream"
-                )
-
-                st.toast(
-                    "🍦 Vanilla Dream added!"
-                )
-
-                st.rerun()
-
-
-        # ----------------------------------------------------
-        # CHERRY SUNDAE
-        # ----------------------------------------------------
 
         with col6:
-
-            st.markdown(
-                "<div style='text-align:center; font-size:75px;'>🍒</div>",
-                unsafe_allow_html=True
+            show_product(
+                "Cherry Sundae",
+                "add_cherry"
             )
 
-            st.markdown(
-                "<h3 style='text-align:center;'>Cherry Sundae</h3>",
-                unsafe_allow_html=True
-            )
 
-            st.markdown(
-                "<p style='text-align:center;'>"
-                "Ice cream sundae with cherry"
-                "</p>",
-                unsafe_allow_html=True
-            )
+        st.write("")
 
-            st.markdown(
-                "<h2 style='text-align:center;'>€4.25</h2>",
-                unsafe_allow_html=True
-            )
 
-            if st.button(
-                "Add Cherry Sundae 🛒",
-                key="add_cherry",
-                use_container_width=True
-            ):
+        # GO TO CART
+        if st.button(
+            f"Go to Shopping Cart ({len(st.session_state.cart)}) →",
+            type="primary",
+            use_container_width=True
+        ):
 
-                st.session_state.cart.append(
-                    "Cherry Sundae"
-                )
+            st.session_state.shop_page = "Cart"
 
-                st.toast(
-                    "🍒 Cherry Sundae added!"
-                )
-
-                st.rerun()
+            st.rerun()
 
 
     # ========================================================
-    # PAGE 3
     # SHOPPING CART
     # ========================================================
 
-    else:
+    elif st.session_state.shop_page == "Cart":
+
+        # BACK BUTTON
+        if st.button(
+            "← Back to Menu + Prices",
+            key="cart_back"
+        ):
+
+            st.session_state.shop_page = "Menu"
+
+            st.rerun()
+
 
         st.markdown("# 🛒 Shopping Cart")
 
@@ -1468,8 +1277,8 @@ else:
 
 
         # ====================================================
-        # EMPTY SHOPPING CART
-        # ========================================================
+        # EMPTY CART
+        # ====================================================
 
         if len(st.session_state.cart) == 0:
 
@@ -1477,66 +1286,73 @@ else:
                 [1, 2, 1]
             )
 
+
             with empty_center:
 
                 st.markdown(
-                    "<p style='text-align:center; font-size:80px;'>🛒</p>",
+                    "<p style='"
+                    "text-align:center;"
+                    "font-size:80px;"
+                    "'>"
+                    "🛒"
+                    "</p>",
                     unsafe_allow_html=True
                 )
 
                 st.markdown(
-                    "<h2 style='text-align:center; color:#102a56;'>"
+                    "<h2 style='text-align:center;'>"
                     "Your cart is empty"
                     "</h2>",
                     unsafe_allow_html=True
                 )
 
                 st.markdown(
-                    "<p style='text-align:center; color:#405d83; font-size:17px;'>"
-                    "Visit Menu + Prices to add some delicious ice cream!"
+                    "<p style='"
+                    "text-align:center;"
+                    "font-size:17px;"
+                    "'>"
+                    "Visit Menu + Prices to add "
+                    "some delicious ice cream!"
                     "</p>",
                     unsafe_allow_html=True
                 )
 
 
         # ====================================================
-        # SHOPPING CART WITH PRODUCTS
-        # ========================================================
+        # CART WITH ITEMS
+        # ====================================================
 
         else:
 
             cart_counts = {}
 
+
             for item in st.session_state.cart:
 
                 if item in cart_counts:
+
                     cart_counts[item] += 1
 
                 else:
+
                     cart_counts[item] = 1
 
 
             total_price = 0
 
 
-            # =================================================
-            # DISPLAY PRODUCTS
-            # =================================================
-
+            # PRODUCT ROWS
             for product_name, quantity in cart_counts.items():
 
                 product = products[product_name]
 
                 subtotal = (
-                    product["price"] * quantity
+                    product["price"]
+                    * quantity
                 )
 
                 total_price += subtotal
 
-
-                # ---------------------------------------------
-                # PRODUCT ROW
-                # ---------------------------------------------
 
                 emoji_col, item_col, quantity_col, price_col, remove_col = (
                     st.columns(
@@ -1545,23 +1361,18 @@ else:
                 )
 
 
-                # ---------------------------------------------
-                # PRODUCT PICTURE / EMOJI
-                # ---------------------------------------------
-
                 with emoji_col:
 
                     st.markdown(
-                        f"<div style='font-size:45px; text-align:center;'>"
+                        f"<div style='"
+                        f"font-size:45px;"
+                        f"text-align:center;"
+                        f"'>"
                         f"{product['emoji']}"
                         f"</div>",
                         unsafe_allow_html=True
                     )
 
-
-                # ---------------------------------------------
-                # PRODUCT NAME
-                # ---------------------------------------------
 
                 with item_col:
 
@@ -1574,10 +1385,6 @@ else:
                     )
 
 
-                # ---------------------------------------------
-                # QUANTITY
-                # ---------------------------------------------
-
                 with quantity_col:
 
                     st.metric(
@@ -1585,10 +1392,6 @@ else:
                         quantity
                     )
 
-
-                # ---------------------------------------------
-                # SUBTOTAL
-                # ---------------------------------------------
 
                 with price_col:
 
@@ -1598,23 +1401,22 @@ else:
                     )
 
 
-                # ---------------------------------------------
-                # REMOVE PRODUCT
-                # ---------------------------------------------
-
                 with remove_col:
 
                     st.write("")
 
                     if st.button(
                         "➖",
-                        key=f"remove_{product_name}",
+                        key="remove_" + product_name,
                         help="Remove one"
                     ):
 
                         st.session_state.cart.remove(
                             product_name
                         )
+
+                        # Stay in cart
+                        st.session_state.shop_page = "Cart"
 
                         st.rerun()
 
@@ -1630,6 +1432,7 @@ else:
                 [4, 1.5]
             )
 
+
             with total_right:
 
                 st.markdown("### Total")
@@ -1643,17 +1446,13 @@ else:
 
 
             # =================================================
-            # BUTTONS
+            # CART BUTTONS
             # =================================================
 
             clear_col, order_col = st.columns(
                 [1, 2]
             )
 
-
-            # -------------------------------------------------
-            # EMPTY CART
-            # -------------------------------------------------
 
             with clear_col:
 
@@ -1664,12 +1463,10 @@ else:
 
                     st.session_state.cart = []
 
+                    st.session_state.shop_page = "Cart"
+
                     st.rerun()
 
-
-            # -------------------------------------------------
-            # PLACE ORDER
-            # -------------------------------------------------
 
             with order_col:
 
@@ -1679,26 +1476,174 @@ else:
                     use_container_width=True
                 ):
 
-                    st.success(
-                        "🎉 Your fake ice cream order "
-                        "has been placed!"
+                    # Save order before clearing cart
+                    st.session_state.order_total = total_price
+
+                    st.session_state.order_items = (
+                        st.session_state.cart.copy()
                     )
 
-                    st.balloons()
-
+                    # Empty cart
                     st.session_state.cart = []
 
+                    # Go to confirmation page
+                    st.session_state.shop_page = "Confirmation"
+
+                    st.rerun()
+
 
     # ========================================================
-    # DISCLAIMER
+    # ORDER CONFIRMATION
     # ========================================================
 
-    st.write("")
-    st.write("")
+    elif st.session_state.shop_page == "Confirmation":
 
-    st.divider()
+        # Balloons when arriving here
+        st.balloons()
 
-    st.caption(
-        "This is a fictional demonstration shop. "
-        "All products and prices are fake."
-    )
+
+        # BACK BUTTON
+        if st.button(
+            "← Back to Shopping Cart",
+            key="confirmation_back"
+        ):
+
+            st.session_state.shop_page = "Cart"
+
+            st.rerun()
+
+
+        st.write("")
+        st.write("")
+
+
+        confirmation_left, confirmation_center, confirmation_right = (
+            st.columns(
+                [1, 2, 1]
+            )
+        )
+
+
+        with confirmation_center:
+
+            st.markdown(
+                "<p style='"
+                "text-align:center;"
+                "font-size:90px;"
+                "'>"
+                "✅"
+                "</p>",
+                unsafe_allow_html=True
+            )
+
+
+            st.markdown(
+                "<h1 style='text-align:center;'>"
+                "Order received!"
+                "</h1>",
+                unsafe_allow_html=True
+            )
+
+
+            st.markdown(
+                "<p style='"
+                "text-align:center;"
+                "font-size:19px;"
+                "'>"
+                "Thank you for your order!"
+                "</p>",
+                unsafe_allow_html=True
+            )
+
+
+            st.success(
+                "🍦 Your fake order was successfully received!"
+            )
+
+
+            # ================================================
+            # ORDER SUMMARY
+            # ================================================
+
+            st.markdown("### 🧾 Order summary")
+
+
+            order_counts = {}
+
+
+            for item in st.session_state.order_items:
+
+                if item in order_counts:
+
+                    order_counts[item] += 1
+
+                else:
+
+                    order_counts[item] = 1
+
+
+            for product_name, quantity in order_counts.items():
+
+                product = products[product_name]
+
+                subtotal = (
+                    product["price"]
+                    * quantity
+                )
+
+
+                st.write(
+                    product["emoji"]
+                    + " **"
+                    + product_name
+                    + "** × "
+                    + str(quantity)
+                    + " — €"
+                    + f"{subtotal:.2f}"
+                )
+
+
+            st.divider()
+
+
+            st.markdown(
+                "## Total: €"
+                + f"{st.session_state.order_total:.2f}"
+            )
+
+
+            st.info(
+                "This is a demonstration order. "
+                "No real purchase or payment has been made."
+            )
+
+
+            # ================================================
+            # NEW ORDER
+            # ================================================
+
+            if st.button(
+                "🍦 Start a new order",
+                type="primary",
+                use_container_width=True
+            ):
+
+                st.session_state.order_items = []
+                st.session_state.order_total = 0
+
+                st.session_state.shop_page = "Menu"
+
+                st.rerun()
+
+
+# ============================================================
+# FOOTER
+# ============================================================
+
+st.markdown(
+    '<div class="footer-text">'
+    'SecureLogin &nbsp; | &nbsp; '
+    'Built for a safer digital world'
+    '</div>',
+    unsafe_allow_html=True
+)

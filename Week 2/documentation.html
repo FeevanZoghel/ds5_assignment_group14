@@ -1,0 +1,493 @@
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Documentatie van de DS5 Week 2 oefeningen">
+  <title>DS5 Week 2 | Documentatie</title>
+  <style>
+    :root {
+      --ink: #172033;
+      --muted: #64748b;
+      --blue: #2563eb;
+      --blue-dark: #173b8f;
+      --cyan: #06b6d4;
+      --purple: #7c3aed;
+      --surface: #ffffff;
+      --background: #f4f7fb;
+      --line: #e2e8f0;
+      --code: #111827;
+      --shadow: 0 18px 50px rgba(23, 59, 143, 0.10);
+    }
+
+    * { box-sizing: border-box; }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      margin: 0;
+      color: var(--ink);
+      background: var(--background);
+      font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      line-height: 1.65;
+    }
+
+    a { color: var(--blue); }
+    a:hover { color: var(--blue-dark); }
+
+    .hero {
+      position: relative;
+      overflow: hidden;
+      padding: 4.5rem 1.5rem 5rem;
+      color: white;
+      background:
+        radial-gradient(circle at 85% 15%, rgba(6, 182, 212, .35), transparent 28rem),
+        linear-gradient(135deg, #10245c 0%, #2563eb 58%, #06b6d4 100%);
+    }
+
+    .hero::after {
+      position: absolute;
+      right: -8rem;
+      bottom: -13rem;
+      width: 34rem;
+      height: 34rem;
+      content: "";
+      border: 2px solid rgba(255,255,255,.15);
+      border-radius: 50%;
+      box-shadow: 0 0 0 2rem rgba(255,255,255,.08), 0 0 0 4rem rgba(255,255,255,.05);
+    }
+
+    .hero-inner, main, footer {
+      width: min(100% - 2rem, 1120px);
+      margin: 0 auto;
+    }
+
+    .eyebrow {
+      margin: 0 0 .75rem;
+      color: #bae6fd;
+      font-size: .8rem;
+      font-weight: 800;
+      letter-spacing: .15em;
+      text-transform: uppercase;
+    }
+
+    h1, h2, h3 { line-height: 1.2; }
+    h1 { max-width: 760px; margin: 0; font-size: clamp(2.4rem, 6vw, 5rem); letter-spacing: -.04em; }
+    h2 { margin: 0 0 1rem; font-size: clamp(1.7rem, 3vw, 2.5rem); }
+    h3 { margin-bottom: .5rem; }
+
+    .hero p {
+      max-width: 720px;
+      margin: 1.25rem 0 0;
+      color: #e0f2fe;
+      font-size: 1.15rem;
+    }
+
+    nav {
+      position: sticky;
+      top: 0;
+      z-index: 5;
+      border-bottom: 1px solid var(--line);
+      background: rgba(255,255,255,.92);
+      box-shadow: 0 5px 20px rgba(15, 23, 42, .06);
+      backdrop-filter: blur(12px);
+    }
+
+    .nav-inner {
+      display: flex;
+      gap: .4rem;
+      width: min(100% - 2rem, 1120px);
+      margin: 0 auto;
+      overflow-x: auto;
+    }
+
+    nav a {
+      flex: 0 0 auto;
+      padding: 1rem .8rem;
+      color: var(--muted);
+      font-size: .9rem;
+      font-weight: 700;
+      text-decoration: none;
+    }
+
+    nav a:hover { color: var(--blue); }
+
+    main { padding: 2.5rem 0 4rem; }
+
+    .intro, .exercise, .checklist {
+      margin-bottom: 1.5rem;
+      padding: clamp(1.3rem, 3vw, 2.3rem);
+      background: var(--surface);
+      border: 1px solid var(--line);
+      border-radius: 20px;
+      box-shadow: var(--shadow);
+    }
+
+    .intro {
+      display: grid;
+      grid-template-columns: 1.4fr .8fr;
+      gap: 2rem;
+      align-items: center;
+    }
+
+    .stats {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: .75rem;
+    }
+
+    .stat {
+      padding: 1rem;
+      text-align: center;
+      background: #eff6ff;
+      border: 1px solid #dbeafe;
+      border-radius: 14px;
+    }
+
+    .stat strong {
+      display: block;
+      color: var(--blue-dark);
+      font-size: 1.8rem;
+    }
+
+    .section-heading {
+      display: flex;
+      gap: 1rem;
+      align-items: flex-start;
+      margin-bottom: 1.5rem;
+    }
+
+    .number {
+      display: grid;
+      flex: 0 0 3rem;
+      width: 3rem;
+      height: 3rem;
+      place-items: center;
+      color: white;
+      background: linear-gradient(135deg, var(--blue), var(--purple));
+      border-radius: 12px;
+      font-size: 1.3rem;
+      font-weight: 800;
+    }
+
+    .subtitle {
+      margin: -.65rem 0 0;
+      color: var(--muted);
+    }
+
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 1rem;
+    }
+
+    .card {
+      padding: 1.2rem;
+      background: #f8fafc;
+      border: 1px solid var(--line);
+      border-radius: 14px;
+    }
+
+    .card h3 { color: var(--blue-dark); }
+    .card p:last-child { margin-bottom: 0; }
+
+    .tag {
+      display: inline-block;
+      margin-bottom: .5rem;
+      padding: .2rem .6rem;
+      color: #075985;
+      background: #e0f2fe;
+      border-radius: 999px;
+      font-size: .75rem;
+      font-weight: 800;
+      text-transform: uppercase;
+    }
+
+    pre {
+      overflow-x: auto;
+      margin: 1rem 0;
+      padding: 1.2rem;
+      color: #e5e7eb;
+      background: var(--code);
+      border-radius: 12px;
+      box-shadow: inset 0 0 0 1px rgba(255,255,255,.08);
+    }
+
+    code, pre { font-family: Consolas, "Cascadia Code", monospace; }
+    code {
+      padding: .1rem .35rem;
+      color: #9f1239;
+      background: #fff1f2;
+      border-radius: 5px;
+    }
+    pre code { padding: 0; color: inherit; background: transparent; }
+
+    .formula {
+      margin: 1rem 0;
+      padding: 1rem;
+      color: #312e81;
+      background: #eef2ff;
+      border-left: 4px solid var(--purple);
+      border-radius: 0 10px 10px 0;
+      font-family: Georgia, serif;
+      font-size: 1.1rem;
+    }
+
+    .note {
+      margin-top: 1rem;
+      padding: 1rem 1.2rem;
+      border-left: 4px solid #f59e0b;
+      background: #fffbeb;
+      border-radius: 0 10px 10px 0;
+    }
+
+    .success {
+      border-left-color: #10b981;
+      background: #ecfdf5;
+    }
+
+    li { margin: .35rem 0; }
+
+    .checklist {
+      background: linear-gradient(135deg, #10245c, #173b8f);
+      color: white;
+    }
+
+    .checklist h2 { color: white; }
+    .checklist li::marker { color: #67e8f9; }
+    .checklist code { color: #dbeafe; background: rgba(255,255,255,.12); }
+
+    footer {
+      padding: 0 0 3rem;
+      color: var(--muted);
+      text-align: center;
+    }
+
+    @media (max-width: 700px) {
+      .intro { grid-template-columns: 1fr; }
+      .stats { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+      .stat { padding: .7rem .3rem; font-size: .8rem; }
+      .stat strong { font-size: 1.35rem; }
+    }
+  </style>
+</head>
+<body>
+  <header class="hero">
+    <div class="hero-inner">
+      <p class="eyebrow">DS5 • Week 2 • Documentatie</p>
+      <h1>Van studentdata naar het wereldwijde web</h1>
+      <p>
+        Een overzicht van de drie oefeningen: nette Python-functies schrijven,
+        de Mandelbrotverzameling visualiseren en PageRank simuleren op netwerken.
+      </p>
+    </div>
+  </header>
+
+  <nav aria-label="Hoofdnavigatie">
+    <div class="nav-inner">
+      <a href="#overzicht">Overzicht</a>
+      <a href="#exercise-1">Oefening 1</a>
+      <a href="#exercise-2">Oefening 2</a>
+      <a href="#exercise-3">Oefening 3</a>
+      <a href="#inleveren">Inleveren</a>
+    </div>
+  </nav>
+
+  <main>
+    <section id="overzicht" class="intro">
+      <div>
+        <p class="eyebrow">Projectdoel</p>
+        <h2>Waarom deze oefeningen?</h2>
+        <p>
+          In deze opdracht leren we code structureren, wetenschappelijke
+          visualisaties maken en een algoritme toepassen op een netwerk. Elke
+          functie heeft een duidelijke taak, type hints en een docstring met de
+          naam van de maker.
+        </p>
+      </div>
+      <div class="stats" aria-label="Projectstatistieken">
+        <div class="stat"><strong>3</strong>oefeningen</div>
+        <div class="stat"><strong>2D</strong>visualisaties</div>
+        <div class="stat"><strong>1</strong>notebook</div>
+      </div>
+    </section>
+
+    <section id="exercise-1" class="exercise">
+      <div class="section-heading">
+        <div class="number">01</div>
+        <div>
+          <h2>Code structureren: studentrecords</h2>
+          <p class="subtitle">CSV inlezen, cijfers berekenen en een rapport maken</p>
+        </div>
+      </div>
+      <p>
+        De oorspronkelijke code leest studentrecords uit een CSV-bestand. De
+        code berekent het gemiddelde en toont alleen studenten met een cijfer
+        van minstens 80. De opdracht is om deze lange code op te splitsen in
+        kleinere, begrijpelijke functies.
+      </p>
+      <div class="grid">
+        <article class="card">
+          <span class="tag">Functie 1</span>
+          <h3><code>read_records(file_path)</code></h3>
+          <p>Leest het CSV-bestand en geeft een lijst met records terug.</p>
+        </article>
+        <article class="card">
+          <span class="tag">Functie 2</span>
+          <h3><code>calculate_average(records)</code></h3>
+          <p>Berekent het gemiddelde cijfer van alle studenten.</p>
+        </article>
+        <article class="card">
+          <span class="tag">Functie 3</span>
+          <h3><code>filter_records(records, minimum)</code></h3>
+          <p>Selecteert studenten die minimaal het opgegeven cijfer hebben.</p>
+        </article>
+        <article class="card">
+          <span class="tag">Functie 4</span>
+          <h3><code>print_report(records)</code></h3>
+          <p>Print het gemiddelde en het studentrapport op een vaste manier.</p>
+        </article>
+      </div>
+      <pre><code>def calculate_average(records: list[dict[str, str]]) -&gt; float:
+    """Bereken het gemiddelde cijfer. Author: Matthijs."""
+    total = sum(float(record["Grade"]) for record in records)
+    return total / len(records)</code></pre>
+      <div class="note">
+        <strong>Belangrijk:</strong> voeg voor iedere functie een beschrijving
+        van de input, output en verantwoordelijke persoon toe.
+      </div>
+    </section>
+
+    <section id="exercise-2" class="exercise">
+      <div class="section-heading">
+        <div class="number">02</div>
+        <div>
+          <h2>Mandelbrotvisualisatie</h2>
+          <p class="subtitle">Een fractal berekenen als vierkante afbeelding</p>
+        </div>
+      </div>
+      <p>
+        Voor ieder complex getal <code>c</code> wordt de reeks
+        <code>z<sub>n+1</sub> = z<sub>n</sub><sup>2</sup> + c</code>
+        berekend. Als de absolute waarde groter wordt dan 2, is het getal
+        divergent. Het aantal iteraties tot dat moment heet de diverging index.
+      </p>
+      <div class="formula">
+        Start met z<sub>0</sub> = 0. Als |z<sub>n</sub>| &gt; 2, geef n terug.
+        Gebeurt dat niet binnen 100 iteraties, geef dan 0 terug.
+      </div>
+      <div class="grid">
+        <article class="card">
+          <span class="tag">Complexe getallen</span>
+          <h3><code>complex_number(x, y)</code></h3>
+          <p>Maakt het complexe getal <code>x + yi</code>.</p>
+        </article>
+        <article class="card">
+          <span class="tag">Berekening</span>
+          <h3><code>complex_limit(c)</code></h3>
+          <p>Geeft de diverging index terug, of 0 als de reeks niet divergeert.</p>
+        </article>
+        <article class="card">
+          <span class="tag">Data</span>
+          <h3><code>create_mandel_data(width)</code></h3>
+          <p>Maakt een <code>width × width</code> NumPy-array met indices.</p>
+        </article>
+        <article class="card">
+          <span class="tag">Visualisatie</span>
+          <h3><code>draw_mandel(width)</code></h3>
+          <p>Toont de array als afbeelding met een kleurenschaal.</p>
+        </article>
+      </div>
+      <pre><code>draw_mandel(200)
+draw_mandel(300)
+draw_mandel(500)
+draw_mandel(800)</code></pre>
+      <div class="note success">
+        <strong>Verwachting:</strong> de functie moet voor alle vierkante
+        afmetingen werken, niet alleen voor 200 × 200.
+      </div>
+    </section>
+
+    <section id="exercise-3" class="exercise">
+      <div class="section-heading">
+        <div class="number">03</div>
+        <div>
+          <h2>PageRank en het wereldwijde web</h2>
+          <p class="subtitle">Populariteit schatten door een surfer te simuleren</p>
+        </div>
+      </div>
+      <p>
+        PageRank schat hoe vaak iemand op een webpagina terechtkomt. De surfer
+        volgt links vanaf de huidige pagina en bij een ongerichte graaf kan hij
+        naar een verbonden node gaan. Door veel stappen te simuleren, wordt de
+        verhouding van bezochte nodes een schatting van de PageRank.
+      </p>
+      <div class="grid">
+        <article class="card">
+          <span class="tag">3.1 Ongericht</span>
+          <h3>Zelf een netwerk maken</h3>
+          <p>
+            Maak zonder graph generator een Barabási-Albert-netwerk. Nieuwe
+            nodes kiezen bestaande nodes met een kans die afhangt van de degree.
+          </p>
+        </article>
+        <article class="card">
+          <span class="tag">3.2 Gericht</span>
+          <h3>Links met pijlen</h3>
+          <p>
+            Gebruik <code>nx.DiGraph</code> voor Wikipedia-links. Een pagina
+            kan alleen naar een bestaande uitgaande link surfen.
+          </p>
+        </article>
+        <article class="card">
+          <span class="tag">Analyse</span>
+          <h3>Verdeling tonen</h3>
+          <p>
+            Visualiseer zowel het netwerk als de verdeling van de PageRank-
+            waarschijnlijkheden met bijvoorbeeld een histogram.
+          </p>
+        </article>
+      </div>
+      <div class="formula">
+        P(page) = aantal bezoeken aan page / totaal aantal bezoeken
+      </div>
+      <h3>Belangrijke functies</h3>
+      <ul>
+        <li><code>calculate_probabilities(G)</code>: berekent selectiekansen op basis van degree.</li>
+        <li><code>create_network(k, N, M)</code>: bouwt het ongerichte netwerk op.</li>
+        <li><code>simulate_pagerank(G, steps)</code>: simuleert de surfer en telt bezoeken.</li>
+        <li><code>load_directed_network(file_path)</code>: leest bron- en doelartikelen uit de CSV.</li>
+        <li><code>visualize_network(G)</code>: tekent nodes en verbindingen.</li>
+        <li><code>plot_pagerank_distribution(scores)</code>: toont de verdeling van scores.</li>
+      </ul>
+      <pre><code>G = create_network(k=5, N=400, M=4)
+scores = simulate_pagerank(G, steps=100_000)
+plot_pagerank_distribution(scores)</code></pre>
+      <div class="note">
+        <strong>Let op:</strong> in de huidige <code>Opdracht3.py</code> staat
+        het netwerkmodel en de visualisatie al. De PageRank-simulatie en het
+        gerichte Wikipedia-netwerk moeten nog als aparte functies worden
+        toegevoegd als je de volledige oefening 3 wilt afronden.
+      </div>
+    </section>
+
+    <section id="inleveren" class="checklist">
+      <h2>Inleverchecklist</h2>
+      <ul>
+        <li>De repository bevat de map <code>Week 2</code>.</li>
+        <li>De antwoorden staan in één <code>main.ipynb</code>.</li>
+        <li>Elke functie heeft een type hint en duidelijke docstring.</li>
+        <li>In iedere docstring staat de naam van de maker.</li>
+        <li>Mandelbrot is getest met 200, 300, 500 en 800.</li>
+        <li>Het ongerichte netwerk en de PageRank-verdeling zijn gevisualiseerd.</li>
+        <li>Het gerichte netwerk met de squirrel/Wikipedia-CSV is verwerkt.</li>
+        <li>Alle wijzigingen zijn gecommit en gepusht vóór de deadline.</li>
+      </ul>
+    </section>
+  </main>
+
+  <footer>
+    DS5 Week 2 • Documentatie voor de oefeningen • <code>documentation.html</code>
+  </footer>
+</body>
+</html>

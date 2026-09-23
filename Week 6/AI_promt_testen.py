@@ -1,5 +1,6 @@
 import streamlit as st
 import re
+from pathlib import Path
 
 
 # ============================================================
@@ -12,6 +13,17 @@ st.set_page_config(
     layout="wide",
     initial_sidebar_state="collapsed"
 )
+
+
+# ============================================================
+# FILE PATHS
+# ============================================================
+
+# Folder where this Python file is located
+BASE_DIR = Path(__file__).resolve().parent
+
+# Elmo image in the same folder as this Python file
+ELMO_IMAGE = BASE_DIR / "elmo.png"
 
 
 # ============================================================
@@ -131,7 +143,6 @@ header[data-testid="stHeader"] {
     font-size: 29px;
 }
 
-
 .main-title {
     text-align: center;
     color: #10234b;
@@ -139,7 +150,6 @@ header[data-testid="stHeader"] {
     font-weight: 750;
     margin-bottom: 5px;
 }
-
 
 .main-subtitle {
     text-align: center;
@@ -159,7 +169,6 @@ header[data-testid="stHeader"] {
     font-size: 14px !important;
 }
 
-
 div[data-baseweb="input"] {
     background-color: #24252d !important;
     border: 1px solid #30333e !important;
@@ -167,11 +176,9 @@ div[data-baseweb="input"] {
     min-height: 47px;
 }
 
-
 div[data-baseweb="input"] input {
     color: white !important;
 }
-
 
 div[data-baseweb="input"] input::placeholder {
     color: #b8bdca !important;
@@ -199,7 +206,6 @@ div[data-baseweb="input"] input::placeholder {
     margin-bottom: 15px;
 }
 
-
 .requirements-title {
     color: #14294f;
     font-size: 14px;
@@ -207,13 +213,11 @@ div[data-baseweb="input"] input::placeholder {
     margin-bottom: 10px;
 }
 
-
 .req {
     font-size: 13px;
     margin: 5px 0;
     color: #657999;
 }
-
 
 .req-ok {
     color: #17603b;
@@ -222,7 +226,7 @@ div[data-baseweb="input"] input::placeholder {
 
 
 /* ==========================================================
-   BUTTON
+   BUTTONS
 ========================================================== */
 
 .stButton > button {
@@ -231,7 +235,6 @@ div[data-baseweb="input"] input::placeholder {
     height: 49px;
 
     border: none !important;
-
     border-radius: 10px !important;
 
     background:
@@ -253,7 +256,6 @@ div[data-baseweb="input"] input::placeholder {
     transition: all 0.2s ease;
 }
 
-
 .stButton > button:hover {
 
     transform: translateY(-1px);
@@ -265,19 +267,10 @@ div[data-baseweb="input"] input::placeholder {
 
 
 /* ==========================================================
-   SUCCESS MESSAGE
+   ALERT MESSAGES
 ========================================================== */
 
-/* Green success box */
-div[data-testid="stAlert"]:has(
-    div[data-testid="stNotificationContentSuccess"]
-) {
-    background-color:
-        rgba(34, 197, 94, 0.20) !important;
-}
-
-
-/* Make text inside alerts darker */
+/* Darker text so the success message is easier to read */
 div[data-testid="stAlert"] p {
     color: #14532d !important;
     font-weight: 700 !important;
@@ -295,13 +288,11 @@ div[data-testid="stAlert"] p {
     margin-bottom: 2px;
 }
 
-
 .right-text {
     color: #405d83;
     font-size: 14px;
     line-height: 1.4;
 }
-
 
 .feature {
     margin-top: 70px;
@@ -319,6 +310,94 @@ div[data-testid="stAlert"] p {
     font-size: 12px;
     margin-top: 30px;
     letter-spacing: 0.5px;
+}
+
+
+/* ==========================================================
+   ICE CREAM SHOP
+========================================================== */
+
+.shop-title {
+    font-size: 42px;
+    font-weight: 800;
+    color: #102a56;
+    padding-top: 10px;
+}
+
+.shop-subtitle {
+    color: #405d83;
+    font-size: 17px;
+}
+
+.welcome-shop {
+    background: rgba(255, 255, 255, 0.60);
+    padding: 18px 25px;
+    border-radius: 15px;
+    margin-bottom: 25px;
+}
+
+.welcome-shop-title {
+    font-size: 21px;
+    font-weight: 700;
+    color: #102a56;
+}
+
+.welcome-shop-text {
+    color: #405d83;
+    margin-top: 5px;
+}
+
+.product-card {
+    text-align: center;
+    background: rgba(255, 255, 255, 0.72);
+    padding: 25px 15px;
+    border-radius: 18px;
+    min-height: 230px;
+    border: 1px solid rgba(255,255,255,0.55);
+    box-shadow: 0 8px 20px rgba(16,42,86,0.08);
+}
+
+.product-emoji {
+    font-size: 65px;
+}
+
+.product-name {
+    color: #102a56;
+    font-size: 22px;
+    font-weight: 700;
+    margin-top: 10px;
+}
+
+.product-description {
+    color: #526b91;
+    font-size: 14px;
+    min-height: 45px;
+}
+
+.product-price {
+    color: #102a56;
+    font-size: 25px;
+    font-weight: 800;
+    margin-top: 12px;
+}
+
+.elmo-message {
+    background: rgba(255,255,255,0.72);
+    padding: 25px;
+    border-radius: 18px;
+    margin-top: 10px;
+}
+
+.elmo-message-title {
+    font-size: 21px;
+    font-weight: 700;
+    color: #102a56;
+}
+
+.elmo-message-text {
+    color: #405d83;
+    margin-top: 8px;
+    font-size: 16px;
 }
 
 
@@ -407,7 +486,6 @@ def password_checks(password):
     special_characters = "!@#$%^&*()_+-=[]{};:,.?"
 
     return {
-
         "At least 8 characters":
             len(password) >= 8,
 
@@ -468,21 +546,15 @@ def password_strength(password):
 if "account_created" not in st.session_state:
     st.session_state.account_created = False
 
-
 if "saved_email" not in st.session_state:
     st.session_state.saved_email = ""
-
 
 if "saved_password" not in st.session_state:
     st.session_state.saved_password = ""
 
-
 if "logged_in" not in st.session_state:
     st.session_state.logged_in = False
 
-
-# NEW:
-# Used to show balloons only once after login
 if "show_balloons" not in st.session_state:
     st.session_state.show_balloons = False
 
@@ -494,9 +566,7 @@ if "show_balloons" not in st.session_state:
 st.markdown(
     '<div class="brand">'
     '🔒 Secure'
-    '<span class="brand-light">'
-    'Login'
-    '</span>'
+    '<span class="brand-light">Login</span>'
     '</div>',
     unsafe_allow_html=True
 )
@@ -550,9 +620,7 @@ if not st.session_state.account_created:
     with center:
 
         st.markdown(
-            '<div class="lock-icon">'
-            '🔐'
-            '</div>',
+            '<div class="lock-icon">🔐</div>',
             unsafe_allow_html=True
         )
 
@@ -571,10 +639,7 @@ if not st.session_state.account_created:
         )
 
 
-        # ====================================================
         # EMAIL
-        # ====================================================
-
         email = st.text_input(
             "Email address",
             placeholder="name@example.com",
@@ -582,10 +647,7 @@ if not st.session_state.account_created:
         )
 
 
-        # ====================================================
         # PASSWORD
-        # ====================================================
-
         password = st.text_input(
             "Password",
             type="password",
@@ -594,10 +656,7 @@ if not st.session_state.account_created:
         )
 
 
-        # ====================================================
         # CONFIRM PASSWORD
-        # ====================================================
-
         repeat_password = st.text_input(
             "Confirm password",
             type="password",
@@ -657,25 +716,19 @@ if not st.session_state.account_created:
             strength = password_strength(password)
 
             if strength <= 0.35:
-
                 strength_text = "Weak"
 
             elif strength <= 0.65:
-
                 strength_text = "Medium"
 
             elif strength < 1:
-
                 strength_text = "Good"
 
             else:
-
                 strength_text = "Strong"
 
-
             st.caption(
-                "Password strength: "
-                + strength_text
+                "Password strength: " + strength_text
             )
 
             st.progress(strength)
@@ -695,27 +748,19 @@ if not st.session_state.account_created:
 
             password_valid, password_message = validate_password(password)
 
-
             if not email_valid:
 
-                st.error(
-                    email_message
-                )
-
+                st.error(email_message)
 
             elif not password_valid:
 
-                st.error(
-                    password_message
-                )
-
+                st.error(password_message)
 
             elif password != repeat_password:
 
                 st.error(
                     "The passwords do not match."
                 )
-
 
             else:
 
@@ -746,7 +791,6 @@ if not st.session_state.account_created:
             unsafe_allow_html=True
         )
 
-
         st.markdown(
             '<div class="feature">'
             '<div class="right-title">'
@@ -758,7 +802,6 @@ if not st.session_state.account_created:
             '</div>',
             unsafe_allow_html=True
         )
-
 
         st.markdown(
             '<div class="feature">'
@@ -783,16 +826,12 @@ elif not st.session_state.logged_in:
         [1, 1.2, 1]
     )
 
-
     with login:
 
         st.markdown(
-            '<div class="lock-icon">'
-            '🔐'
-            '</div>',
+            '<div class="lock-icon">🔐</div>',
             unsafe_allow_html=True
         )
-
 
         st.markdown(
             '<div class="main-title">'
@@ -801,7 +840,6 @@ elif not st.session_state.logged_in:
             unsafe_allow_html=True
         )
 
-
         st.markdown(
             '<div class="main-subtitle">'
             'Sign in to your account'
@@ -809,17 +847,12 @@ elif not st.session_state.logged_in:
             unsafe_allow_html=True
         )
 
-
-        # Green success message
         st.success(
             "✓ Account successfully created!"
         )
 
 
-        # ====================================================
         # LOGIN EMAIL
-        # ====================================================
-
         login_email = st.text_input(
             "Email address",
             placeholder="name@example.com",
@@ -827,10 +860,7 @@ elif not st.session_state.logged_in:
         )
 
 
-        # ====================================================
         # LOGIN PASSWORD
-        # ====================================================
-
         login_password = st.text_input(
             "Password",
             type="password",
@@ -839,10 +869,7 @@ elif not st.session_state.logged_in:
         )
 
 
-        # ====================================================
         # LOGIN BUTTON
-        # ====================================================
-
         if st.button(
             "Log in →",
             type="primary",
@@ -857,14 +884,11 @@ elif not st.session_state.logged_in:
                 == st.session_state.saved_password
             ):
 
-                # Login successful
                 st.session_state.logged_in = True
 
-                # Activate balloons
                 st.session_state.show_balloons = True
 
                 st.rerun()
-
 
             else:
 
@@ -879,7 +903,10 @@ elif not st.session_state.logged_in:
 
 else:
 
-    # Show balloons once after successful login
+    # ========================================================
+    # BALLOONS AFTER LOGIN
+    # ========================================================
+
     if st.session_state.show_balloons:
 
         st.balloons()
@@ -898,33 +925,34 @@ else:
 
     with col_logo:
 
-        # Put elmo.png in the same folder as this Python file
-        st.image(
-            "elmo.png",
-            width=110
-        )
+        # Check if Elmo image exists before displaying it
+        if ELMO_IMAGE.exists():
+
+            st.image(
+                str(ELMO_IMAGE),
+                width=110
+            )
+
+        else:
+
+            st.warning(
+                "elmo.png was not found."
+            )
 
 
     with col_title:
 
         st.markdown(
-            """
-            <div style="
-                font-size: 42px;
-                font-weight: 800;
-                color: #102a56;
-                padding-top: 10px;
-            ">
-                🍦 Elmo's Ice Cream Shop
-            </div>
+            '<div class="shop-title">'
+            "🍦 Elmo's Ice Cream Shop"
+            '</div>',
+            unsafe_allow_html=True
+        )
 
-            <div style="
-                color: #405d83;
-                font-size: 17px;
-            ">
-                The coolest ice cream in town!
-            </div>
-            """,
+        st.markdown(
+            '<div class="shop-subtitle">'
+            'The coolest ice cream in town!'
+            '</div>',
             unsafe_allow_html=True
         )
 
@@ -949,103 +977,68 @@ else:
     # ========================================================
 
     st.markdown(
-        f"""
-        <div style="
-            background: rgba(255,255,255,0.55);
-            padding: 18px 25px;
-            border-radius: 15px;
-            margin-bottom: 25px;
-        ">
-
-            <div style="
-                font-size: 21px;
-                font-weight: 700;
-                color: #102a56;
-            ">
-                👋 Welcome to Elmo's!
-            </div>
-
-            <div style="
-                color: #405d83;
-                margin-top: 5px;
-            ">
-                You are logged in as
-                {st.session_state.saved_email}
-            </div>
-
-        </div>
-        """,
+        '<div class="welcome-shop">'
+        '<div class="welcome-shop-title">'
+        "👋 Welcome to Elmo's!"
+        '</div>'
+        '<div class="welcome-shop-text">'
+        'You are logged in as '
+        + st.session_state.saved_email +
+        '</div>'
+        '</div>',
         unsafe_allow_html=True
     )
 
 
     # ========================================================
-    # SHOP TITLE
+    # ICE CREAM TITLE
     # ========================================================
 
     st.markdown(
-        """
-        <h2 style="
-            color: #102a56;
-            text-align: center;
-            margin-bottom: 5px;
-        ">
-            🍨 Our Ice Cream
-        </h2>
+        '<h2 style="'
+        'color:#102a56;'
+        'text-align:center;'
+        'margin-bottom:5px;'
+        '">'
+        '🍨 Our Ice Cream'
+        '</h2>',
+        unsafe_allow_html=True
+    )
 
-        <p style="
-            text-align: center;
-            color: #405d83;
-            margin-bottom: 30px;
-        ">
-            Pick your favorite flavor!
-        </p>
-        """,
+    st.markdown(
+        '<p style="'
+        'text-align:center;'
+        'color:#405d83;'
+        'margin-bottom:30px;'
+        '">'
+        'Pick your favorite flavor!'
+        '</p>',
         unsafe_allow_html=True
     )
 
 
     # ========================================================
-    # ICE CREAM PRODUCTS
+    # PRODUCTS
     # ========================================================
 
     ice1, ice2, ice3, ice4 = st.columns(4)
 
 
-    # --------------------------------------------------------
+    # ========================================================
     # STRAWBERRY
-    # --------------------------------------------------------
+    # ========================================================
 
     with ice1:
 
         st.markdown(
-            """
-            <div style="
-                text-align: center;
-                background: rgba(255,255,255,0.70);
-                padding: 25px 15px;
-                border-radius: 18px;
-                min-height: 210px;
-            ">
-
-                <div style="font-size: 65px;">
-                    🍓
-                </div>
-
-                <h3 style="color:#102a56;">
-                    Strawberry
-                </h3>
-
-                <p style="color:#526b91;">
-                    Sweet strawberry ice cream
-                </p>
-
-                <h2 style="color:#102a56;">
-                    €2.95
-                </h2>
-
-            </div>
-            """,
+            '<div class="product-card">'
+            '<div class="product-emoji">🍓</div>'
+            '<div class="product-name">Strawberry</div>'
+            '<div class="product-description">'
+            'Sweet strawberry ice cream'
+            '</div>'
+            '<div class="product-price">€2.95</div>'
+            '</div>',
             unsafe_allow_html=True
         )
 
@@ -1060,40 +1053,21 @@ else:
             )
 
 
-    # --------------------------------------------------------
+    # ========================================================
     # CHOCOLATE
-    # --------------------------------------------------------
+    # ========================================================
 
     with ice2:
 
         st.markdown(
-            """
-            <div style="
-                text-align: center;
-                background: rgba(255,255,255,0.70);
-                padding: 25px 15px;
-                border-radius: 18px;
-                min-height: 210px;
-            ">
-
-                <div style="font-size: 65px;">
-                    🍫
-                </div>
-
-                <h3 style="color:#102a56;">
-                    Chocolate
-                </h3>
-
-                <p style="color:#526b91;">
-                    Rich chocolate ice cream
-                </p>
-
-                <h2 style="color:#102a56;">
-                    €3.25
-                </h2>
-
-            </div>
-            """,
+            '<div class="product-card">'
+            '<div class="product-emoji">🍫</div>'
+            '<div class="product-name">Chocolate</div>'
+            '<div class="product-description">'
+            'Rich chocolate ice cream'
+            '</div>'
+            '<div class="product-price">€3.25</div>'
+            '</div>',
             unsafe_allow_html=True
         )
 
@@ -1108,40 +1082,21 @@ else:
             )
 
 
-    # --------------------------------------------------------
-    # COOKIE MONSTER
-    # --------------------------------------------------------
+    # ========================================================
+    # COOKIE CRUNCH
+    # ========================================================
 
     with ice3:
 
         st.markdown(
-            """
-            <div style="
-                text-align: center;
-                background: rgba(255,255,255,0.70);
-                padding: 25px 15px;
-                border-radius: 18px;
-                min-height: 210px;
-            ">
-
-                <div style="font-size: 65px;">
-                    🍪
-                </div>
-
-                <h3 style="color:#102a56;">
-                    Cookie Crunch
-                </h3>
-
-                <p style="color:#526b91;">
-                    Vanilla with cookie pieces
-                </p>
-
-                <h2 style="color:#102a56;">
-                    €3.50
-                </h2>
-
-            </div>
-            """,
+            '<div class="product-card">'
+            '<div class="product-emoji">🍪</div>'
+            '<div class="product-name">Cookie Crunch</div>'
+            '<div class="product-description">'
+            'Vanilla with cookie pieces'
+            '</div>'
+            '<div class="product-price">€3.50</div>'
+            '</div>',
             unsafe_allow_html=True
         )
 
@@ -1156,40 +1111,21 @@ else:
             )
 
 
-    # --------------------------------------------------------
+    # ========================================================
     # RAINBOW
-    # --------------------------------------------------------
+    # ========================================================
 
     with ice4:
 
         st.markdown(
-            """
-            <div style="
-                text-align: center;
-                background: rgba(255,255,255,0.70);
-                padding: 25px 15px;
-                border-radius: 18px;
-                min-height: 210px;
-            ">
-
-                <div style="font-size: 65px;">
-                    🌈
-                </div>
-
-                <h3 style="color:#102a56;">
-                    Rainbow
-                </h3>
-
-                <p style="color:#526b91;">
-                    Elmo's colorful special
-                </p>
-
-                <h2 style="color:#102a56;">
-                    €3.75
-                </h2>
-
-            </div>
-            """,
+            '<div class="product-card">'
+            '<div class="product-emoji">🌈</div>'
+            '<div class="product-name">Rainbow</div>'
+            '<div class="product-description">'
+            "Elmo's colorful special"
+            '</div>'
+            '<div class="product-price">€3.75</div>'
+            '</div>',
             unsafe_allow_html=True
         )
 
@@ -1205,7 +1141,7 @@ else:
 
 
     # ========================================================
-    # ELMO MESSAGE
+    # ELMO'S FAVORITE
     # ========================================================
 
     st.write("")
@@ -1218,42 +1154,33 @@ else:
 
     with elmo_image:
 
-        st.image(
-            "elmo.png",
-            width=140
-        )
+        # Again check if the file exists
+        if ELMO_IMAGE.exists():
+
+            st.image(
+                str(ELMO_IMAGE),
+                width=140
+            )
+
+        else:
+
+            st.info(
+                "Add elmo.png to the Week 6 folder."
+            )
 
 
     with elmo_message:
 
         st.markdown(
-            """
-            <div style="
-                background: rgba(255,255,255,0.70);
-                padding: 25px;
-                border-radius: 18px;
-                margin-top: 10px;
-            ">
-
-                <div style="
-                    font-size: 21px;
-                    font-weight: 700;
-                    color: #102a56;
-                ">
-                    ❤️ Elmo's favorite
-                </div>
-
-                <div style="
-                    color: #405d83;
-                    margin-top: 8px;
-                    font-size: 16px;
-                ">
-                    Elmo loves the Strawberry Special!
-                    Try one today for only €2.95.
-                </div>
-
-            </div>
-            """,
+            '<div class="elmo-message">'
+            '<div class="elmo-message-title">'
+            "❤️ Elmo's favorite"
+            '</div>'
+            '<div class="elmo-message-text">'
+            'Elmo loves the Strawberry Special! '
+            'Try one today for only €2.95.'
+            '</div>'
+            '</div>',
             unsafe_allow_html=True
         )
 
@@ -1268,3 +1195,16 @@ else:
         "This is a fictional demonstration shop. "
         "All products and prices are fake."
     )
+
+
+# ============================================================
+# FOOTER
+# ============================================================
+
+st.markdown(
+    '<div class="footer-text">'
+    'SecureLogin &nbsp; | &nbsp; '
+    'Built for a safer digital world'
+    '</div>',
+    unsafe_allow_html=True
+)

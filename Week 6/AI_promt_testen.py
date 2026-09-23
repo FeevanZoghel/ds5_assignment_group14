@@ -3,6 +3,102 @@ import re
 
 
 # ============================================================
+# PAGE SETTINGS
+# ============================================================
+
+st.set_page_config(
+    page_title="SecureLogin",
+    page_icon="🔐",
+    layout="centered"
+)
+
+
+# ============================================================
+# CSS - DESIGN
+# ============================================================
+
+st.markdown("""
+<style>
+
+    /* Main background */
+    .stApp {
+        background: linear-gradient(
+            135deg,
+            #f5f7fa 0%,
+            #e8edf5 100%
+        );
+    }
+
+    /* Main content width */
+    .block-container {
+        max-width: 650px;
+        padding-top: 3rem;
+        padding-bottom: 3rem;
+    }
+
+    /* Titles */
+    h1 {
+        text-align: center;
+        color: #1f2937;
+        font-weight: 700;
+    }
+
+    h3 {
+        color: #374151;
+    }
+
+    /* Input fields */
+    div[data-baseweb="input"] {
+        border-radius: 10px;
+    }
+
+    /* Buttons */
+    .stButton > button {
+        border-radius: 10px;
+        height: 48px;
+        font-weight: 600;
+        font-size: 16px;
+        transition: 0.3s;
+    }
+
+    .stButton > button:hover {
+        transform: translateY(-1px);
+    }
+
+    /* Login logo */
+    .logo {
+        text-align: center;
+        font-size: 55px;
+        margin-bottom: -10px;
+    }
+
+    /* Subtitle */
+    .subtitle {
+        text-align: center;
+        color: #6b7280;
+        font-size: 17px;
+        margin-bottom: 25px;
+    }
+
+    /* Requirement text */
+    .requirement {
+        font-size: 14px;
+        margin: 3px 0;
+    }
+
+    /* Footer */
+    .footer {
+        text-align: center;
+        color: #9ca3af;
+        font-size: 12px;
+        margin-top: 40px;
+    }
+
+</style>
+""", unsafe_allow_html=True)
+
+
+# ============================================================
 # EMAIL VALIDATION
 # ============================================================
 
@@ -67,6 +163,36 @@ def validate_email(email):
 
 
 # ============================================================
+# PASSWORD CHECKS
+# ============================================================
+
+def password_checks(password):
+
+    special_characters = "!@#$%^&*()_+-=[]{};:,.?"
+
+    checks = {
+        "8 characters": len(password) >= 8,
+
+        "Uppercase letter":
+            any(character.isupper() for character in password),
+
+        "Lowercase letter":
+            any(character.islower() for character in password),
+
+        "Number":
+            any(character.isdigit() for character in password),
+
+        "Special character":
+            any(character in special_characters for character in password),
+
+        "No spaces":
+            " " not in password
+    }
+
+    return checks
+
+
+# ============================================================
 # PASSWORD VALIDATION
 # ============================================================
 
@@ -75,45 +201,59 @@ def validate_password(password):
     if password == "":
         return False, "Please enter a password."
 
-    if len(password) < 8:
+    checks = password_checks(password)
+
+    if not checks["8 characters"]:
         return False, "Password must contain at least 8 characters."
 
-    if not any(character.isupper() for character in password):
+    if not checks["Uppercase letter"]:
         return False, "Password must contain at least one uppercase letter."
 
-    if not any(character.islower() for character in password):
+    if not checks["Lowercase letter"]:
         return False, "Password must contain at least one lowercase letter."
 
-    if not any(character.isdigit() for character in password):
+    if not checks["Number"]:
         return False, "Password must contain at least one number."
 
-    special_characters = "!@#$%^&*()_+-=[]{};:,.?"
-
-    if not any(character in special_characters for character in password):
+    if not checks["Special character"]:
         return False, "Password must contain at least one special character."
 
-    if " " in password:
+    if not checks["No spaces"]:
         return False, "Password cannot contain spaces."
 
-    return True, "Valid password."
+    return True, "Strong password."
 
 
 # ============================================================
-# STREAMLIT SETTINGS
+# PASSWORD STRENGTH
 # ============================================================
 
-st.set_page_config(
-    page_title="Login System",
-    page_icon="🔐",
-    layout="centered"
-)
+def password_strength(password):
+
+    if password == "":
+        return 0, "No password entered"
+
+    checks = password_checks(password)
+
+    score = sum(checks.values())
+
+    if score <= 2:
+        return 0.25, "Weak"
+
+    elif score <= 4:
+        return 0.50, "Medium"
+
+    elif score == 5:
+        return 0.75, "Good"
+
+    else:
+        return 1.0, "Strong"
 
 
 # ============================================================
 # SESSION STATE
 # ============================================================
 
-# Stores the created account
 if "account_created" not in st.session_state:
     st.session_state.account_created = False
 
@@ -123,69 +263,128 @@ if "saved_email" not in st.session_state:
 if "saved_password" not in st.session_state:
     st.session_state.saved_password = ""
 
-# Keeps track of login
 if "logged_in" not in st.session_state:
     st.session_state.logged_in = False
 
 
 # ============================================================
-# CREATE ACCOUNT PAGE
+# CREATE ACCOUNT
 # ============================================================
 
 if not st.session_state.account_created:
 
-    st.title("👤 Create Account")
-
-    st.write(
-        "Create an account by entering a valid email address "
-        "and a strong password."
+    st.markdown(
+        '<div class="logo">🔐</div>',
+        unsafe_allow_html=True
     )
 
-    st.divider()
+    st.title("Create your account")
 
-    # Email input
+    st.markdown(
+        '<div class="subtitle">'
+        'Create a secure account to continue'
+        '</div>',
+        unsafe_allow_html=True
+    )
+
+    st.write("### Account details")
+
+    # --------------------------------------------------------
+    # EMAIL
+    # --------------------------------------------------------
+
     email = st.text_input(
         "Email address",
-        placeholder="example@gmail.com"
+        placeholder="name@example.com",
+        key="register_email"
     )
 
-    # Password input
+    # Live email validation
+    if email:
+
+        email_valid, email_message = validate_email(email)
+
+        if email_valid:
+            st.success("✓ Email address looks good")
+
+        else:
+            st.warning(email_message)
+
+    # --------------------------------------------------------
+    # PASSWORD
+    # --------------------------------------------------------
+
     password = st.text_input(
         "Password",
         type="password",
-        placeholder="Create a password"
+        placeholder="Create a strong password",
+        key="register_password"
     )
 
-    # Repeat password
+    # --------------------------------------------------------
+    # LIVE PASSWORD CHECK
+    # --------------------------------------------------------
+
+    if password:
+
+        strength_value, strength_text = password_strength(password)
+
+        st.write(f"**Password strength: {strength_text}**")
+
+        st.progress(strength_value)
+
+        checks = password_checks(password)
+
+        col1, col2 = st.columns(2)
+
+        requirements = list(checks.items())
+
+        with col1:
+
+            for requirement, passed in requirements[:3]:
+
+                if passed:
+                    st.markdown(f"🟢 {requirement}")
+                else:
+                    st.markdown(f"⚪ {requirement}")
+
+        with col2:
+
+            for requirement, passed in requirements[3:]:
+
+                if passed:
+                    st.markdown(f"🟢 {requirement}")
+                else:
+                    st.markdown(f"⚪ {requirement}")
+
+    # --------------------------------------------------------
+    # CONFIRM PASSWORD
+    # --------------------------------------------------------
+
     repeat_password = st.text_input(
-        "Repeat password",
+        "Confirm password",
         type="password",
-        placeholder="Repeat your password"
+        placeholder="Enter your password again",
+        key="repeat_password"
     )
 
-    # --------------------------------------------------------
-    # PASSWORD REQUIREMENTS
-    # --------------------------------------------------------
+    # Live password match
+    if repeat_password:
 
-    with st.expander("🔐 Password requirements"):
+        if password == repeat_password:
+            st.success("✓ Passwords match")
 
-        st.write("""
-        Your password must:
+        else:
+            st.warning("Passwords do not match yet.")
 
-        - Contain at least 8 characters
-        - Contain at least one uppercase letter
-        - Contain at least one lowercase letter
-        - Contain at least one number
-        - Contain at least one special character
-        - Not contain spaces
-        """)
+    st.write("")
 
     # --------------------------------------------------------
-    # CREATE ACCOUNT BUTTON
+    # CREATE BUTTON
     # --------------------------------------------------------
 
     if st.button(
-        "Create account",
+        "Create Account",
         type="primary",
         use_container_width=True
     ):
@@ -194,59 +393,86 @@ if not st.session_state.account_created:
 
         password_valid, password_message = validate_password(password)
 
-        # Check email
         if not email_valid:
 
             st.error("❌ Invalid email address")
             st.warning(email_message)
 
-        # Check password
         elif not password_valid:
 
-            st.error("❌ Invalid password")
+            st.error("❌ Password does not meet the requirements")
             st.warning(password_message)
 
-        # Check if passwords match
         elif password != repeat_password:
 
-            st.error("❌ Passwords do not match.")
+            st.error("❌ The passwords do not match.")
 
-        # Everything is correct
         else:
 
             st.session_state.saved_email = email.strip()
             st.session_state.saved_password = password
             st.session_state.account_created = True
 
-            st.success("✅ Account successfully created!")
-
             st.rerun()
+
+    st.markdown(
+        '<div class="footer">'
+        'SecureLogin • Data Science 5'
+        '</div>',
+        unsafe_allow_html=True
+    )
 
 
 # ============================================================
-# LOGIN PAGE
+# LOGIN
 # ============================================================
 
 elif not st.session_state.logged_in:
 
-    st.title("🔐 Login")
-
-    st.write("Enter your email address and password to continue.")
-
-    st.divider()
-
-    # Login email
-    login_email = st.text_input(
-        "Email address",
-        placeholder="example@gmail.com"
+    st.markdown(
+        '<div class="logo">🔐</div>',
+        unsafe_allow_html=True
     )
 
-    # Login password
+    st.title("Welcome back")
+
+    st.markdown(
+        '<div class="subtitle">'
+        'Sign in to your account'
+        '</div>',
+        unsafe_allow_html=True
+    )
+
+    # Account created message
+    st.success(
+        "✓ Your account has been created successfully. "
+        "You can now log in."
+    )
+
+    st.write("### Login")
+
+    # --------------------------------------------------------
+    # LOGIN EMAIL
+    # --------------------------------------------------------
+
+    login_email = st.text_input(
+        "Email address",
+        placeholder="name@example.com",
+        key="login_email"
+    )
+
+    # --------------------------------------------------------
+    # LOGIN PASSWORD
+    # --------------------------------------------------------
+
     login_password = st.text_input(
         "Password",
         type="password",
-        placeholder="Enter your password"
+        placeholder="Enter your password",
+        key="login_password"
     )
+
+    st.write("")
 
     # --------------------------------------------------------
     # LOGIN BUTTON
@@ -258,7 +484,6 @@ elif not st.session_state.logged_in:
         use_container_width=True
     ):
 
-        # Check both email and password
         if (
             login_email.strip() == st.session_state.saved_email
             and
@@ -267,18 +492,32 @@ elif not st.session_state.logged_in:
 
             st.session_state.logged_in = True
 
-            st.success("✅ Login successful!")
-
             st.rerun()
 
         else:
 
-            st.error("❌ Incorrect email address or password.")
+            st.error(
+                "❌ Incorrect email address or password. "
+                "Please try again."
+            )
+
+    # --------------------------------------------------------
+    # NEW ACCOUNT
+    # --------------------------------------------------------
 
     st.divider()
 
-    # Option to create a new account
-    if st.button("Create a new account"):
+    st.markdown(
+        "<p style='text-align:center;'>"
+        "Want to create a different account?"
+        "</p>",
+        unsafe_allow_html=True
+    )
+
+    if st.button(
+        "Create new account",
+        use_container_width=True
+    ):
 
         st.session_state.account_created = False
         st.session_state.saved_email = ""
@@ -286,30 +525,70 @@ elif not st.session_state.logged_in:
 
         st.rerun()
 
+    st.markdown(
+        '<div class="footer">'
+        '🔒 Your login information is protected'
+        '</div>',
+        unsafe_allow_html=True
+    )
+
 
 # ============================================================
-# LOGGED IN PAGE
+# DASHBOARD
 # ============================================================
 
 else:
 
-    st.title("🎉 Welcome!")
+    st.markdown(
+        '<div class="logo">🎉</div>',
+        unsafe_allow_html=True
+    )
 
-    st.success("You are successfully logged in.")
+    st.title("You're logged in!")
 
-    st.write("Logged in as:")
+    st.markdown(
+        '<div class="subtitle">'
+        'Welcome to your account'
+        '</div>',
+        unsafe_allow_html=True
+    )
 
-    st.info(st.session_state.saved_email)
+    st.success("✓ Authentication successful")
+
+    st.write("### 👤 Account")
+
+    st.info(
+        f"**Email address:**  \n"
+        f"{st.session_state.saved_email}"
+    )
+
+    st.write("### 🔐 Security status")
+
+    col1, col2 = st.columns(2)
+
+    with col1:
+        st.metric(
+            label="Email",
+            value="Valid"
+        )
+
+    with col2:
+        st.metric(
+            label="Password",
+            value="Strong"
+        )
 
     st.divider()
 
     st.write(
-        "You have successfully created an account "
-        "and logged into the application."
+        "Your email address and password have successfully "
+        "passed all validation checks."
     )
 
+    st.write("")
+
     # --------------------------------------------------------
-    # LOGOUT BUTTON
+    # LOGOUT
     # --------------------------------------------------------
 
     if st.button(
@@ -320,3 +599,10 @@ else:
         st.session_state.logged_in = False
 
         st.rerun()
+
+    st.markdown(
+        '<div class="footer">'
+        'SecureLogin • Data Science 5'
+        '</div>',
+        unsafe_allow_html=True
+    )

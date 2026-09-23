@@ -24,12 +24,25 @@ st.markdown("""
 /* Complete page */
 .stApp {
     background:
-        radial-gradient(circle at 10% 20%, #ffffff 0%, transparent 30%),
-        radial-gradient(circle at 90% 10%, #ffffff 0%, transparent 30%),
-        linear-gradient(135deg, #f8fbff 0%, #edf5ff 50%, #dcecff 100%);
+        radial-gradient(
+            circle at 15% 15%,
+            rgba(255, 255, 255, 0.30) 0%,
+            transparent 32%
+        ),
+        radial-gradient(
+            circle at 85% 10%,
+            rgba(255, 255, 255, 0.20) 0%,
+            transparent 30%
+        ),
+        linear-gradient(
+            135deg,
+            #b8d8ff 0%,
+            #91c2fa 50%,
+            #6fa9ed 100%
+        );
+
     min-height: 100vh;
 }
-
 /* Remove Streamlit default header spacing */
 .block-container {
     max-width: 1400px;

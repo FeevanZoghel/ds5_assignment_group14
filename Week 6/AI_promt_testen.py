@@ -3,6 +3,338 @@ import re
 
 
 # ============================================================
+# PAGE CONFIG
+# ============================================================
+
+st.set_page_config(
+    page_title="SecureLogin",
+    page_icon="🔐",
+    layout="wide",
+    initial_sidebar_state="collapsed"
+)
+
+
+# ============================================================
+# CSS
+# ============================================================
+
+st.markdown("""
+<style>
+
+/* ==========================================================
+   BACKGROUND
+========================================================== */
+
+.stApp {
+    background:
+        radial-gradient(
+            circle at 15% 15%,
+            rgba(255, 255, 255, 0.30) 0%,
+            transparent 32%
+        ),
+        radial-gradient(
+            circle at 85% 10%,
+            rgba(255, 255, 255, 0.20) 0%,
+            transparent 30%
+        ),
+        linear-gradient(
+            135deg,
+            #b8d8ff 0%,
+            #91c2fa 50%,
+            #6fa9ed 100%
+        );
+
+    min-height: 100vh;
+}
+
+
+/* ==========================================================
+   PAGE
+========================================================== */
+
+.block-container {
+    max-width: 1400px;
+    padding-top: 2rem;
+    padding-bottom: 2rem;
+}
+
+header[data-testid="stHeader"] {
+    background: transparent;
+}
+
+
+/* ==========================================================
+   BRAND
+========================================================== */
+
+.brand {
+    font-size: 22px;
+    font-weight: 700;
+    color: #102a56;
+    margin-bottom: 25px;
+}
+
+.brand-light {
+    font-weight: 400;
+}
+
+
+/* ==========================================================
+   LEFT SIDE
+========================================================== */
+
+.hero-title {
+    font-family: Georgia, serif;
+    font-size: 54px;
+    line-height: 1.02;
+    color: #102a56;
+    margin-top: 100px;
+    margin-bottom: 25px;
+}
+
+.hero-line {
+    width: 45px;
+    height: 3px;
+    background: #2563eb;
+    border-radius: 10px;
+    margin-bottom: 28px;
+}
+
+.hero-text {
+    color: #405d83;
+    font-size: 17px;
+    line-height: 1.6;
+    max-width: 260px;
+}
+
+
+/* ==========================================================
+   CENTER
+========================================================== */
+
+.lock-icon {
+    width: 65px;
+    height: 65px;
+
+    margin:
+        5px auto
+        15px auto;
+
+    border-radius: 50%;
+
+    background: rgba(255, 255, 255, 0.55);
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    font-size: 29px;
+}
+
+
+.main-title {
+    text-align: center;
+    color: #10234b;
+    font-size: 31px;
+    font-weight: 750;
+    margin-bottom: 5px;
+}
+
+
+.main-subtitle {
+    text-align: center;
+    color: #536d92;
+    font-size: 15px;
+    margin-bottom: 25px;
+}
+
+
+/* ==========================================================
+   INPUT FIELDS
+========================================================== */
+
+.stTextInput label {
+    color: #172b4d !important;
+    font-weight: 600 !important;
+    font-size: 14px !important;
+}
+
+
+div[data-baseweb="input"] {
+    background-color: #24252d !important;
+    border: 1px solid #30333e !important;
+    border-radius: 10px !important;
+    min-height: 47px;
+}
+
+
+div[data-baseweb="input"] input {
+    color: white !important;
+}
+
+
+div[data-baseweb="input"] input::placeholder {
+    color: #b8bdca !important;
+}
+
+
+/* ==========================================================
+   PASSWORD REQUIREMENTS
+========================================================== */
+
+.requirements {
+    background: rgba(255, 255, 255, 0.70);
+
+    border:
+        1px solid
+        rgba(255, 255, 255, 0.60);
+
+    border-radius: 14px;
+
+    padding:
+        16px
+        20px;
+
+    margin-top: 10px;
+    margin-bottom: 15px;
+}
+
+
+.requirements-title {
+    color: #14294f;
+    font-size: 14px;
+    font-weight: 700;
+    margin-bottom: 10px;
+}
+
+
+.req {
+    font-size: 13px;
+    margin: 5px 0;
+    color: #657999;
+}
+
+
+.req-ok {
+    color: #17603b;
+    font-weight: 600;
+}
+
+
+/* ==========================================================
+   BUTTON
+========================================================== */
+
+.stButton > button {
+
+    width: 100%;
+    height: 49px;
+
+    border: none !important;
+
+    border-radius: 10px !important;
+
+    background:
+        linear-gradient(
+            90deg,
+            #2463d4,
+            #3478ea
+        ) !important;
+
+    color: white !important;
+
+    font-weight: 650 !important;
+    font-size: 15px !important;
+
+    box-shadow:
+        0 8px 18px
+        rgba(36, 99, 212, 0.20);
+
+    transition: all 0.2s ease;
+}
+
+
+.stButton > button:hover {
+
+    transform: translateY(-1px);
+
+    box-shadow:
+        0 10px 24px
+        rgba(36, 99, 212, 0.30);
+}
+
+
+/* ==========================================================
+   SUCCESS MESSAGE
+========================================================== */
+
+/* Green success box */
+div[data-testid="stAlert"]:has(
+    div[data-testid="stNotificationContentSuccess"]
+) {
+    background-color:
+        rgba(34, 197, 94, 0.20) !important;
+}
+
+
+/* Make text inside alerts darker */
+div[data-testid="stAlert"] p {
+    color: #14532d !important;
+    font-weight: 700 !important;
+}
+
+
+/* ==========================================================
+   RIGHT SIDE
+========================================================== */
+
+.right-title {
+    color: #102a56;
+    font-size: 17px;
+    font-weight: 700;
+    margin-bottom: 2px;
+}
+
+
+.right-text {
+    color: #405d83;
+    font-size: 14px;
+    line-height: 1.4;
+}
+
+
+.feature {
+    margin-top: 70px;
+    margin-bottom: 45px;
+}
+
+
+/* ==========================================================
+   FOOTER
+========================================================== */
+
+.footer-text {
+    text-align: center;
+    color: #657b9c;
+    font-size: 12px;
+    margin-top: 30px;
+    letter-spacing: 0.5px;
+}
+
+
+/* ==========================================================
+   PROGRESS BAR
+========================================================== */
+
+.stProgress > div > div > div > div {
+    background-color: #2563eb;
+}
+
+</style>
+""", unsafe_allow_html=True)
+
+
+# ============================================================
 # EMAIL VALIDATION
 # ============================================================
 
@@ -67,6 +399,36 @@ def validate_email(email):
 
 
 # ============================================================
+# PASSWORD CHECKS
+# ============================================================
+
+def password_checks(password):
+
+    special_characters = "!@#$%^&*()_+-=[]{};:,.?"
+
+    return {
+
+        "At least 8 characters":
+            len(password) >= 8,
+
+        "One uppercase letter (A-Z)":
+            any(c.isupper() for c in password),
+
+        "One lowercase letter (a-z)":
+            any(c.islower() for c in password),
+
+        "One number (0-9)":
+            any(c.isdigit() for c in password),
+
+        "One special character":
+            any(c in special_characters for c in password),
+
+        "No spaces":
+            " " not in password
+    }
+
+
+# ============================================================
 # PASSWORD VALIDATION
 # ============================================================
 
@@ -75,57 +437,69 @@ def validate_password(password):
     if password == "":
         return False, "Please enter a password."
 
-    if len(password) < 8:
-        return False, "Password must contain at least 8 characters."
+    checks = password_checks(password)
 
-    if not any(character.isupper() for character in password):
-        return False, "Password must contain at least one uppercase letter."
+    for requirement, passed in checks.items():
 
-    if not any(character.islower() for character in password):
-        return False, "Password must contain at least one lowercase letter."
-
-    if not any(character.isdigit() for character in password):
-        return False, "Password must contain at least one number."
-
-    special_characters = "!@#$%^&*()_+-=[]{};:,.?"
-
-    if not any(character in special_characters for character in password):
-        return False, "Password must contain at least one special character."
-
-    if " " in password:
-        return False, "Password cannot contain spaces."
+        if not passed:
+            return False, "Missing requirement: " + requirement
 
     return True, "Valid password."
 
 
 # ============================================================
-# STREAMLIT SETTINGS
+# PASSWORD STRENGTH
 # ============================================================
 
-st.set_page_config(
-    page_title="Login System",
-    page_icon="🔐",
-    layout="centered"
-)
+def password_strength(password):
+
+    if password == "":
+        return 0
+
+    checks = password_checks(password)
+
+    return sum(checks.values()) / len(checks)
 
 
 # ============================================================
 # SESSION STATE
 # ============================================================
 
-# Stores the created account
 if "account_created" not in st.session_state:
     st.session_state.account_created = False
+
 
 if "saved_email" not in st.session_state:
     st.session_state.saved_email = ""
 
+
 if "saved_password" not in st.session_state:
     st.session_state.saved_password = ""
 
-# Keeps track of login
+
 if "logged_in" not in st.session_state:
     st.session_state.logged_in = False
+
+
+# NEW:
+# Used to show balloons only once after login
+if "show_balloons" not in st.session_state:
+    st.session_state.show_balloons = False
+
+
+# ============================================================
+# BRAND
+# ============================================================
+
+st.markdown(
+    '<div class="brand">'
+    '🔒 Secure'
+    '<span class="brand-light">'
+    'Login'
+    '</span>'
+    '</div>',
+    unsafe_allow_html=True
+)
 
 
 # ============================================================
@@ -134,93 +508,269 @@ if "logged_in" not in st.session_state:
 
 if not st.session_state.account_created:
 
-    st.title("👤 Create Account")
-
-    st.write(
-        "Create an account by entering a valid email address "
-        "and a strong password."
+    left, center, right = st.columns(
+        [1, 1.55, 1],
+        gap="large"
     )
 
-    st.divider()
 
-    # Email input
-    email = st.text_input(
-        "Email address",
-        placeholder="example@gmail.com"
-    )
+    # ========================================================
+    # LEFT SIDE
+    # ========================================================
 
-    # Password input
-    password = st.text_input(
-        "Password",
-        type="password",
-        placeholder="Create a password"
-    )
+    with left:
 
-    # Repeat password
-    repeat_password = st.text_input(
-        "Repeat password",
-        type="password",
-        placeholder="Repeat your password"
-    )
+        st.markdown(
+            '<div class="hero-title">'
+            'A safer<br>'
+            'brighter<br>'
+            'tomorrow'
+            '</div>',
+            unsafe_allow_html=True
+        )
 
-    # --------------------------------------------------------
-    # PASSWORD REQUIREMENTS
-    # --------------------------------------------------------
+        st.markdown(
+            '<div class="hero-line"></div>',
+            unsafe_allow_html=True
+        )
 
-    with st.expander("🔐 Password requirements"):
+        st.markdown(
+            '<div class="hero-text">'
+            'Create your account and take the first step '
+            'towards a more secure digital experience.'
+            '</div>',
+            unsafe_allow_html=True
+        )
 
-        st.write("""
-        Your password must:
 
-        - Contain at least 8 characters
-        - Contain at least one uppercase letter
-        - Contain at least one lowercase letter
-        - Contain at least one number
-        - Contain at least one special character
-        - Not contain spaces
-        """)
+    # ========================================================
+    # CENTER
+    # ========================================================
 
-    # --------------------------------------------------------
-    # CREATE ACCOUNT BUTTON
-    # --------------------------------------------------------
+    with center:
 
-    if st.button(
-        "Create account",
-        type="primary",
-        use_container_width=True
-    ):
+        st.markdown(
+            '<div class="lock-icon">'
+            '🔐'
+            '</div>',
+            unsafe_allow_html=True
+        )
 
-        email_valid, email_message = validate_email(email)
+        st.markdown(
+            '<div class="main-title">'
+            'Create your account'
+            '</div>',
+            unsafe_allow_html=True
+        )
 
-        password_valid, password_message = validate_password(password)
+        st.markdown(
+            '<div class="main-subtitle">'
+            'Create a secure account to continue'
+            '</div>',
+            unsafe_allow_html=True
+        )
 
-        # Check email
-        if not email_valid:
 
-            st.error("❌ Invalid email address")
-            st.warning(email_message)
+        # ====================================================
+        # EMAIL
+        # ====================================================
 
-        # Check password
-        elif not password_valid:
+        email = st.text_input(
+            "Email address",
+            placeholder="name@example.com",
+            key="register_email"
+        )
 
-            st.error("❌ Invalid password")
-            st.warning(password_message)
 
-        # Check if passwords match
-        elif password != repeat_password:
+        # ====================================================
+        # PASSWORD
+        # ====================================================
 
-            st.error("❌ Passwords do not match.")
+        password = st.text_input(
+            "Password",
+            type="password",
+            placeholder="Create a strong password",
+            key="register_password"
+        )
 
-        # Everything is correct
-        else:
 
-            st.session_state.saved_email = email.strip()
-            st.session_state.saved_password = password
-            st.session_state.account_created = True
+        # ====================================================
+        # CONFIRM PASSWORD
+        # ====================================================
 
-            st.success("✅ Account successfully created!")
+        repeat_password = st.text_input(
+            "Confirm password",
+            type="password",
+            placeholder="Enter your password again",
+            key="repeat_password"
+        )
 
-            st.rerun()
+
+        # ====================================================
+        # PASSWORD REQUIREMENTS
+        # ====================================================
+
+        checks = password_checks(password)
+
+        requirement_html = ""
+
+        for name, passed in checks.items():
+
+            if passed:
+
+                requirement_html += (
+                    '<div class="req req-ok">'
+                    '✓ ' + name +
+                    '</div>'
+                )
+
+            else:
+
+                requirement_html += (
+                    '<div class="req">'
+                    '○ ' + name +
+                    '</div>'
+                )
+
+
+        requirements_box = (
+            '<div class="requirements">'
+            '<div class="requirements-title">'
+            'Password requirements'
+            '</div>'
+            + requirement_html +
+            '</div>'
+        )
+
+        st.markdown(
+            requirements_box,
+            unsafe_allow_html=True
+        )
+
+
+        # ====================================================
+        # PASSWORD STRENGTH
+        # ====================================================
+
+        if password:
+
+            strength = password_strength(password)
+
+            if strength <= 0.35:
+
+                strength_text = "Weak"
+
+            elif strength <= 0.65:
+
+                strength_text = "Medium"
+
+            elif strength < 1:
+
+                strength_text = "Good"
+
+            else:
+
+                strength_text = "Strong"
+
+
+            st.caption(
+                "Password strength: "
+                + strength_text
+            )
+
+            st.progress(strength)
+
+
+        # ====================================================
+        # CREATE ACCOUNT BUTTON
+        # ====================================================
+
+        if st.button(
+            "Create Account  →",
+            type="primary",
+            use_container_width=True
+        ):
+
+            email_valid, email_message = validate_email(email)
+
+            password_valid, password_message = validate_password(password)
+
+
+            if not email_valid:
+
+                st.error(
+                    email_message
+                )
+
+
+            elif not password_valid:
+
+                st.error(
+                    password_message
+                )
+
+
+            elif password != repeat_password:
+
+                st.error(
+                    "The passwords do not match."
+                )
+
+
+            else:
+
+                st.session_state.saved_email = email.strip()
+
+                st.session_state.saved_password = password
+
+                st.session_state.account_created = True
+
+                st.rerun()
+
+
+    # ========================================================
+    # RIGHT SIDE
+    # ========================================================
+
+    with right:
+
+        st.markdown(
+            '<div class="feature">'
+            '<div class="right-title">'
+            '🛡️ &nbsp; Secure'
+            '</div>'
+            '<div class="right-text">'
+            'Your information is protected.'
+            '</div>'
+            '</div>',
+            unsafe_allow_html=True
+        )
+
+
+        st.markdown(
+            '<div class="feature">'
+            '<div class="right-title">'
+            '👤 &nbsp; Private'
+            '</div>'
+            '<div class="right-text">'
+            'We never share your data.'
+            '</div>'
+            '</div>',
+            unsafe_allow_html=True
+        )
+
+
+        st.markdown(
+            '<div class="feature">'
+            '<div class="right-title">'
+            '⚡ &nbsp; Simple'
+            '</div>'
+            '<div class="right-text">'
+            'Fast and easy to use.'
+            '</div>'
+            '</div>',
+            unsafe_allow_html=True
+        )
 
 
 # ============================================================
@@ -229,62 +779,98 @@ if not st.session_state.account_created:
 
 elif not st.session_state.logged_in:
 
-    st.title("🔐 Login")
-
-    st.write("Enter your email address and password to continue.")
-
-    st.divider()
-
-    # Login email
-    login_email = st.text_input(
-        "Email address",
-        placeholder="example@gmail.com"
+    left_space, login, right_space = st.columns(
+        [1, 1.2, 1]
     )
 
-    # Login password
-    login_password = st.text_input(
-        "Password",
-        type="password",
-        placeholder="Enter your password"
-    )
 
-    # --------------------------------------------------------
-    # LOGIN BUTTON
-    # --------------------------------------------------------
+    with login:
 
-    if st.button(
-        "Login",
-        type="primary",
-        use_container_width=True
-    ):
+        st.markdown(
+            '<div class="lock-icon">'
+            '🔐'
+            '</div>',
+            unsafe_allow_html=True
+        )
 
-        # Check both email and password
-        if (
-            login_email.strip() == st.session_state.saved_email
-            and
-            login_password == st.session_state.saved_password
+
+        st.markdown(
+            '<div class="main-title">'
+            'Welcome back'
+            '</div>',
+            unsafe_allow_html=True
+        )
+
+
+        st.markdown(
+            '<div class="main-subtitle">'
+            'Sign in to your account'
+            '</div>',
+            unsafe_allow_html=True
+        )
+
+
+        # Green success message
+        st.success(
+            "✓ Account successfully created!"
+        )
+
+
+        # ====================================================
+        # LOGIN EMAIL
+        # ====================================================
+
+        login_email = st.text_input(
+            "Email address",
+            placeholder="name@example.com",
+            key="login_email"
+        )
+
+
+        # ====================================================
+        # LOGIN PASSWORD
+        # ====================================================
+
+        login_password = st.text_input(
+            "Password",
+            type="password",
+            placeholder="Enter your password",
+            key="login_password"
+        )
+
+
+        # ====================================================
+        # LOGIN BUTTON
+        # ====================================================
+
+        if st.button(
+            "Log in →",
+            type="primary",
+            use_container_width=True
         ):
 
-            st.session_state.logged_in = True
+            if (
+                login_email.strip()
+                == st.session_state.saved_email
+                and
+                login_password
+                == st.session_state.saved_password
+            ):
 
-            st.success("✅ Login successful!")
+                # Login successful
+                st.session_state.logged_in = True
 
-            st.rerun()
+                # Activate balloons
+                st.session_state.show_balloons = True
 
-        else:
+                st.rerun()
 
-            st.error("❌ Incorrect email address or password.")
 
-    st.divider()
+            else:
 
-    # Option to create a new account
-    if st.button("Create a new account"):
-
-        st.session_state.account_created = False
-        st.session_state.saved_email = ""
-        st.session_state.saved_password = ""
-
-        st.rerun()
+                st.error(
+                    "Incorrect email address or password."
+                )
 
 
 # ============================================================
@@ -293,30 +879,106 @@ elif not st.session_state.logged_in:
 
 else:
 
-    st.title("🎉 Welcome!")
+    # ========================================================
+    # BALLOONS
+    # ========================================================
 
-    st.success("You are successfully logged in.")
+    # Balloons are shown once after a successful login
+    if st.session_state.show_balloons:
 
-    st.write("Logged in as:")
+        st.balloons()
 
-    st.info(st.session_state.saved_email)
+        # Prevent balloons from appearing again
+        st.session_state.show_balloons = False
 
-    st.divider()
 
-    st.write(
-        "You have successfully created an account "
-        "and logged into the application."
+    left_space, dashboard, right_space = st.columns(
+        [1, 1.2, 1]
     )
 
-    # --------------------------------------------------------
-    # LOGOUT BUTTON
-    # --------------------------------------------------------
 
-    if st.button(
-        "🚪 Logout",
-        use_container_width=True
-    ):
+    with dashboard:
 
-        st.session_state.logged_in = False
+        st.markdown(
+            '<div class="lock-icon">'
+            '✓'
+            '</div>',
+            unsafe_allow_html=True
+        )
 
-        st.rerun()
+
+        st.markdown(
+            '<div class="main-title">'
+            'Welcome!'
+            '</div>',
+            unsafe_allow_html=True
+        )
+
+
+        st.markdown(
+            '<div class="main-subtitle">'
+            'You are securely logged in'
+            '</div>',
+            unsafe_allow_html=True
+        )
+
+
+        st.success(
+            "✓ Authentication successful"
+        )
+
+
+        st.info(
+            "Logged in as: "
+            + st.session_state.saved_email
+        )
+
+
+        # ====================================================
+        # ACCOUNT STATUS
+        # ====================================================
+
+        col1, col2 = st.columns(2)
+
+
+        with col1:
+
+            st.metric(
+                "Email status",
+                "Valid"
+            )
+
+
+        with col2:
+
+            st.metric(
+                "Password",
+                "Strong"
+            )
+
+
+        # ====================================================
+        # LOG OUT
+        # ====================================================
+
+        if st.button(
+            "Log out",
+            use_container_width=True
+        ):
+
+            st.session_state.logged_in = False
+
+            st.rerun()
+
+
+# ============================================================
+# FOOTER
+# ============================================================
+
+st.markdown(
+    '<div class="footer-text">'
+    'SecureLogin &nbsp; | &nbsp; '
+    'Built for a safer digital world'
+    '</div>',
+    unsafe_allow_html=True
+)

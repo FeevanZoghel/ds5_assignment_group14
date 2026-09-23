@@ -1,0 +1,470 @@
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Documentatie van de Data Science 5 opdrachten van groep 14 - week 2.">
+    <title>DS5 - Documentatie week 2</title>
+    <style>
+        :root {
+            --background: #f4f7fb;
+            --surface: #ffffff;
+            --text: #1f2937;
+            --muted: #5b677a;
+            --primary: #1d4ed8;
+            --primary-dark: #163ca5;
+            --border: #dbe3ef;
+            --code: #111827;
+            --success: #166534;
+        }
+
+        * {
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            margin: 0;
+            color: var(--text);
+            background: var(--background);
+            font: 16px/1.6 system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+        }
+
+        a {
+            color: var(--primary);
+        }
+
+        a:hover {
+            color: var(--primary-dark);
+        }
+
+        header {
+            padding: 4rem 1.5rem 3rem;
+            color: #fff;
+            background: linear-gradient(135deg, #172554, #1d4ed8);
+        }
+
+        .hero,
+        main,
+        footer {
+            width: min(1100px, calc(100% - 2rem));
+            margin: 0 auto;
+        }
+
+        .hero h1 {
+            max-width: 760px;
+            margin: 0 0 0.75rem;
+            font-size: clamp(2rem, 5vw, 3.4rem);
+            line-height: 1.1;
+        }
+
+        .hero p {
+            max-width: 760px;
+            margin: 0;
+            color: #dbeafe;
+            font-size: 1.1rem;
+        }
+
+        nav {
+            position: sticky;
+            top: 0;
+            z-index: 10;
+            border-bottom: 1px solid var(--border);
+            background: rgba(255, 255, 255, 0.96);
+            backdrop-filter: blur(8px);
+        }
+
+        nav ul {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.25rem 1.25rem;
+            width: min(1100px, calc(100% - 2rem));
+            margin: 0 auto;
+            padding: 0.8rem 0;
+            list-style: none;
+        }
+
+        nav a {
+            text-decoration: none;
+            font-weight: 650;
+        }
+
+        main {
+            padding: 2rem 0 3rem;
+        }
+
+        .intro,
+        .exercise,
+        .card {
+            margin-bottom: 1.5rem;
+            padding: clamp(1.25rem, 3vw, 2rem);
+            border: 1px solid var(--border);
+            border-radius: 14px;
+            background: var(--surface);
+            box-shadow: 0 5px 18px rgba(30, 41, 59, 0.05);
+        }
+
+        h2 {
+            margin-top: 0;
+            color: #172554;
+            font-size: clamp(1.5rem, 3vw, 2.1rem);
+        }
+
+        h3 {
+            margin-top: 1.6rem;
+            color: #1e3a8a;
+        }
+
+        .summary {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(190px, 1fr));
+            gap: 1rem;
+            margin-top: 1.25rem;
+        }
+
+        .summary .card {
+            margin: 0;
+            padding: 1rem;
+            box-shadow: none;
+        }
+
+        .summary strong {
+            display: block;
+            color: var(--primary);
+            font-size: 1.4rem;
+        }
+
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1rem;
+        }
+
+        .function {
+            height: 100%;
+            padding: 1rem;
+            border-left: 4px solid var(--primary);
+            background: #f8fafc;
+        }
+
+        .function h4 {
+            margin: 0 0 0.25rem;
+            font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+            color: #172554;
+        }
+
+        .function p {
+            margin: 0.25rem 0;
+        }
+
+        code,
+        pre {
+            font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+        }
+
+        code {
+            padding: 0.1rem 0.3rem;
+            border-radius: 4px;
+            background: #e8eef8;
+            font-size: 0.92em;
+        }
+
+        pre {
+            overflow-x: auto;
+            margin: 1rem 0;
+            padding: 1rem;
+            border-radius: 8px;
+            color: #ffffff;
+            background: #0b1220;
+            font-size: 1rem;
+            line-height: 1.7;
+        }
+
+        pre code {
+            padding: 0;
+            color: inherit;
+            background: transparent;
+            font-weight: 600;
+        }
+
+        .notice {
+            padding: 1rem;
+            border-left: 4px solid var(--success);
+            background: #f0fdf4;
+        }
+
+        .requirements li,
+        .steps li {
+            margin: 0.45rem 0;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 1rem 0;
+        }
+
+        th,
+        td {
+            padding: 0.7rem;
+            border: 1px solid var(--border);
+            text-align: left;
+            vertical-align: top;
+        }
+
+        th {
+            color: #172554;
+            background: #eff6ff;
+        }
+
+        footer {
+            padding: 0 0 2.5rem;
+            color: var(--muted);
+            text-align: center;
+        }
+
+        @media (max-width: 600px) {
+            header {
+                padding-top: 3rem;
+            }
+
+            table {
+                display: block;
+                overflow-x: auto;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="hero">
+            <p>Data Science 5 · Groep 14 · Week 2</p>
+            <h1>Documentatie van de Python-opdrachten</h1>
+            <p>
+                Een overzicht van de probleemstelling, functies, werkwijze en
+                verwachte resultaten van opdrachten 1, 2 en 3.
+            </p>
+        </div>
+    </header>
+
+    <nav aria-label="Hoofdnavigatie">
+        <ul>
+            <li><a href="#overzicht">Overzicht</a></li>
+            <li><a href="#opdracht-1">Opdracht 1</a></li>
+            <li><a href="#opdracht-2">Opdracht 2</a></li>
+            <li><a href="#opdracht-3">Opdracht 3</a></li>
+            <li><a href="#uitvoeren">Uitvoeren</a></li>
+        </ul>
+    </nav>
+
+    <main>
+        <section id="overzicht" class="intro">
+            <h2>Overzicht</h2>
+            <p>
+                In deze week wordt bestaande Python-code opgesplitst in duidelijke
+                functies. Elke functie heeft één verantwoordelijkheid, een
+                beschrijving en waar mogelijk type hints. De opdrachten behandelen
+                CSV-verwerking, de Mandelbrotverzameling en een
+                Barabási-Albert-netwerk voor de simulatie van webpagina's.
+            </p>
+            <div class="summary">
+                <div class="card">
+                    <strong>1</strong>
+                    CSV-bestand lezen en studentresultaten rapporteren.
+                </div>
+                <div class="card">
+                    <strong>2</strong>
+                    Een Mandelbrot-afbeelding genereren.
+                </div>
+                <div class="card">
+                    <strong>3</strong>
+                    Een netwerk opbouwen en visualiseren.
+                </div>
+            </div>
+        </section>
+
+        <section id="opdracht-1" class="exercise">
+            <h2>Opdracht 1 · Structureren van code</h2>
+            <p>
+                Het programma leest een CSV-bestand met studentrecords. Daarna wordt
+                het gemiddelde cijfer berekend en worden studenten met een cijfer
+                van minimaal 80 geselecteerd voor een rapport.
+            </p>
+
+            <h3>Functies en verantwoordelijkheden</h3>
+            <div class="grid">
+                <article class="function">
+                    <h4>import_file()</h4>
+                    <p><strong>Invoer:</strong> een bestandspad via <code>input()</code>.</p>
+                    <p><strong>Uitvoer:</strong> een lijst met dictionaries uit de CSV.</p>
+                    <p><strong>Verantwoordelijke:</strong> teamlid.</p>
+                </article>
+                <article class="function">
+                    <h4>gemiddelde_score(records)</h4>
+                    <p><strong>Invoer:</strong> studentrecords met de sleutel <code>Grade</code>.</p>
+                    <p><strong>Uitvoer:</strong> het gemiddelde als <code>float</code>.</p>
+                    <p><strong>Verantwoordelijke:</strong> teamlid.</p>
+                </article>
+                <article class="function">
+                    <h4>Excellent_records(records)</h4>
+                    <p><strong>Invoer:</strong> studentrecords.</p>
+                    <p><strong>Uitvoer:</strong> records met <code>Grade &gt;= 80.0</code>.</p>
+                    <p><strong>Verantwoordelijke:</strong> teamlid.</p>
+                </article>
+            </div>
+
+            <h3>Verwerkingsstroom</h3>
+            <ol class="steps">
+                <li>Vraag het pad naar het CSV-bestand aan.</li>
+                <li>Lees elke rij met <code>csv.DictReader</code> en bewaar de records.</li>
+                <li>Bereken het gemiddelde van alle waarden in de kolom <code>Grade</code>.</li>
+                <li>Filter studenten met een cijfer van 80 of hoger.</li>
+                <li>Print de naam en het cijfer van elke geselecteerde student.</li>
+            </ol>
+
+            <div class="notice">
+                <strong>Bronbestand:</strong>
+                <a href="Opdracht1.py">Opdracht1.py</a>.
+                Het CSV-bestand moet kolommen met de namen <code>Name</code> en
+                <code>Grade</code> bevatten.
+            </div>
+        </section>
+
+        <section id="opdracht-2" class="exercise">
+            <h2>Opdracht 2 · Mandelbrotvisualisatie</h2>
+            <p>
+                Voor ieder complex getal <code>c</code> wordt de rij
+                <code>a₀ = 0</code> en <code>aₙ = aₙ₋₁² + c</code> berekend.
+                Zodra <code>|aₙ| &gt; 2</code>, is het getal divergerend. Als dit
+                binnen 100 iteraties niet gebeurt, wordt het als onderdeel van de
+                Mandelbrotverzameling beschouwd.
+            </p>
+
+            <h3>Functies en verantwoordelijkheden</h3>
+            <div class="grid">
+                <article class="function">
+                    <h4>complex_number(x, y)</h4>
+                    <p>Combineert een reëel en imaginair deel tot <code>x + yi</code>.</p>
+                    <p><strong>Verantwoordelijke:</strong> Julien.</p>
+                </article>
+                <article class="function">
+                    <h4>complex_number_list(x_values, y_values)</h4>
+                    <p>Maakt alle complexe punten in het gekozen x- en y-bereik.</p>
+                    <p><strong>Verantwoordelijke:</strong> Julien.</p>
+                </article>
+                <article class="function">
+                    <h4>complex_limiet(complex_list)</h4>
+                    <p>Verdeelt punten in convergerende en divergerende waarden.</p>
+                    <p><strong>Verantwoordelijke:</strong> Matthijs.</p>
+                </article>
+                <article class="function">
+                    <h4>draw_mandel(width)</h4>
+                    <p>Tekent de punten met Matplotlib en gebruikt de diverging index als kleur.</p>
+                    <p><strong>Verantwoordelijke:</strong> Megin en Fee.</p>
+                </article>
+            </div>
+
+            <h3>Specificaties</h3>
+            <table>
+                <thead>
+                    <tr><th>Onderdeel</th><th>Waarde</th></tr>
+                </thead>
+                <tbody>
+                    <tr><td>Standaardafbeelding</td><td>200 × 200 pixels</td></tr>
+                    <tr><td>x-bereik</td><td>[-1.5, 0.5]</td></tr>
+                    <tr><td>y-bereik</td><td>[-1, 1]</td></tr>
+                    <tr><td>Maximale iteraties</td><td>100</td></tr>
+                    <tr><td>Divergentiecriterium</td><td><code>abs(a_n) &gt; 2</code></td></tr>
+                </tbody>
+            </table>
+
+            <pre><code># Voorbeeld van gebruik
+draw_mandel(200)
+draw_mandel(300)
+draw_mandel(500)
+draw_mandel(800)</code></pre>
+
+            <div class="notice">
+                <strong>Bronbestanden:</strong>
+                <a href="Opdracht2.py">Opdracht2.py</a> bevat de oorspronkelijke
+                uitwerking. <a href="Goede_opdr_2.py">Goede_opdr_2.py</a> bevat
+                een array-gebaseerde uitwerking met NumPy.
+            </div>
+        </section>
+
+        <section id="opdracht-3" class="exercise">
+            <h2>Opdracht 3 · PageRank en webnetwerken</h2>
+            <p>
+                Deze opdracht modelleert webpagina's als knopen in een netwerk.
+                Nieuwe pagina's verbinden met bestaande pagina's. Pagina's met een
+                hogere degree hebben daardoor een grotere kans om gekozen te worden.
+                Dit is het principe achter een Barabási-Albert-netwerk.
+            </p>
+
+            <h3>Functies en verantwoordelijkheden</h3>
+            <div class="grid">
+                <article class="function">
+                    <h4>calculate_probabilities(G)</h4>
+                    <p>Deelt de degree van iedere node door de totale degree.</p>
+                    <p><strong>Uitvoer:</strong> een lijst met selectieprobabiliteiten.</p>
+                    <p><strong>Verantwoordelijke:</strong> Fee.</p>
+                </article>
+                <article class="function">
+                    <h4>create_network(k, N, M)</h4>
+                    <p>Start met een star-netwerk en voegt nodes toe met gewogen selectie.</p>
+                    <p><strong>Uitvoer:</strong> een <code>networkx.Graph</code>.</p>
+                    <p><strong>Verantwoordelijke:</strong> Fee.</p>
+                </article>
+                <article class="function">
+                    <h4>visualize_network(G)</h4>
+                    <p>Tekent het netwerk; nodegrootte en kleur zijn gebaseerd op degree.</p>
+                    <p><strong>Verantwoordelijke:</strong> Matthijs.</p>
+                </article>
+            </div>
+
+            <h3>Voorbeeldconfiguratie</h3>
+            <pre><code>G = create_network(k=5, N=400, M=4)
+visualize_network(G)</code></pre>
+
+            <ul class="requirements">
+                <li><code>k</code>: aantal verbindingen in het startnetwerk.</li>
+                <li><code>N</code>: totaal aantal nodes.</li>
+                <li><code>M</code>: aantal verbindingen per nieuwe node.</li>
+                <li>Een node mag niet twee keer aan dezelfde bestaande node worden gekoppeld.</li>
+                <li>Self-loops worden gecontroleerd voordat het netwerk wordt teruggegeven.</li>
+            </ul>
+
+            <div class="notice">
+                <strong>Bronbestand:</strong>
+                <a href="Opdracht3.py">Opdracht3.py</a>.
+                De huidige uitwerking genereert en visualiseert het netwerk. Een
+                volledige PageRank-uitwerking vereist daarnaast nog een simulatie
+                van bezoeken en een verdeling van de bezoekkansen.
+            </div>
+        </section>
+
+        <section id="uitvoeren" class="exercise">
+            <h2>Uitvoeren en samenwerken</h2>
+            <ol class="steps">
+                <li>Open de map <code>Week 2</code> in een terminal of IDE.</li>
+                <li>Installeer de gebruikte pakketten: <code>matplotlib</code>, <code>networkx</code> en eventueel <code>numpy</code>.</li>
+                <li>Voer het gewenste Python-bestand uit vanuit de projectomgeving.</li>
+                <li>Gebruik voor opdracht 1 een CSV-bestand met <code>Name</code> en <code>Grade</code>.</li>
+                <li>Commit en push de wijzigingen naar de gezamenlijke GitHub-repository.</li>
+                <li>Neem deze documentatie en de resultaten op in <code>main.ipynb</code>.</li>
+            </ol>
+            <p>
+                Deze pagina is statische documentatie; de Python-bestanden voeren de
+                berekeningen en visualisaties uit.
+            </p>
+        </section>
+    </main>
+
+    <footer>
+        DS5 · Assignment group 14 · Week 2
+    </footer>
+</body>
+</html>

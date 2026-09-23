@@ -874,92 +874,62 @@ elif not st.session_state.logged_in:
 
 
 # ============================================================
-# LOGGED IN PAGE
+# ELMO'S ICE CREAM SHOP
 # ============================================================
 
 else:
 
-    # ========================================================
-    # BALLOONS
-    # ========================================================
-
-    # Balloons are shown once after a successful login
+    # Show balloons once after successful login
     if st.session_state.show_balloons:
 
         st.balloons()
 
-        # Prevent balloons from appearing again
         st.session_state.show_balloons = False
 
 
-    left_space, dashboard, right_space = st.columns(
-        [1, 1.2, 1]
+    # ========================================================
+    # SHOP HEADER
+    # ========================================================
+
+    col_logo, col_title, col_logout = st.columns(
+        [1, 4, 1]
     )
 
 
-    with dashboard:
+    with col_logo:
+
+        # Put elmo.png in the same folder as this Python file
+        st.image(
+            "elmo.png",
+            width=110
+        )
+
+
+    with col_title:
 
         st.markdown(
-            '<div class="lock-icon">'
-            '✓'
-            '</div>',
+            """
+            <div style="
+                font-size: 42px;
+                font-weight: 800;
+                color: #102a56;
+                padding-top: 10px;
+            ">
+                🍦 Elmo's Ice Cream Shop
+            </div>
+
+            <div style="
+                color: #405d83;
+                font-size: 17px;
+            ">
+                The coolest ice cream in town!
+            </div>
+            """,
             unsafe_allow_html=True
         )
 
 
-        st.markdown(
-            '<div class="main-title">'
-            'Welcome!'
-            '</div>',
-            unsafe_allow_html=True
-        )
-
-
-        st.markdown(
-            '<div class="main-subtitle">'
-            'You are securely logged in'
-            '</div>',
-            unsafe_allow_html=True
-        )
-
-
-        st.success(
-            "✓ Authentication successful"
-        )
-
-
-        st.info(
-            "Logged in as: "
-            + st.session_state.saved_email
-        )
-
-
-        # ====================================================
-        # ACCOUNT STATUS
-        # ====================================================
-
-        col1, col2 = st.columns(2)
-
-
-        with col1:
-
-            st.metric(
-                "Email status",
-                "Valid"
-            )
-
-
-        with col2:
-
-            st.metric(
-                "Password",
-                "Strong"
-            )
-
-
-        # ====================================================
-        # LOG OUT
-        # ====================================================
+    with col_logout:
 
         if st.button(
             "Log out",
@@ -971,14 +941,330 @@ else:
             st.rerun()
 
 
-# ============================================================
-# FOOTER
-# ============================================================
+    st.divider()
 
-st.markdown(
-    '<div class="footer-text">'
-    'SecureLogin &nbsp; | &nbsp; '
-    'Built for a safer digital world'
-    '</div>',
-    unsafe_allow_html=True
-)
+
+    # ========================================================
+    # WELCOME MESSAGE
+    # ========================================================
+
+    st.markdown(
+        f"""
+        <div style="
+            background: rgba(255,255,255,0.55);
+            padding: 18px 25px;
+            border-radius: 15px;
+            margin-bottom: 25px;
+        ">
+
+            <div style="
+                font-size: 21px;
+                font-weight: 700;
+                color: #102a56;
+            ">
+                👋 Welcome to Elmo's!
+            </div>
+
+            <div style="
+                color: #405d83;
+                margin-top: 5px;
+            ">
+                You are logged in as
+                {st.session_state.saved_email}
+            </div>
+
+        </div>
+        """,
+        unsafe_allow_html=True
+    )
+
+
+    # ========================================================
+    # SHOP TITLE
+    # ========================================================
+
+    st.markdown(
+        """
+        <h2 style="
+            color: #102a56;
+            text-align: center;
+            margin-bottom: 5px;
+        ">
+            🍨 Our Ice Cream
+        </h2>
+
+        <p style="
+            text-align: center;
+            color: #405d83;
+            margin-bottom: 30px;
+        ">
+            Pick your favorite flavor!
+        </p>
+        """,
+        unsafe_allow_html=True
+    )
+
+
+    # ========================================================
+    # ICE CREAM PRODUCTS
+    # ========================================================
+
+    ice1, ice2, ice3, ice4 = st.columns(4)
+
+
+    # --------------------------------------------------------
+    # STRAWBERRY
+    # --------------------------------------------------------
+
+    with ice1:
+
+        st.markdown(
+            """
+            <div style="
+                text-align: center;
+                background: rgba(255,255,255,0.70);
+                padding: 25px 15px;
+                border-radius: 18px;
+                min-height: 210px;
+            ">
+
+                <div style="font-size: 65px;">
+                    🍓
+                </div>
+
+                <h3 style="color:#102a56;">
+                    Strawberry
+                </h3>
+
+                <p style="color:#526b91;">
+                    Sweet strawberry ice cream
+                </p>
+
+                <h2 style="color:#102a56;">
+                    €2.95
+                </h2>
+
+            </div>
+            """,
+            unsafe_allow_html=True
+        )
+
+        if st.button(
+            "Add to cart 🛒",
+            key="strawberry",
+            use_container_width=True
+        ):
+
+            st.toast(
+                "🍓 Strawberry added to your cart!"
+            )
+
+
+    # --------------------------------------------------------
+    # CHOCOLATE
+    # --------------------------------------------------------
+
+    with ice2:
+
+        st.markdown(
+            """
+            <div style="
+                text-align: center;
+                background: rgba(255,255,255,0.70);
+                padding: 25px 15px;
+                border-radius: 18px;
+                min-height: 210px;
+            ">
+
+                <div style="font-size: 65px;">
+                    🍫
+                </div>
+
+                <h3 style="color:#102a56;">
+                    Chocolate
+                </h3>
+
+                <p style="color:#526b91;">
+                    Rich chocolate ice cream
+                </p>
+
+                <h2 style="color:#102a56;">
+                    €3.25
+                </h2>
+
+            </div>
+            """,
+            unsafe_allow_html=True
+        )
+
+        if st.button(
+            "Add to cart 🛒",
+            key="chocolate",
+            use_container_width=True
+        ):
+
+            st.toast(
+                "🍫 Chocolate added to your cart!"
+            )
+
+
+    # --------------------------------------------------------
+    # COOKIE MONSTER
+    # --------------------------------------------------------
+
+    with ice3:
+
+        st.markdown(
+            """
+            <div style="
+                text-align: center;
+                background: rgba(255,255,255,0.70);
+                padding: 25px 15px;
+                border-radius: 18px;
+                min-height: 210px;
+            ">
+
+                <div style="font-size: 65px;">
+                    🍪
+                </div>
+
+                <h3 style="color:#102a56;">
+                    Cookie Crunch
+                </h3>
+
+                <p style="color:#526b91;">
+                    Vanilla with cookie pieces
+                </p>
+
+                <h2 style="color:#102a56;">
+                    €3.50
+                </h2>
+
+            </div>
+            """,
+            unsafe_allow_html=True
+        )
+
+        if st.button(
+            "Add to cart 🛒",
+            key="cookie",
+            use_container_width=True
+        ):
+
+            st.toast(
+                "🍪 Cookie Crunch added to your cart!"
+            )
+
+
+    # --------------------------------------------------------
+    # RAINBOW
+    # --------------------------------------------------------
+
+    with ice4:
+
+        st.markdown(
+            """
+            <div style="
+                text-align: center;
+                background: rgba(255,255,255,0.70);
+                padding: 25px 15px;
+                border-radius: 18px;
+                min-height: 210px;
+            ">
+
+                <div style="font-size: 65px;">
+                    🌈
+                </div>
+
+                <h3 style="color:#102a56;">
+                    Rainbow
+                </h3>
+
+                <p style="color:#526b91;">
+                    Elmo's colorful special
+                </p>
+
+                <h2 style="color:#102a56;">
+                    €3.75
+                </h2>
+
+            </div>
+            """,
+            unsafe_allow_html=True
+        )
+
+        if st.button(
+            "Add to cart 🛒",
+            key="rainbow",
+            use_container_width=True
+        ):
+
+            st.toast(
+                "🌈 Rainbow added to your cart!"
+            )
+
+
+    # ========================================================
+    # ELMO MESSAGE
+    # ========================================================
+
+    st.write("")
+    st.write("")
+
+    elmo_image, elmo_message = st.columns(
+        [1, 4]
+    )
+
+
+    with elmo_image:
+
+        st.image(
+            "elmo.png",
+            width=140
+        )
+
+
+    with elmo_message:
+
+        st.markdown(
+            """
+            <div style="
+                background: rgba(255,255,255,0.70);
+                padding: 25px;
+                border-radius: 18px;
+                margin-top: 10px;
+            ">
+
+                <div style="
+                    font-size: 21px;
+                    font-weight: 700;
+                    color: #102a56;
+                ">
+                    ❤️ Elmo's favorite
+                </div>
+
+                <div style="
+                    color: #405d83;
+                    margin-top: 8px;
+                    font-size: 16px;
+                ">
+                    Elmo loves the Strawberry Special!
+                    Try one today for only €2.95.
+                </div>
+
+            </div>
+            """,
+            unsafe_allow_html=True
+        )
+
+
+    # ========================================================
+    # DISCLAIMER
+    # ========================================================
+
+    st.write("")
+
+    st.caption(
+        "This is a fictional demonstration shop. "
+        "All products and prices are fake."
+    )

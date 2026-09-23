@@ -2,174 +2,269 @@ import streamlit as st
 import re
 
 
-# --------------------------------------------------
-# EMAIL VALIDATION FUNCTION
-# --------------------------------------------------
+# ============================================================
+# EMAIL VALIDATION
+# ============================================================
 
 def validate_email(email):
-    """
-    Checks if an email address is valid.
 
-    Returns:
-        True, message  -> if email is valid
-        False, message -> if email is invalid
-    """
-
-    # Remove spaces at beginning and end
     email = email.strip()
 
-    # Check if email is empty
     if email == "":
         return False, "Please enter an email address."
 
-    # Check maximum length
     if len(email) > 254:
         return False, "Email address is too long."
 
-    # Check for spaces
     if " " in email:
         return False, "Email cannot contain spaces."
 
-    # Check if there is exactly one @
     if email.count("@") != 1:
         return False, "Email must contain exactly one @ symbol."
 
-    # Split email into username and domain
     username, domain = email.split("@")
 
-    # Check username
     if username == "":
         return False, "Username cannot be empty."
 
-    # Check domain
     if domain == "":
         return False, "Domain cannot be empty."
 
-    # Check username length
     if len(username) > 64:
         return False, "Username is too long."
 
-    # Username cannot start or end with a dot
     if username.startswith(".") or username.endswith("."):
         return False, "Username cannot start or end with a dot."
 
-    # Domain cannot start or end with a dot
     if domain.startswith(".") or domain.endswith("."):
         return False, "Domain cannot start or end with a dot."
 
-    # No consecutive dots
     if ".." in email:
         return False, "Email cannot contain consecutive dots."
 
-    # Domain must contain a dot
     if "." not in domain:
         return False, "Domain must contain a dot."
 
-    # Split domain extension
     domain_name, extension = domain.rsplit(".", 1)
 
     if domain_name == "":
         return False, "Domain name cannot be empty."
 
-    # Extension must have at least 2 characters
     if len(extension) < 2:
         return False, "Domain extension must contain at least 2 characters."
 
-    # Check username characters
     username_pattern = r"^[A-Za-z0-9._%+-]+$"
 
     if not re.match(username_pattern, username):
         return False, "Username contains invalid characters."
 
-    # Check domain characters
     domain_pattern = r"^[A-Za-z0-9.-]+$"
 
     if not re.match(domain_pattern, domain):
         return False, "Domain contains invalid characters."
 
-    # Everything passed
-    return True, "This is a valid email address."
+    return True, "Valid email address."
 
 
-# --------------------------------------------------
-# STREAMLIT PAGE
-# --------------------------------------------------
+# ============================================================
+# PASSWORD VALIDATION
+# ============================================================
+
+def validate_password(password):
+
+    if password == "":
+        return False, "Please enter a password."
+
+    if len(password) < 8:
+        return False, "Password must contain at least 8 characters."
+
+    if not any(character.isupper() for character in password):
+        return False, "Password must contain at least one uppercase letter."
+
+    if not any(character.islower() for character in password):
+        return False, "Password must contain at least one lowercase letter."
+
+    if not any(character.isdigit() for character in password):
+        return False, "Password must contain at least one number."
+
+    special_characters = "!@#$%^&*()_+-=[]{};:,.?"
+
+    if not any(character in special_characters for character in password):
+        return False, "Password must contain at least one special character."
+
+    if " " in password:
+        return False, "Password cannot contain spaces."
+
+    return True, "Valid password."
+
+
+# ============================================================
+# STREAMLIT PAGE SETTINGS
+# ============================================================
 
 st.set_page_config(
-    page_title="Email Validator",
-    page_icon="📧",
+    page_title="Data Validator",
+    page_icon="🔍",
     layout="centered"
 )
 
 
-# Title
-st.title("📧 Email Validator")
+# ============================================================
+# TITLE
+# ============================================================
+
+st.title("🔍 Data Validator")
 
 st.write(
-    "Enter an email address below and the program will check "
-    "whether the email address has a valid format."
+    "This application can validate an email address "
+    "or check the strength of a password."
 )
 
 st.divider()
 
 
-# --------------------------------------------------
-# EMAIL INPUT
-# --------------------------------------------------
+# ============================================================
+# MENU
+# ============================================================
 
-email = st.text_input(
-    "Email address",
-    placeholder="example@gmail.com"
+option = st.radio(
+    "Choose what you want to validate:",
+    ["📧 Email address", "🔐 Password"],
+    horizontal=True
 )
-
-
-# --------------------------------------------------
-# VALIDATE BUTTON
-# --------------------------------------------------
-
-if st.button("Validate email", type="primary", use_container_width=True):
-
-    valid, message = validate_email(email)
-
-    if valid:
-
-        st.success("✅ Valid email address!")
-
-        st.write("The entered email address is:")
-
-        st.code(email)
-
-        st.balloons()
-
-    else:
-
-        st.error("❌ Invalid email address")
-
-        st.warning(message)
-
-        st.write("Please correct the email address and try again.")
-
-
-# --------------------------------------------------
-# INFORMATION
-# --------------------------------------------------
 
 st.divider()
 
-with st.expander("What does the validator check?"):
 
-    st.write("""
-    The validator checks whether:
+# ============================================================
+# EMAIL VALIDATOR
+# ============================================================
 
-    - The email contains exactly one @ symbol
-    - The username is valid
-    - The domain is valid
-    - The domain contains a dot
-    - There are no spaces
-    - There are no consecutive dots
-    - The domain extension contains at least 2 characters
-    - Only valid characters are used
-    """)
+if option == "📧 Email address":
+
+    st.header("📧 Email Validator")
+
+    st.write(
+        "Enter an email address below. The program will check "
+        "whether the email address has a valid format."
+    )
+
+    email = st.text_input(
+        "Email address",
+        placeholder="example@gmail.com"
+    )
+
+    if st.button(
+        "Validate email",
+        type="primary",
+        use_container_width=True
+    ):
+
+        valid, message = validate_email(email)
+
+        if valid:
+
+            st.success("✅ Valid email address!")
+
+            st.write("The entered email address is:")
+
+            st.code(email)
+
+            st.balloons()
+
+        else:
+
+            st.error("❌ Invalid email address")
+
+            st.warning(message)
+
+            st.write(
+                "Please correct the email address and try again."
+            )
+
+    # Explanation
+    with st.expander("What does the email validator check?"):
+
+        st.write("""
+        The validator checks whether:
+
+        - The email contains exactly one @ symbol
+        - The username is valid
+        - The domain is valid
+        - The domain contains a dot
+        - There are no spaces
+        - There are no consecutive dots
+        - The domain extension contains at least 2 characters
+        - Only valid characters are used
+        """)
 
 
-st.caption("Data Science 5 - Email Validation")
+# ============================================================
+# PASSWORD VALIDATOR
+# ============================================================
+
+elif option == "🔐 Password":
+
+    st.header("🔐 Password Validator")
+
+    st.write(
+        "Enter a password below. The program will check "
+        "whether the password meets all requirements."
+    )
+
+    password = st.text_input(
+        "Password",
+        type="password",
+        placeholder="Enter your password"
+    )
+
+    if st.button(
+        "Validate password",
+        type="primary",
+        use_container_width=True
+    ):
+
+        valid, message = validate_password(password)
+
+        if valid:
+
+            st.success("✅ Strong password!")
+
+            st.write(
+                "Your password meets all the requirements."
+            )
+
+            st.balloons()
+
+        else:
+
+            st.error("❌ Invalid password")
+
+            st.warning(message)
+
+            st.write(
+                "Please change your password and try again."
+            )
+
+    # Explanation
+    with st.expander("What does the password validator check?"):
+
+        st.write("""
+        Your password must:
+
+        - Contain at least 8 characters
+        - Contain at least one uppercase letter
+        - Contain at least one lowercase letter
+        - Contain at least one number
+        - Contain at least one special character
+        - Not contain spaces
+        """)
+
+
+# ============================================================
+# FOOTER
+# ============================================================
+
+st.divider()
+
+st.caption("Data Science 5 - Validation Application")

@@ -21,7 +21,10 @@ st.set_page_config(
 st.markdown("""
 <style>
 
-/* Complete page */
+/* ==========================================================
+   BACKGROUND
+========================================================== */
+
 .stApp {
     background:
         radial-gradient(
@@ -43,21 +46,26 @@ st.markdown("""
 
     min-height: 100vh;
 }
-/* Remove Streamlit default header spacing */
+
+
+/* ==========================================================
+   PAGE
+========================================================== */
+
 .block-container {
     max-width: 1400px;
     padding-top: 2rem;
     padding-bottom: 2rem;
 }
 
-/* Main Streamlit header */
 header[data-testid="stHeader"] {
     background: transparent;
 }
 
-/* --------------------------------------------------
+
+/* ==========================================================
    BRAND
--------------------------------------------------- */
+========================================================== */
 
 .brand {
     font-size: 22px;
@@ -71,9 +79,9 @@ header[data-testid="stHeader"] {
 }
 
 
-/* --------------------------------------------------
+/* ==========================================================
    LEFT SIDE
--------------------------------------------------- */
+========================================================== */
 
 .hero-title {
     font-family: Georgia, serif;
@@ -87,34 +95,42 @@ header[data-testid="stHeader"] {
 .hero-line {
     width: 45px;
     height: 3px;
-    background: #3b82f6;
+    background: #2563eb;
     border-radius: 10px;
     margin-bottom: 28px;
 }
 
 .hero-text {
-    color: #60789c;
+    color: #405d83;
     font-size: 17px;
     line-height: 1.6;
     max-width: 260px;
 }
 
 
-/* --------------------------------------------------
+/* ==========================================================
    CENTER
--------------------------------------------------- */
+========================================================== */
 
 .lock-icon {
     width: 65px;
     height: 65px;
-    margin: 5px auto 15px auto;
+
+    margin:
+        5px auto
+        15px auto;
+
     border-radius: 50%;
-    background: #e7f0ff;
+
+    background: rgba(255, 255, 255, 0.55);
+
     display: flex;
     align-items: center;
     justify-content: center;
+
     font-size: 29px;
 }
+
 
 .main-title {
     text-align: center;
@@ -124,17 +140,18 @@ header[data-testid="stHeader"] {
     margin-bottom: 5px;
 }
 
+
 .main-subtitle {
     text-align: center;
-    color: #7185a5;
+    color: #536d92;
     font-size: 15px;
     margin-bottom: 25px;
 }
 
 
-/* --------------------------------------------------
+/* ==========================================================
    INPUT FIELDS
--------------------------------------------------- */
+========================================================== */
 
 .stTextInput label {
     color: #172b4d !important;
@@ -142,30 +159,46 @@ header[data-testid="stHeader"] {
     font-size: 14px !important;
 }
 
+
 div[data-baseweb="input"] {
-    background-color: white !important;
-    border: 1px solid #d9e2ef !important;
+    background-color: #24252d !important;
+    border: 1px solid #30333e !important;
     border-radius: 10px !important;
     min-height: 47px;
 }
 
+
 div[data-baseweb="input"] input {
-    color: #172b4d !important;
+    color: white !important;
 }
 
 
-/* --------------------------------------------------
+div[data-baseweb="input"] input::placeholder {
+    color: #b8bdca !important;
+}
+
+
+/* ==========================================================
    PASSWORD REQUIREMENTS
--------------------------------------------------- */
+========================================================== */
 
 .requirements {
-    background: rgba(255, 255, 255, 0.65);
-    border: 1px solid #e1e8f2;
+    background: rgba(255, 255, 255, 0.70);
+
+    border:
+        1px solid
+        rgba(255, 255, 255, 0.60);
+
     border-radius: 14px;
-    padding: 16px 20px;
+
+    padding:
+        16px
+        20px;
+
     margin-top: 10px;
     margin-bottom: 15px;
 }
+
 
 .requirements-title {
     color: #14294f;
@@ -174,52 +207,86 @@ div[data-baseweb="input"] input {
     margin-bottom: 10px;
 }
 
+
 .req {
     font-size: 13px;
     margin: 5px 0;
-    color: #71819a;
+    color: #657999;
 }
+
 
 .req-ok {
-    color: #26835a;
-    font-weight: 500;
+    color: #17603b;
+    font-weight: 600;
 }
 
 
-/* --------------------------------------------------
+/* ==========================================================
    BUTTON
--------------------------------------------------- */
+========================================================== */
 
 .stButton > button {
+
     width: 100%;
     height: 49px;
+
     border: none !important;
+
     border-radius: 10px !important;
 
-    background: linear-gradient(
-        90deg,
-        #2463d4,
-        #3478ea
-    ) !important;
+    background:
+        linear-gradient(
+            90deg,
+            #2463d4,
+            #3478ea
+        ) !important;
 
     color: white !important;
+
     font-weight: 650 !important;
     font-size: 15px !important;
 
-    box-shadow: 0 8px 18px rgba(36, 99, 212, 0.15);
+    box-shadow:
+        0 8px 18px
+        rgba(36, 99, 212, 0.20);
 
     transition: all 0.2s ease;
 }
 
+
 .stButton > button:hover {
+
     transform: translateY(-1px);
-    box-shadow: 0 10px 24px rgba(36, 99, 212, 0.25);
+
+    box-shadow:
+        0 10px 24px
+        rgba(36, 99, 212, 0.30);
 }
 
 
-/* --------------------------------------------------
+/* ==========================================================
+   SUCCESS MESSAGE
+========================================================== */
+
+/* Green success box */
+div[data-testid="stAlert"]:has(
+    div[data-testid="stNotificationContentSuccess"]
+) {
+    background-color:
+        rgba(34, 197, 94, 0.20) !important;
+}
+
+
+/* Make text inside alerts darker */
+div[data-testid="stAlert"] p {
+    color: #14532d !important;
+    font-weight: 700 !important;
+}
+
+
+/* ==========================================================
    RIGHT SIDE
--------------------------------------------------- */
+========================================================== */
 
 .right-title {
     color: #102a56;
@@ -228,11 +295,13 @@ div[data-baseweb="input"] input {
     margin-bottom: 2px;
 }
 
+
 .right-text {
-    color: #7185a5;
+    color: #405d83;
     font-size: 14px;
     line-height: 1.4;
 }
+
 
 .feature {
     margin-top: 70px;
@@ -240,22 +309,25 @@ div[data-baseweb="input"] input {
 }
 
 
-/* --------------------------------------------------
+/* ==========================================================
    FOOTER
--------------------------------------------------- */
+========================================================== */
 
 .footer-text {
     text-align: center;
-    color: #8b9bb5;
+    color: #657b9c;
     font-size: 12px;
     margin-top: 30px;
     letter-spacing: 0.5px;
 }
 
 
-/* Progress bar */
+/* ==========================================================
+   PROGRESS BAR
+========================================================== */
+
 .stProgress > div > div > div > div {
-    background-color: #3478ea;
+    background-color: #2563eb;
 }
 
 </style>
@@ -263,7 +335,7 @@ div[data-baseweb="input"] input {
 
 
 # ============================================================
-# FUNCTIONS
+# EMAIL VALIDATION
 # ============================================================
 
 def validate_email(email):
@@ -326,11 +398,16 @@ def validate_email(email):
     return True, "Valid email address."
 
 
+# ============================================================
+# PASSWORD CHECKS
+# ============================================================
+
 def password_checks(password):
 
     special_characters = "!@#$%^&*()_+-=[]{};:,.?"
 
     return {
+
         "At least 8 characters":
             len(password) >= 8,
 
@@ -351,6 +428,10 @@ def password_checks(password):
     }
 
 
+# ============================================================
+# PASSWORD VALIDATION
+# ============================================================
+
 def validate_password(password):
 
     if password == "":
@@ -365,6 +446,10 @@ def validate_password(password):
 
     return True, "Valid password."
 
+
+# ============================================================
+# PASSWORD STRENGTH
+# ============================================================
 
 def password_strength(password):
 
@@ -383,14 +468,23 @@ def password_strength(password):
 if "account_created" not in st.session_state:
     st.session_state.account_created = False
 
+
 if "saved_email" not in st.session_state:
     st.session_state.saved_email = ""
+
 
 if "saved_password" not in st.session_state:
     st.session_state.saved_password = ""
 
+
 if "logged_in" not in st.session_state:
     st.session_state.logged_in = False
+
+
+# NEW:
+# Used to show balloons only once after login
+if "show_balloons" not in st.session_state:
+    st.session_state.show_balloons = False
 
 
 # ============================================================
@@ -398,13 +492,18 @@ if "logged_in" not in st.session_state:
 # ============================================================
 
 st.markdown(
-    '<div class="brand">🔒 Secure<span class="brand-light">Login</span></div>',
+    '<div class="brand">'
+    '🔒 Secure'
+    '<span class="brand-light">'
+    'Login'
+    '</span>'
+    '</div>',
     unsafe_allow_html=True
 )
 
 
 # ============================================================
-# CREATE ACCOUNT
+# CREATE ACCOUNT PAGE
 # ============================================================
 
 if not st.session_state.account_created:
@@ -416,7 +515,7 @@ if not st.session_state.account_created:
 
 
     # ========================================================
-    # LEFT COLUMN
+    # LEFT SIDE
     # ========================================================
 
     with left:
@@ -445,18 +544,22 @@ if not st.session_state.account_created:
 
 
     # ========================================================
-    # CENTER COLUMN
+    # CENTER
     # ========================================================
 
     with center:
 
         st.markdown(
-            '<div class="lock-icon">🔐</div>',
+            '<div class="lock-icon">'
+            '🔐'
+            '</div>',
             unsafe_allow_html=True
         )
 
         st.markdown(
-            '<div class="main-title">Create your account</div>',
+            '<div class="main-title">'
+            'Create your account'
+            '</div>',
             unsafe_allow_html=True
         )
 
@@ -468,26 +571,38 @@ if not st.session_state.account_created:
         )
 
 
+        # ====================================================
         # EMAIL
+        # ====================================================
+
         email = st.text_input(
             "Email address",
-            placeholder="name@example.com"
+            placeholder="name@example.com",
+            key="register_email"
         )
 
 
+        # ====================================================
         # PASSWORD
+        # ====================================================
+
         password = st.text_input(
             "Password",
             type="password",
-            placeholder="Create a strong password"
+            placeholder="Create a strong password",
+            key="register_password"
         )
 
 
+        # ====================================================
         # CONFIRM PASSWORD
+        # ====================================================
+
         repeat_password = st.text_input(
             "Confirm password",
             type="password",
-            placeholder="Enter your password again"
+            placeholder="Enter your password again",
+            key="repeat_password"
         )
 
 
@@ -518,10 +633,6 @@ if not st.session_state.account_created:
                 )
 
 
-        # IMPORTANT:
-        # HTML IS ALL ON ONE LINE TO PREVENT STREAMLIT
-        # FROM TURNING IT INTO A CODE BLOCK
-
         requirements_box = (
             '<div class="requirements">'
             '<div class="requirements-title">'
@@ -537,25 +648,34 @@ if not st.session_state.account_created:
         )
 
 
+        # ====================================================
         # PASSWORD STRENGTH
+        # ====================================================
+
         if password:
 
             strength = password_strength(password)
 
             if strength <= 0.35:
+
                 strength_text = "Weak"
 
             elif strength <= 0.65:
+
                 strength_text = "Medium"
 
             elif strength < 1:
+
                 strength_text = "Good"
 
             else:
+
                 strength_text = "Strong"
 
+
             st.caption(
-                "Password strength: " + strength_text
+                "Password strength: "
+                + strength_text
             )
 
             st.progress(strength)
@@ -575,17 +695,27 @@ if not st.session_state.account_created:
 
             password_valid, password_message = validate_password(password)
 
+
             if not email_valid:
 
-                st.error(email_message)
+                st.error(
+                    email_message
+                )
+
 
             elif not password_valid:
 
-                st.error(password_message)
+                st.error(
+                    password_message
+                )
+
 
             elif password != repeat_password:
 
-                st.error("The passwords do not match.")
+                st.error(
+                    "The passwords do not match."
+                )
+
 
             else:
 
@@ -599,14 +729,16 @@ if not st.session_state.account_created:
 
 
     # ========================================================
-    # RIGHT COLUMN
+    # RIGHT SIDE
     # ========================================================
 
     with right:
 
         st.markdown(
             '<div class="feature">'
-            '<div class="right-title">🛡️ &nbsp; Secure</div>'
+            '<div class="right-title">'
+            '🛡️ &nbsp; Secure'
+            '</div>'
             '<div class="right-text">'
             'Your information is protected.'
             '</div>'
@@ -614,9 +746,12 @@ if not st.session_state.account_created:
             unsafe_allow_html=True
         )
 
+
         st.markdown(
             '<div class="feature">'
-            '<div class="right-title">👤 &nbsp; Private</div>'
+            '<div class="right-title">'
+            '👤 &nbsp; Private'
+            '</div>'
             '<div class="right-text">'
             'We never share your data.'
             '</div>'
@@ -624,9 +759,12 @@ if not st.session_state.account_created:
             unsafe_allow_html=True
         )
 
+
         st.markdown(
             '<div class="feature">'
-            '<div class="right-title">⚡ &nbsp; Simple</div>'
+            '<div class="right-title">'
+            '⚡ &nbsp; Simple'
+            '</div>'
             '<div class="right-text">'
             'Fast and easy to use.'
             '</div>'
@@ -645,17 +783,24 @@ elif not st.session_state.logged_in:
         [1, 1.2, 1]
     )
 
+
     with login:
 
         st.markdown(
-            '<div class="lock-icon">🔐</div>',
+            '<div class="lock-icon">'
+            '🔐'
+            '</div>',
             unsafe_allow_html=True
         )
 
+
         st.markdown(
-            '<div class="main-title">Welcome back</div>',
+            '<div class="main-title">'
+            'Welcome back'
+            '</div>',
             unsafe_allow_html=True
         )
+
 
         st.markdown(
             '<div class="main-subtitle">'
@@ -664,15 +809,27 @@ elif not st.session_state.logged_in:
             unsafe_allow_html=True
         )
 
+
+        # Green success message
         st.success(
             "✓ Account successfully created!"
         )
+
+
+        # ====================================================
+        # LOGIN EMAIL
+        # ====================================================
 
         login_email = st.text_input(
             "Email address",
             placeholder="name@example.com",
             key="login_email"
         )
+
+
+        # ====================================================
+        # LOGIN PASSWORD
+        # ====================================================
 
         login_password = st.text_input(
             "Password",
@@ -681,8 +838,13 @@ elif not st.session_state.logged_in:
             key="login_password"
         )
 
+
+        # ====================================================
+        # LOGIN BUTTON
+        # ====================================================
+
         if st.button(
-            "Log in  →",
+            "Log in →",
             type="primary",
             use_container_width=True
         ):
@@ -695,9 +857,14 @@ elif not st.session_state.logged_in:
                 == st.session_state.saved_password
             ):
 
+                # Login successful
                 st.session_state.logged_in = True
 
+                # Activate balloons
+                st.session_state.show_balloons = True
+
                 st.rerun()
+
 
             else:
 
@@ -707,21 +874,38 @@ elif not st.session_state.logged_in:
 
 
 # ============================================================
-# LOGGED IN
+# LOGGED IN PAGE
 # ============================================================
 
 else:
+
+    # ========================================================
+    # BALLOONS
+    # ========================================================
+
+    # Balloons are shown once after a successful login
+    if st.session_state.show_balloons:
+
+        st.balloons()
+
+        # Prevent balloons from appearing again
+        st.session_state.show_balloons = False
+
 
     left_space, dashboard, right_space = st.columns(
         [1, 1.2, 1]
     )
 
+
     with dashboard:
 
         st.markdown(
-            '<div class="lock-icon">✓</div>',
+            '<div class="lock-icon">'
+            '✓'
+            '</div>',
             unsafe_allow_html=True
         )
+
 
         st.markdown(
             '<div class="main-title">'
@@ -730,6 +914,7 @@ else:
             unsafe_allow_html=True
         )
 
+
         st.markdown(
             '<div class="main-subtitle">'
             'You are securely logged in'
@@ -737,16 +922,24 @@ else:
             unsafe_allow_html=True
         )
 
+
         st.success(
             "✓ Authentication successful"
         )
+
 
         st.info(
             "Logged in as: "
             + st.session_state.saved_email
         )
 
+
+        # ====================================================
+        # ACCOUNT STATUS
+        # ====================================================
+
         col1, col2 = st.columns(2)
+
 
         with col1:
 
@@ -755,12 +948,18 @@ else:
                 "Valid"
             )
 
+
         with col2:
 
             st.metric(
                 "Password",
                 "Strong"
             )
+
+
+        # ====================================================
+        # LOG OUT
+        # ====================================================
 
         if st.button(
             "Log out",
@@ -778,7 +977,8 @@ else:
 
 st.markdown(
     '<div class="footer-text">'
-    'SecureLogin &nbsp; | &nbsp; Built for a safer digital world'
+    'SecureLogin &nbsp; | &nbsp; '
+    'Built for a safer digital world'
     '</div>',
     unsafe_allow_html=True
 )

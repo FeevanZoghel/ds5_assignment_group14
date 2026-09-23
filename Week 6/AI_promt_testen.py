@@ -558,6 +558,9 @@ if "logged_in" not in st.session_state:
 if "show_balloons" not in st.session_state:
     st.session_state.show_balloons = False
 
+if "cart" not in st.session_state:
+    st.session_state.cart = []
+
 
 # ============================================================
 # BRAND
@@ -908,281 +911,854 @@ else:
     # ========================================================
 
     if st.session_state.show_balloons:
-
         st.balloons()
-
         st.session_state.show_balloons = False
-
-
-    # ========================================================
-    # SHOP HEADER
-    # ========================================================
-
-    col_logo, col_title, col_logout = st.columns(
-        [1, 4, 1]
-    )
-
-
-    with col_logo:
-
-        # Check if Elmo image exists before displaying it
-        if ELMO_IMAGE.exists():
-
-            st.image(
-                str(ELMO_IMAGE),
-                width=110
-            )
-
-        else:
-
-            st.warning(
-                "elmo.png was not found."
-            )
-
-
-    with col_title:
-
-        st.markdown(
-            '<div class="shop-title">'
-            "🍦 Elmo's Ice Cream Shop"
-            '</div>',
-            unsafe_allow_html=True
-        )
-
-        st.markdown(
-            '<div class="shop-subtitle">'
-            'The coolest ice cream in town!'
-            '</div>',
-            unsafe_allow_html=True
-        )
-
-
-    with col_logout:
-
-        if st.button(
-            "Log out",
-            use_container_width=True
-        ):
-
-            st.session_state.logged_in = False
-
-            st.rerun()
-
-
-    st.divider()
-
-
-    # ========================================================
-    # WELCOME MESSAGE
-    # ========================================================
-
-    st.markdown(
-        '<div class="welcome-shop">'
-        '<div class="welcome-shop-title">'
-        "👋 Welcome to Elmo's!"
-        '</div>'
-        '<div class="welcome-shop-text">'
-        'You are logged in as '
-        + st.session_state.saved_email +
-        '</div>'
-        '</div>',
-        unsafe_allow_html=True
-    )
-
-
-    # ========================================================
-    # ICE CREAM TITLE
-    # ========================================================
-
-    st.markdown(
-        '<h2 style="'
-        'color:#102a56;'
-        'text-align:center;'
-        'margin-bottom:5px;'
-        '">'
-        '🍨 Our Ice Cream'
-        '</h2>',
-        unsafe_allow_html=True
-    )
-
-    st.markdown(
-        '<p style="'
-        'text-align:center;'
-        'color:#405d83;'
-        'margin-bottom:30px;'
-        '">'
-        'Pick your favorite flavor!'
-        '</p>',
-        unsafe_allow_html=True
-    )
 
 
     # ========================================================
     # PRODUCTS
     # ========================================================
 
-    ice1, ice2, ice3, ice4 = st.columns(4)
+    products = {
+        "Strawberry": {
+            "emoji": "🍓",
+            "description": "Sweet strawberry ice cream",
+            "price": 2.95
+        },
+
+        "Chocolate": {
+            "emoji": "🍫",
+            "description": "Rich chocolate ice cream",
+            "price": 3.25
+        },
+
+        "Cookie Crunch": {
+            "emoji": "🍪",
+            "description": "Vanilla with cookie pieces",
+            "price": 3.50
+        },
+
+        "Rainbow": {
+            "emoji": "🌈",
+            "description": "Elmo's colorful special",
+            "price": 3.75
+        },
+
+        "Vanilla Dream": {
+            "emoji": "🍦",
+            "description": "Classic creamy vanilla",
+            "price": 2.75
+        },
+
+        "Cherry Sundae": {
+            "emoji": "🍒",
+            "description": "Ice cream sundae with cherry",
+            "price": 4.25
+        }
+    }
 
 
     # ========================================================
-    # STRAWBERRY
+    # SIDEBAR
     # ========================================================
 
-    with ice1:
+    with st.sidebar:
 
-        st.markdown(
-            '<div class="product-card">'
-            '<div class="product-emoji">🍓</div>'
-            '<div class="product-name">Strawberry</div>'
-            '<div class="product-description">'
-            'Sweet strawberry ice cream'
-            '</div>'
-            '<div class="product-price">€2.95</div>'
-            '</div>',
-            unsafe_allow_html=True
-        )
-
-        if st.button(
-            "Add to cart 🛒",
-            key="strawberry",
-            use_container_width=True
-        ):
-
-            st.toast(
-                "🍓 Strawberry added to your cart!"
-            )
-
-
-    # ========================================================
-    # CHOCOLATE
-    # ========================================================
-
-    with ice2:
-
-        st.markdown(
-            '<div class="product-card">'
-            '<div class="product-emoji">🍫</div>'
-            '<div class="product-name">Chocolate</div>'
-            '<div class="product-description">'
-            'Rich chocolate ice cream'
-            '</div>'
-            '<div class="product-price">€3.25</div>'
-            '</div>',
-            unsafe_allow_html=True
-        )
-
-        if st.button(
-            "Add to cart 🛒",
-            key="chocolate",
-            use_container_width=True
-        ):
-
-            st.toast(
-                "🍫 Chocolate added to your cart!"
-            )
-
-
-    # ========================================================
-    # COOKIE CRUNCH
-    # ========================================================
-
-    with ice3:
-
-        st.markdown(
-            '<div class="product-card">'
-            '<div class="product-emoji">🍪</div>'
-            '<div class="product-name">Cookie Crunch</div>'
-            '<div class="product-description">'
-            'Vanilla with cookie pieces'
-            '</div>'
-            '<div class="product-price">€3.50</div>'
-            '</div>',
-            unsafe_allow_html=True
-        )
-
-        if st.button(
-            "Add to cart 🛒",
-            key="cookie",
-            use_container_width=True
-        ):
-
-            st.toast(
-                "🍪 Cookie Crunch added to your cart!"
-            )
-
-
-    # ========================================================
-    # RAINBOW
-    # ========================================================
-
-    with ice4:
-
-        st.markdown(
-            '<div class="product-card">'
-            '<div class="product-emoji">🌈</div>'
-            '<div class="product-name">Rainbow</div>'
-            '<div class="product-description">'
-            "Elmo's colorful special"
-            '</div>'
-            '<div class="product-price">€3.75</div>'
-            '</div>',
-            unsafe_allow_html=True
-        )
-
-        if st.button(
-            "Add to cart 🛒",
-            key="rainbow",
-            use_container_width=True
-        ):
-
-            st.toast(
-                "🌈 Rainbow added to your cart!"
-            )
-
-
-    # ========================================================
-    # ELMO'S FAVORITE
-    # ========================================================
-
-    st.write("")
-    st.write("")
-
-    elmo_image, elmo_message = st.columns(
-        [1, 4]
-    )
-
-
-    with elmo_image:
-
-        # Again check if the file exists
+        # Elmo image
         if ELMO_IMAGE.exists():
-
             st.image(
                 str(ELMO_IMAGE),
-                width=140
+                width=120
             )
+
+        st.markdown(
+            """
+            <h2 style="
+                color: #102a56;
+                margin-bottom: 0px;
+            ">
+                🍦 Elmo's
+            </h2>
+
+            <p style="
+                color: #526b91;
+                margin-top: 0px;
+            ">
+                Ice Cream Shop
+            </p>
+            """,
+            unsafe_allow_html=True
+        )
+
+        st.divider()
+
+        st.markdown("### Navigation")
+
+        # Count products in cart
+        cart_amount = len(st.session_state.cart)
+
+        page = st.radio(
+            "Choose a page",
+            [
+                "🏠 Home",
+                "🍦 Menu + Prices",
+                f"🛒 Shopping Cart ({cart_amount})"
+            ],
+            label_visibility="collapsed"
+        )
+
+        st.divider()
+
+        st.caption(
+            "Logged in as:"
+        )
+
+        st.write(
+            st.session_state.saved_email
+        )
+
+        st.write("")
+
+        if st.button(
+            "🚪 Log out",
+            use_container_width=True
+        ):
+
+            st.session_state.logged_in = False
+
+            st.session_state.cart = []
+
+            st.rerun()
+
+
+    # ========================================================
+    # HEADER
+    # ========================================================
+
+    header1, header2 = st.columns(
+        [5, 1]
+    )
+
+    with header1:
+
+        st.markdown(
+            """
+            <div class="shop-title">
+                🍦 Elmo's Ice Cream Shop
+            </div>
+
+            <div class="shop-subtitle">
+                The coolest ice cream in town!
+            </div>
+            """,
+            unsafe_allow_html=True
+        )
+
+    with header2:
+
+        st.metric(
+            "🛒 Cart",
+            len(st.session_state.cart)
+        )
+
+
+    st.divider()
+
+
+    # ========================================================
+    # PAGE 1
+    # HOME
+    # ========================================================
+
+    if page == "🏠 Home":
+
+        st.markdown(
+            f"""
+            <div class="welcome-shop">
+
+                <div class="welcome-shop-title">
+                    👋 Welcome to Elmo's Ice Cream Shop!
+                </div>
+
+                <div class="welcome-shop-text">
+                    You are logged in as
+                    {st.session_state.saved_email}
+                </div>
+
+            </div>
+            """,
+            unsafe_allow_html=True
+        )
+
+
+        # ----------------------------------------------------
+        # HOME COLUMNS
+        # ----------------------------------------------------
+
+        elmo_col, text_col = st.columns(
+            [1, 2]
+        )
+
+
+        with elmo_col:
+
+            if ELMO_IMAGE.exists():
+
+                st.image(
+                    str(ELMO_IMAGE),
+                    width=300
+                )
+
+            else:
+
+                st.warning(
+                    "elmo.png was not found."
+                )
+
+
+        with text_col:
+
+            st.markdown(
+                """
+                ## ❤️ Welcome!
+
+                Welcome to **Elmo's Ice Cream Shop!**
+
+                Here you can discover our delicious
+                collection of fictional ice creams.
+
+                Visit **Menu + Prices** to see all our
+                flavors and add your favorites to your
+                shopping cart.
+
+                When you're finished, open your
+                **Shopping Cart** to see your order and
+                total price.
+                """
+            )
+
+            st.info(
+                "🍓 Elmo's favorite is the Strawberry Special!"
+            )
+
+
+        st.write("")
+        st.write("")
+
+
+        # ----------------------------------------------------
+        # SPECIAL OFFER
+        # ----------------------------------------------------
+
+        st.markdown(
+            """
+            <div style="
+                background: rgba(255,255,255,0.70);
+                border-radius: 18px;
+                padding: 30px;
+                text-align: center;
+            ">
+
+                <div style="
+                    font-size: 35px;
+                ">
+                    🍓 🍦 🍫
+                </div>
+
+                <div style="
+                    color: #102a56;
+                    font-size: 25px;
+                    font-weight: 800;
+                    margin-top: 10px;
+                ">
+                    Today's Special
+                </div>
+
+                <div style="
+                    color: #405d83;
+                    font-size: 17px;
+                    margin-top: 8px;
+                ">
+                    Strawberry Special — only €2.95
+                </div>
+
+            </div>
+            """,
+            unsafe_allow_html=True
+        )
+
+
+    # ========================================================
+    # PAGE 2
+    # MENU + PRICES
+    # ========================================================
+
+    elif page == "🍦 Menu + Prices":
+
+        st.markdown(
+            """
+            <h1 style="
+                color:#102a56;
+            ">
+                🍦 Menu + Prices
+            </h1>
+
+            <p style="
+                color:#405d83;
+                font-size:17px;
+            ">
+                Choose your favorite ice cream and
+                add it to your shopping cart.
+            </p>
+            """,
+            unsafe_allow_html=True
+        )
+
+
+        st.write("")
+
+
+        # ====================================================
+        # FIRST PRODUCT ROW
+        # ====================================================
+
+        col1, col2, col3 = st.columns(3)
+
+
+        # ----------------------------------------------------
+        # STRAWBERRY
+        # ----------------------------------------------------
+
+        with col1:
+
+            product = products["Strawberry"]
+
+            st.markdown(
+                f"""
+                <div class="product-card">
+
+                    <div class="product-emoji">
+                        {product["emoji"]}
+                    </div>
+
+                    <div class="product-name">
+                        Strawberry
+                    </div>
+
+                    <div class="product-description">
+                        {product["description"]}
+                    </div>
+
+                    <div class="product-price">
+                        €{product["price"]:.2f}
+                    </div>
+
+                </div>
+                """,
+                unsafe_allow_html=True
+            )
+
+            if st.button(
+                "Add to cart 🛒",
+                key="add_strawberry",
+                use_container_width=True
+            ):
+
+                st.session_state.cart.append(
+                    "Strawberry"
+                )
+
+                st.toast(
+                    "🍓 Strawberry added!"
+                )
+
+                st.rerun()
+
+
+        # ----------------------------------------------------
+        # CHOCOLATE
+        # ----------------------------------------------------
+
+        with col2:
+
+            product = products["Chocolate"]
+
+            st.markdown(
+                f"""
+                <div class="product-card">
+
+                    <div class="product-emoji">
+                        {product["emoji"]}
+                    </div>
+
+                    <div class="product-name">
+                        Chocolate
+                    </div>
+
+                    <div class="product-description">
+                        {product["description"]}
+                    </div>
+
+                    <div class="product-price">
+                        €{product["price"]:.2f}
+                    </div>
+
+                </div>
+                """,
+                unsafe_allow_html=True
+            )
+
+            if st.button(
+                "Add to cart 🛒",
+                key="add_chocolate",
+                use_container_width=True
+            ):
+
+                st.session_state.cart.append(
+                    "Chocolate"
+                )
+
+                st.toast(
+                    "🍫 Chocolate added!"
+                )
+
+                st.rerun()
+
+
+        # ----------------------------------------------------
+        # COOKIE CRUNCH
+        # ----------------------------------------------------
+
+        with col3:
+
+            product = products["Cookie Crunch"]
+
+            st.markdown(
+                f"""
+                <div class="product-card">
+
+                    <div class="product-emoji">
+                        {product["emoji"]}
+                    </div>
+
+                    <div class="product-name">
+                        Cookie Crunch
+                    </div>
+
+                    <div class="product-description">
+                        {product["description"]}
+                    </div>
+
+                    <div class="product-price">
+                        €{product["price"]:.2f}
+                    </div>
+
+                </div>
+                """,
+                unsafe_allow_html=True
+            )
+
+            if st.button(
+                "Add to cart 🛒",
+                key="add_cookie",
+                use_container_width=True
+            ):
+
+                st.session_state.cart.append(
+                    "Cookie Crunch"
+                )
+
+                st.toast(
+                    "🍪 Cookie Crunch added!"
+                )
+
+                st.rerun()
+
+
+        st.write("")
+        st.write("")
+
+
+        # ====================================================
+        # SECOND PRODUCT ROW
+        # ====================================================
+
+        col4, col5, col6 = st.columns(3)
+
+
+        # ----------------------------------------------------
+        # RAINBOW
+        # ----------------------------------------------------
+
+        with col4:
+
+            product = products["Rainbow"]
+
+            st.markdown(
+                f"""
+                <div class="product-card">
+
+                    <div class="product-emoji">
+                        {product["emoji"]}
+                    </div>
+
+                    <div class="product-name">
+                        Rainbow
+                    </div>
+
+                    <div class="product-description">
+                        {product["description"]}
+                    </div>
+
+                    <div class="product-price">
+                        €{product["price"]:.2f}
+                    </div>
+
+                </div>
+                """,
+                unsafe_allow_html=True
+            )
+
+            if st.button(
+                "Add to cart 🛒",
+                key="add_rainbow",
+                use_container_width=True
+            ):
+
+                st.session_state.cart.append(
+                    "Rainbow"
+                )
+
+                st.toast(
+                    "🌈 Rainbow added!"
+                )
+
+                st.rerun()
+
+
+        # ----------------------------------------------------
+        # VANILLA
+        # ----------------------------------------------------
+
+        with col5:
+
+            product = products["Vanilla Dream"]
+
+            st.markdown(
+                f"""
+                <div class="product-card">
+
+                    <div class="product-emoji">
+                        {product["emoji"]}
+                    </div>
+
+                    <div class="product-name">
+                        Vanilla Dream
+                    </div>
+
+                    <div class="product-description">
+                        {product["description"]}
+                    </div>
+
+                    <div class="product-price">
+                        €{product["price"]:.2f}
+                    </div>
+
+                </div>
+                """,
+                unsafe_allow_html=True
+            )
+
+            if st.button(
+                "Add to cart 🛒",
+                key="add_vanilla",
+                use_container_width=True
+            ):
+
+                st.session_state.cart.append(
+                    "Vanilla Dream"
+                )
+
+                st.toast(
+                    "🍦 Vanilla Dream added!"
+                )
+
+                st.rerun()
+
+
+        # ----------------------------------------------------
+        # CHERRY
+        # ----------------------------------------------------
+
+        with col6:
+
+            product = products["Cherry Sundae"]
+
+            st.markdown(
+                f"""
+                <div class="product-card">
+
+                    <div class="product-emoji">
+                        {product["emoji"]}
+                    </div>
+
+                    <div class="product-name">
+                        Cherry Sundae
+                    </div>
+
+                    <div class="product-description">
+                        {product["description"]}
+                    </div>
+
+                    <div class="product-price">
+                        €{product["price"]:.2f}
+                    </div>
+
+                </div>
+                """,
+                unsafe_allow_html=True
+            )
+
+            if st.button(
+                "Add to cart 🛒",
+                key="add_cherry",
+                use_container_width=True
+            ):
+
+                st.session_state.cart.append(
+                    "Cherry Sundae"
+                )
+
+                st.toast(
+                    "🍒 Cherry Sundae added!"
+                )
+
+                st.rerun()
+
+
+    # ========================================================
+    # PAGE 3
+    # SHOPPING CART
+    # ========================================================
+
+    else:
+
+        st.markdown(
+            """
+            <h1 style="
+                color:#102a56;
+            ">
+                🛒 Shopping Cart
+            </h1>
+            """,
+            unsafe_allow_html=True
+        )
+
+
+        # ====================================================
+        # EMPTY CART
+        # ====================================================
+
+        if len(st.session_state.cart) == 0:
+
+            st.markdown(
+                """
+                <div style="
+                    background:rgba(255,255,255,0.65);
+                    border-radius:18px;
+                    padding:50px;
+                    text-align:center;
+                    margin-top:25px;
+                ">
+
+                    <div style="
+                        font-size:70px;
+                    ">
+                        🛒
+                    </div>
+
+                    <div style="
+                        color:#102a56;
+                        font-size:25px;
+                        font-weight:700;
+                    ">
+                        Your cart is empty
+                    </div>
+
+                    <div style="
+                        color:#526b91;
+                        margin-top:10px;
+                    ">
+                        Visit Menu + Prices to add
+                        some delicious ice cream!
+                    </div>
+
+                </div>
+                """,
+                unsafe_allow_html=True
+            )
+
+
+        # ====================================================
+        # CART HAS PRODUCTS
+        # ====================================================
 
         else:
 
-            st.info(
-                "Add elmo.png to the Week 6 folder."
+            # Count how many of each product
+            cart_counts = {}
+
+            for item in st.session_state.cart:
+
+                if item in cart_counts:
+                    cart_counts[item] += 1
+
+                else:
+                    cart_counts[item] = 1
+
+
+            # =================================================
+            # CART ITEMS
+            # =================================================
+
+            total_price = 0
+
+
+            for product_name, quantity in cart_counts.items():
+
+                product = products[product_name]
+
+                subtotal = (
+                    product["price"]
+                    * quantity
+                )
+
+                total_price += subtotal
+
+
+                item_col, quantity_col, price_col, remove_col = st.columns(
+                    [4, 1, 1.5, 1]
+                )
+
+
+                with item_col:
+
+                    st.markdown(
+                        f"""
+                        ### {product["emoji"]} {product_name}
+
+                        {product["description"]}
+                        """
+                    )
+
+
+                with quantity_col:
+
+                    st.metric(
+                        "Amount",
+                        quantity
+                    )
+
+
+                with price_col:
+
+                    st.metric(
+                        "Subtotal",
+                        f"€{subtotal:.2f}"
+                    )
+
+
+                with remove_col:
+
+                    if st.button(
+                        "➖",
+                        key=f"remove_{product_name}"
+                    ):
+
+                        st.session_state.cart.remove(
+                            product_name
+                        )
+
+                        st.rerun()
+
+
+                st.divider()
+
+
+            # =================================================
+            # TOTAL
+            # =================================================
+
+            st.markdown(
+                f"""
+                <div style="
+                    background:rgba(255,255,255,0.75);
+                    border-radius:18px;
+                    padding:25px;
+                    margin-top:20px;
+                    text-align:right;
+                ">
+
+                    <div style="
+                        color:#526b91;
+                        font-size:15px;
+                    ">
+                        Total
+                    </div>
+
+                    <div style="
+                        color:#102a56;
+                        font-size:35px;
+                        font-weight:800;
+                    ">
+                        €{total_price:.2f}
+                    </div>
+
+                </div>
+                """,
+                unsafe_allow_html=True
             )
 
 
-    with elmo_message:
+            st.write("")
 
-        st.markdown(
-            '<div class="elmo-message">'
-            '<div class="elmo-message-title">'
-            "❤️ Elmo's favorite"
-            '</div>'
-            '<div class="elmo-message-text">'
-            'Elmo loves the Strawberry Special! '
-            'Try one today for only €2.95.'
-            '</div>'
-            '</div>',
-            unsafe_allow_html=True
-        )
+
+            # =================================================
+            # CART BUTTONS
+            # =================================================
+
+            clear_col, order_col = st.columns(
+                [1, 2]
+            )
+
+
+            with clear_col:
+
+                if st.button(
+                    "🗑️ Empty cart",
+                    use_container_width=True
+                ):
+
+                    st.session_state.cart = []
+
+                    st.rerun()
+
+
+            with order_col:
+
+                if st.button(
+                    "🍦 Place fake order",
+                    type="primary",
+                    use_container_width=True
+                ):
+
+                    st.success(
+                        "🎉 Your fake ice cream order has been placed!"
+                    )
+
+                    st.balloons()
+
+                    st.session_state.cart = []
 
 
     # ========================================================
@@ -1190,21 +1766,9 @@ else:
     # ========================================================
 
     st.write("")
+    st.write("")
 
     st.caption(
         "This is a fictional demonstration shop. "
         "All products and prices are fake."
     )
-
-
-# ============================================================
-# FOOTER
-# ============================================================
-
-st.markdown(
-    '<div class="footer-text">'
-    'SecureLogin &nbsp; | &nbsp; '
-    'Built for a safer digital world'
-    '</div>',
-    unsafe_allow_html=True
-)

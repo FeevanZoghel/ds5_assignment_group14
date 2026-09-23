@@ -4,11 +4,11 @@ from pathlib import Path
 
 
 # ============================================================
-# PAGE CONFIG
+# PAGINA-INSTELLINGEN
 # ============================================================
 
 st.set_page_config(
-    page_title="SecureLogin",
+    page_title="VeiligInloggen",
     page_icon="🔐",
     layout="wide",
     initial_sidebar_state="collapsed"
@@ -16,7 +16,7 @@ st.set_page_config(
 
 
 # ============================================================
-# FILE PATHS
+# BESTANDEN
 # ============================================================
 
 BASE_DIR = Path(__file__).resolve().parent
@@ -24,13 +24,11 @@ ELMO_IMAGE = BASE_DIR / "elmo.png"
 
 
 # ============================================================
-# CSS
+# OPMAAK
 # ============================================================
 
 st.markdown("""
 <style>
-
-/* BACKGROUND */
 
 .stApp {
     background:
@@ -55,20 +53,19 @@ st.markdown("""
 }
 
 
-/* PAGE */
-
 .block-container {
     max-width: 1400px;
     padding-top: 2rem;
     padding-bottom: 2rem;
 }
 
+
 header[data-testid="stHeader"] {
     background: transparent;
 }
 
 
-/* BRAND */
+/* LOGO */
 
 .brand {
     font-size: 22px;
@@ -82,7 +79,7 @@ header[data-testid="stHeader"] {
 }
 
 
-/* CREATE ACCOUNT LEFT SIDE */
+/* ACCOUNT AANMAKEN */
 
 .hero-title {
     font-family: Georgia, serif;
@@ -105,22 +102,17 @@ header[data-testid="stHeader"] {
     color: #405d83;
     font-size: 17px;
     line-height: 1.6;
-    max-width: 260px;
+    max-width: 270px;
 }
 
 
-/* TITLES */
+/* TITELS */
 
 .lock-icon {
     width: 65px;
     height: 65px;
-
-    margin:
-        5px auto
-        15px auto;
-
+    margin: 5px auto 15px auto;
     border-radius: 50%;
-
     background: rgba(255,255,255,0.55);
 
     display: flex;
@@ -146,7 +138,7 @@ header[data-testid="stHeader"] {
 }
 
 
-/* INPUT */
+/* INVOERVELDEN */
 
 .stTextInput label {
     color: #172b4d !important;
@@ -170,15 +162,11 @@ div[data-baseweb="input"] input::placeholder {
 }
 
 
-/* PASSWORD REQUIREMENTS */
+/* WACHTWOORDVEREISTEN */
 
 .requirements {
     background: rgba(255,255,255,0.70);
-
-    border:
-        1px solid
-        rgba(255,255,255,0.60);
-
+    border: 1px solid rgba(255,255,255,0.60);
     border-radius: 14px;
 
     padding: 16px 20px;
@@ -206,7 +194,7 @@ div[data-baseweb="input"] input::placeholder {
 }
 
 
-/* BUTTONS */
+/* KNOPPEN */
 
 .stButton > button {
 
@@ -232,7 +220,7 @@ div[data-baseweb="input"] input::placeholder {
         0 8px 18px
         rgba(36,99,212,0.20);
 
-    transition: all 0.2s ease;
+    transition: all 0.15s ease;
 }
 
 .stButton > button:hover {
@@ -245,15 +233,14 @@ div[data-baseweb="input"] input::placeholder {
 }
 
 
-/* ALERT */
+/* MELDINGEN */
 
 div[data-testid="stAlert"] p {
-    color: #14532d !important;
-    font-weight: 700 !important;
+    font-weight: 650 !important;
 }
 
 
-/* RIGHT SIDE */
+/* RECHTERKANT ACCOUNT */
 
 .right-title {
     color: #102a56;
@@ -274,20 +261,6 @@ div[data-testid="stAlert"] p {
 }
 
 
-/* SHOP */
-
-.shop-title {
-    color: #102a56;
-    font-size: 42px;
-    font-weight: 800;
-}
-
-.shop-subtitle {
-    color: #405d83;
-    font-size: 17px;
-}
-
-
 /* FOOTER */
 
 .footer-text {
@@ -299,7 +272,7 @@ div[data-testid="stAlert"] p {
 }
 
 
-/* PROGRESS */
+/* VOORTGANGSBALK */
 
 .stProgress > div > div > div > div {
     background-color: #2563eb;
@@ -310,7 +283,7 @@ div[data-testid="stAlert"] p {
 
 
 # ============================================================
-# FUNCTIONS
+# FUNCTIES
 # ============================================================
 
 def validate_email(email):
@@ -318,59 +291,59 @@ def validate_email(email):
     email = email.strip()
 
     if email == "":
-        return False, "Please enter an email address."
+        return False, "Vul een e-mailadres in."
 
     if len(email) > 254:
-        return False, "Email address is too long."
+        return False, "Het e-mailadres is te lang."
 
     if " " in email:
-        return False, "Email cannot contain spaces."
+        return False, "Een e-mailadres mag geen spaties bevatten."
 
     if email.count("@") != 1:
-        return False, "Email must contain exactly one @ symbol."
+        return False, "Een e-mailadres moet precies één @ bevatten."
 
     username, domain = email.split("@")
 
     if username == "":
-        return False, "Username cannot be empty."
+        return False, "De gebruikersnaam mag niet leeg zijn."
 
     if domain == "":
-        return False, "Domain cannot be empty."
+        return False, "Het domein mag niet leeg zijn."
 
     if len(username) > 64:
-        return False, "Username is too long."
+        return False, "De gebruikersnaam is te lang."
 
     if username.startswith(".") or username.endswith("."):
-        return False, "Username cannot start or end with a dot."
+        return False, "De gebruikersnaam mag niet met een punt beginnen of eindigen."
 
     if domain.startswith(".") or domain.endswith("."):
-        return False, "Domain cannot start or end with a dot."
+        return False, "Het domein mag niet met een punt beginnen of eindigen."
 
     if ".." in email:
-        return False, "Email cannot contain consecutive dots."
+        return False, "Het e-mailadres mag geen twee punten achter elkaar bevatten."
 
     if "." not in domain:
-        return False, "Domain must contain a dot."
+        return False, "Het domein moet een punt bevatten."
 
     domain_name, extension = domain.rsplit(".", 1)
 
     if domain_name == "":
-        return False, "Domain name cannot be empty."
+        return False, "De domeinnaam mag niet leeg zijn."
 
     if len(extension) < 2:
-        return False, "Domain extension must contain at least 2 characters."
+        return False, "De domeinextensie moet minimaal 2 tekens bevatten."
 
     username_pattern = r"^[A-Za-z0-9._%+-]+$"
 
     if not re.match(username_pattern, username):
-        return False, "Username contains invalid characters."
+        return False, "De gebruikersnaam bevat ongeldige tekens."
 
     domain_pattern = r"^[A-Za-z0-9.-]+$"
 
     if not re.match(domain_pattern, domain):
-        return False, "Domain contains invalid characters."
+        return False, "Het domein bevat ongeldige tekens."
 
-    return True, "Valid email address."
+    return True, "Geldig e-mailadres."
 
 
 def password_checks(password):
@@ -378,22 +351,22 @@ def password_checks(password):
     special_characters = "!@#$%^&*()_+-=[]{};:,.?"
 
     return {
-        "At least 8 characters":
+        "Minimaal 8 tekens":
             len(password) >= 8,
 
-        "One uppercase letter (A-Z)":
+        "Minimaal één hoofdletter (A-Z)":
             any(c.isupper() for c in password),
 
-        "One lowercase letter (a-z)":
+        "Minimaal één kleine letter (a-z)":
             any(c.islower() for c in password),
 
-        "One number (0-9)":
+        "Minimaal één cijfer (0-9)":
             any(c.isdigit() for c in password),
 
-        "One special character":
+        "Minimaal één speciaal teken":
             any(c in special_characters for c in password),
 
-        "No spaces":
+        "Geen spaties":
             " " not in password
     }
 
@@ -401,16 +374,16 @@ def password_checks(password):
 def validate_password(password):
 
     if password == "":
-        return False, "Please enter a password."
+        return False, "Vul een wachtwoord in."
 
     checks = password_checks(password)
 
     for requirement, passed in checks.items():
 
         if not passed:
-            return False, "Missing requirement: " + requirement
+            return False, "Ontbrekende vereiste: " + requirement
 
-    return True, "Valid password."
+    return True, "Geldig wachtwoord."
 
 
 def password_strength(password):
@@ -445,8 +418,6 @@ if "show_balloons" not in st.session_state:
 if "cart" not in st.session_state:
     st.session_state.cart = []
 
-# IMPORTANT:
-# This remembers which shop page the user is on
 if "shop_page" not in st.session_state:
     st.session_state.shop_page = "Home"
 
@@ -458,20 +429,20 @@ if "order_items" not in st.session_state:
 
 
 # ============================================================
-# BRAND
+# LOGO
 # ============================================================
 
 st.markdown(
     '<div class="brand">'
-    '🔒 Secure'
-    '<span class="brand-light">Login</span>'
+    '🔒 Veilig'
+    '<span class="brand-light">Inloggen</span>'
     '</div>',
     unsafe_allow_html=True
 )
 
 
 # ============================================================
-# CREATE ACCOUNT PAGE
+# ACCOUNT AANMAKEN
 # ============================================================
 
 if not st.session_state.account_created:
@@ -482,14 +453,14 @@ if not st.session_state.account_created:
     )
 
 
-    # LEFT
+    # LINKERKANT
     with left:
 
         st.markdown(
             '<div class="hero-title">'
-            'A safer<br>'
-            'brighter<br>'
-            'tomorrow'
+            'Een veiligere<br>'
+            'digitale<br>'
+            'toekomst'
             '</div>',
             unsafe_allow_html=True
         )
@@ -501,14 +472,14 @@ if not st.session_state.account_created:
 
         st.markdown(
             '<div class="hero-text">'
-            'Create your account and take the first step '
-            'towards a more secure digital experience.'
+            'Maak een account aan en zet de eerste stap '
+            'naar een veilige digitale ervaring.'
             '</div>',
             unsafe_allow_html=True
         )
 
 
-    # CENTER
+    # MIDDEN
     with center:
 
         st.markdown(
@@ -518,43 +489,46 @@ if not st.session_state.account_created:
 
         st.markdown(
             '<div class="main-title">'
-            'Create your account'
+            'Maak je account aan'
             '</div>',
             unsafe_allow_html=True
         )
 
         st.markdown(
             '<div class="main-subtitle">'
-            'Create a secure account to continue'
+            'Maak een veilig account aan om verder te gaan'
             '</div>',
             unsafe_allow_html=True
         )
 
 
         email = st.text_input(
-            "Email address",
-            placeholder="name@example.com",
+            "E-mailadres",
+            placeholder="naam@voorbeeld.nl",
             key="register_email"
         )
 
 
         password = st.text_input(
-            "Password",
+            "Wachtwoord",
             type="password",
-            placeholder="Create a strong password",
+            placeholder="Maak een sterk wachtwoord",
             key="register_password"
         )
 
 
         repeat_password = st.text_input(
-            "Confirm password",
+            "Bevestig wachtwoord",
             type="password",
-            placeholder="Enter your password again",
+            placeholder="Vul je wachtwoord opnieuw in",
             key="repeat_password"
         )
 
 
-        # PASSWORD REQUIREMENTS
+        # ====================================================
+        # WACHTWOORDVEREISTEN
+        # ====================================================
+
         checks = password_checks(password)
 
         requirement_html = ""
@@ -581,7 +555,7 @@ if not st.session_state.account_created:
         st.markdown(
             '<div class="requirements">'
             '<div class="requirements-title">'
-            'Password requirements'
+            'Wachtwoordvereisten'
             '</div>'
             + requirement_html +
             '</div>',
@@ -589,33 +563,39 @@ if not st.session_state.account_created:
         )
 
 
-        # PASSWORD STRENGTH
+        # ====================================================
+        # WACHTWOORDSTERKTE
+        # ====================================================
+
         if password:
 
             strength = password_strength(password)
 
             if strength <= 0.35:
-                strength_text = "Weak"
+                strength_text = "Zwak"
 
             elif strength <= 0.65:
-                strength_text = "Medium"
+                strength_text = "Gemiddeld"
 
             elif strength < 1:
-                strength_text = "Good"
+                strength_text = "Goed"
 
             else:
-                strength_text = "Strong"
+                strength_text = "Sterk"
 
             st.caption(
-                "Password strength: " + strength_text
+                "Wachtwoordsterkte: " + strength_text
             )
 
             st.progress(strength)
 
 
-        # CREATE ACCOUNT
+        # ====================================================
+        # ACCOUNT AANMAKEN
+        # ====================================================
+
         if st.button(
-            "Create Account →",
+            "Account aanmaken →",
             type="primary",
             use_container_width=True
         ):
@@ -637,7 +617,7 @@ if not st.session_state.account_created:
             elif password != repeat_password:
 
                 st.error(
-                    "The passwords do not match."
+                    "De wachtwoorden komen niet overeen."
                 )
 
             else:
@@ -649,16 +629,16 @@ if not st.session_state.account_created:
                 st.rerun()
 
 
-    # RIGHT
+    # RECHTERKANT
     with right:
 
         st.markdown(
             '<div class="feature">'
             '<div class="right-title">'
-            '🛡️ &nbsp; Secure'
+            '🛡️ &nbsp; Veilig'
             '</div>'
             '<div class="right-text">'
-            'Your information is protected.'
+            'Je gegevens worden beschermd.'
             '</div>'
             '</div>',
             unsafe_allow_html=True
@@ -667,10 +647,10 @@ if not st.session_state.account_created:
         st.markdown(
             '<div class="feature">'
             '<div class="right-title">'
-            '👤 &nbsp; Private'
+            '👤 &nbsp; Privé'
             '</div>'
             '<div class="right-text">'
-            'We never share your data.'
+            'We delen je gegevens niet.'
             '</div>'
             '</div>',
             unsafe_allow_html=True
@@ -679,10 +659,10 @@ if not st.session_state.account_created:
         st.markdown(
             '<div class="feature">'
             '<div class="right-title">'
-            '⚡ &nbsp; Simple'
+            '⚡ &nbsp; Eenvoudig'
             '</div>'
             '<div class="right-text">'
-            'Fast and easy to use.'
+            'Snel en gemakkelijk te gebruiken.'
             '</div>'
             '</div>',
             unsafe_allow_html=True
@@ -690,7 +670,7 @@ if not st.session_state.account_created:
 
 
 # ============================================================
-# LOGIN PAGE
+# INLOGPAGINA
 # ============================================================
 
 elif not st.session_state.logged_in:
@@ -701,9 +681,8 @@ elif not st.session_state.logged_in:
 
     with login:
 
-        # BACK TO CREATE ACCOUNT
         if st.button(
-            "← Back to create account",
+            "← Terug naar account aanmaken",
             use_container_width=True
         ):
 
@@ -721,40 +700,40 @@ elif not st.session_state.logged_in:
 
         st.markdown(
             '<div class="main-title">'
-            'Welcome back'
+            'Welkom terug'
             '</div>',
             unsafe_allow_html=True
         )
 
         st.markdown(
             '<div class="main-subtitle">'
-            'Sign in to your account'
+            'Log in op je account'
             '</div>',
             unsafe_allow_html=True
         )
 
         st.success(
-            "✓ Account successfully created!"
+            "✓ Account succesvol aangemaakt!"
         )
 
 
         login_email = st.text_input(
-            "Email address",
-            placeholder="name@example.com",
+            "E-mailadres",
+            placeholder="naam@voorbeeld.nl",
             key="login_email"
         )
 
 
         login_password = st.text_input(
-            "Password",
+            "Wachtwoord",
             type="password",
-            placeholder="Enter your password",
+            placeholder="Vul je wachtwoord in",
             key="login_password"
         )
 
 
         if st.button(
-            "Log in →",
+            "Inloggen →",
             type="primary",
             use_container_width=True
         ):
@@ -769,8 +748,6 @@ elif not st.session_state.logged_in:
 
                 st.session_state.logged_in = True
                 st.session_state.show_balloons = True
-
-                # Start on Home
                 st.session_state.shop_page = "Home"
 
                 st.rerun()
@@ -778,12 +755,12 @@ elif not st.session_state.logged_in:
             else:
 
                 st.error(
-                    "Incorrect email address or password."
+                    "Onjuist e-mailadres of wachtwoord."
                 )
 
 
 # ============================================================
-# SHOP
+# ELMO'S IJSSALON
 # ============================================================
 
 else:
@@ -791,56 +768,55 @@ else:
     if st.session_state.show_balloons:
 
         st.balloons()
-
         st.session_state.show_balloons = False
 
 
     # ========================================================
-    # PRODUCTS
+    # PRODUCTEN
     # ========================================================
 
     products = {
 
-        "Strawberry": {
+        "Aardbei": {
             "emoji": "🍓",
-            "description": "Sweet strawberry ice cream",
+            "description": "Romig aardbeienijs",
             "price": 2.95
         },
 
-        "Chocolate": {
+        "Chocolade": {
             "emoji": "🍫",
-            "description": "Rich chocolate ice cream",
+            "description": "Vol en romig chocolade-ijs",
             "price": 3.25
         },
 
         "Cookie Crunch": {
             "emoji": "🍪",
-            "description": "Vanilla ice cream with cookie pieces",
+            "description": "Vanille-ijs met stukjes koek",
             "price": 3.50
         },
 
-        "Rainbow": {
+        "Regenboog": {
             "emoji": "🌈",
-            "description": "Elmo's colorful special",
+            "description": "Elmo's kleurrijke specialiteit",
             "price": 3.75
         },
 
-        "Vanilla Dream": {
+        "Vanilledroom": {
             "emoji": "🍦",
-            "description": "Classic creamy vanilla",
+            "description": "Klassiek romig vanille-ijs",
             "price": 2.75
         },
 
-        "Cherry Sundae": {
+        "Kersen Sundae": {
             "emoji": "🍒",
-            "description": "Ice cream sundae with cherry",
+            "description": "IJssundae met kersen",
             "price": 4.25
         }
     }
 
 
     # ========================================================
-    # SIDEBAR
+    # ZIJBALK
     # ========================================================
 
     with st.sidebar:
@@ -854,19 +830,15 @@ else:
 
 
         st.markdown("## 🍦 Elmo's")
-        st.caption("Ice Cream Shop")
+        st.caption("IJssalon")
 
         st.divider()
 
-        st.markdown("### Navigation")
+        st.markdown("### Hoofdmenu")
 
-
-        # ----------------------------------------------------
-        # HOME
-        # ----------------------------------------------------
 
         if st.button(
-            "🏠 Home",
+            "🏠 Startpagina",
             use_container_width=True
         ):
 
@@ -874,12 +846,8 @@ else:
             st.rerun()
 
 
-        # ----------------------------------------------------
-        # MENU
-        # ----------------------------------------------------
-
         if st.button(
-            "🍦 Menu + Prices",
+            "🍦 Menu + prijzen",
             use_container_width=True
         ):
 
@@ -887,12 +855,8 @@ else:
             st.rerun()
 
 
-        # ----------------------------------------------------
-        # CART
-        # ----------------------------------------------------
-
         if st.button(
-            f"🛒 Shopping Cart ({len(st.session_state.cart)})",
+            f"🛒 Winkelwagen ({len(st.session_state.cart)})",
             use_container_width=True
         ):
 
@@ -902,21 +866,15 @@ else:
 
         st.divider()
 
-        st.caption("Logged in as:")
+        st.caption("Ingelogd als:")
 
         st.write(
             st.session_state.saved_email
         )
 
-        st.write("")
-
-
-        # ----------------------------------------------------
-        # LOG OUT
-        # ----------------------------------------------------
 
         if st.button(
-            "🚪 Log out",
+            "🚪 Uitloggen",
             use_container_width=True
         ):
 
@@ -927,7 +885,7 @@ else:
 
 
     # ========================================================
-    # HEADER
+    # BOVENKANT WINKEL
     # ========================================================
 
     header1, header2 = st.columns(
@@ -938,18 +896,18 @@ else:
     with header1:
 
         st.markdown(
-            "# 🍦 Elmo's Ice Cream Shop"
+            "# 🍦 Elmo's IJssalon"
         )
 
         st.write(
-            "The coolest ice cream in town!"
+            "Het lekkerste ijs van de stad!"
         )
 
 
     with header2:
 
         st.metric(
-            "🛒 Cart",
+            "🛒 Winkelwagen",
             len(st.session_state.cart)
         )
 
@@ -958,28 +916,26 @@ else:
 
 
     # ========================================================
-    # HOME
+    # STARTPAGINA
     # ========================================================
 
     if st.session_state.shop_page == "Home":
 
-        # BACK BUTTON
         if st.button(
-            "← Back to login",
+            "← Terug naar inloggen",
             key="home_back"
         ):
 
             st.session_state.logged_in = False
-
             st.rerun()
 
 
         st.success(
-            "👋 Welcome to Elmo's Ice Cream Shop!"
+            "👋 Welkom bij Elmo's IJssalon!"
         )
 
         st.caption(
-            "You are logged in as "
+            "Je bent ingelogd als "
             + st.session_state.saved_email
         )
 
@@ -987,7 +943,6 @@ else:
         st.write("")
 
 
-        # ELMO + TEXT
         elmo_col, text_col = st.columns(
             [1, 2],
             gap="large"
@@ -1005,38 +960,44 @@ else:
 
             else:
 
-                st.error(
-                    "Elmo image could not be found."
+                st.warning(
+                    "De afbeelding van Elmo kon niet worden gevonden."
+                )
+
+                st.caption(
+                    "Zorg ervoor dat elmo.png in dezelfde map "
+                    "staat als dit Python-bestand."
                 )
 
 
         with text_col:
 
-            st.markdown("## ❤️ Welcome!")
-
-            st.write(
-                "Welcome to **Elmo's Ice Cream Shop!**"
+            st.markdown(
+                "## ❤️ Welkom!"
             )
 
             st.write(
-                "Here you can discover our delicious "
-                "collection of fictional ice creams."
+                "Welkom bij **Elmo's IJssalon!**"
             )
 
             st.write(
-                "Visit **Menu + Prices** to see all our "
-                "flavors and add your favorites to your "
-                "shopping cart."
+                "Hier vind je onze heerlijke collectie "
+                "van verschillende soorten ijs."
             )
 
             st.write(
-                "When you're finished, open your "
-                "**Shopping Cart** to see your order "
-                "and total price."
+                "Ga naar **Menu + prijzen** om alle smaken "
+                "te bekijken en je favoriete ijsjes aan je "
+                "winkelwagen toe te voegen."
+            )
+
+            st.write(
+                "Ben je klaar? Open dan je **Winkelwagen** "
+                "om je bestelling en het totaalbedrag te bekijken."
             )
 
             st.info(
-                "🍓 Elmo's favorite is the Strawberry Special!"
+                "🍓 Elmo's favoriet is het aardbeienijs!"
             )
 
 
@@ -1044,10 +1005,10 @@ else:
         st.divider()
 
 
-        # TODAY'S SPECIAL
         center1, center2, center3 = st.columns(
             [1, 2, 1]
         )
+
 
         with center2:
 
@@ -1060,68 +1021,64 @@ else:
 
             st.markdown(
                 "<h2 style='text-align:center;'>"
-                "Today's Special"
+                "Specialiteit van vandaag"
                 "</h2>",
                 unsafe_allow_html=True
             )
 
             st.markdown(
                 "<p style='text-align:center; font-size:18px;'>"
-                "Strawberry Special — only €2.95"
+                "Aardbeienspecial — slechts €2,95"
                 "</p>",
                 unsafe_allow_html=True
             )
 
 
-        # NEXT BUTTON
         st.write("")
 
+
         if st.button(
-            "View Menu →",
+            "Bekijk het menu →",
             type="primary",
             use_container_width=True
         ):
 
             st.session_state.shop_page = "Menu"
-
             st.rerun()
 
 
     # ========================================================
-    # MENU + PRICES
+    # MENU + PRIJZEN
     # ========================================================
 
     elif st.session_state.shop_page == "Menu":
 
-        # BACK BUTTON
         if st.button(
-            "← Back to Home",
+            "← Terug naar startpagina",
             key="menu_back"
         ):
 
             st.session_state.shop_page = "Home"
-
             st.rerun()
 
 
-        st.markdown("# 🍦 Menu + Prices")
+        st.markdown(
+            "# 🍦 Menu + prijzen"
+        )
 
         st.write(
-            "Choose your favorite ice cream and "
-            "add it to your shopping cart."
+            "Kies je favoriete ijs en voeg het toe "
+            "aan je winkelwagen."
         )
 
         st.write("")
 
 
         # ====================================================
-        # PRODUCT DISPLAY FUNCTION
+        # FUNCTIE VOOR PRODUCTEN
         # ====================================================
 
-        def show_product(
-            name,
-            button_key
-        ):
+        def show_product(name, button_key):
 
             product = products[name]
 
@@ -1161,49 +1118,55 @@ else:
             )
 
 
+            # GEEN EXTRA ST.RERUN HIER
+            # Hierdoor kun je sneller meerdere ijsjes toevoegen.
+
             if st.button(
-                "Add to cart 🛒",
+                "Toevoegen 🛒",
                 key=button_key,
                 use_container_width=True
             ):
 
-                st.session_state.cart.append(
-                    name
-                )
+                st.session_state.cart.append(name)
 
-                # IMPORTANT:
-                # Stay on menu after rerun
                 st.session_state.shop_page = "Menu"
 
                 st.toast(
                     product["emoji"]
                     + " "
                     + name
-                    + " added!"
+                    + " toegevoegd aan je winkelwagen!"
                 )
 
-                st.rerun()
 
+        # ====================================================
+        # EERSTE RIJ
+        # ====================================================
 
-        # FIRST ROW
         col1, col2, col3 = st.columns(
             3,
             gap="medium"
         )
 
+
         with col1:
+
             show_product(
-                "Strawberry",
+                "Aardbei",
                 "add_strawberry"
             )
 
+
         with col2:
+
             show_product(
-                "Chocolate",
+                "Chocolade",
                 "add_chocolate"
             )
 
+
         with col3:
+
             show_product(
                 "Cookie Crunch",
                 "add_cookie"
@@ -1214,70 +1177,102 @@ else:
         st.write("")
 
 
-        # SECOND ROW
+        # ====================================================
+        # TWEEDE RIJ
+        # ====================================================
+
         col4, col5, col6 = st.columns(
             3,
             gap="medium"
         )
 
+
         with col4:
+
             show_product(
-                "Rainbow",
+                "Regenboog",
                 "add_rainbow"
             )
 
+
         with col5:
+
             show_product(
-                "Vanilla Dream",
+                "Vanilledroom",
                 "add_vanilla"
             )
 
+
         with col6:
+
             show_product(
-                "Cherry Sundae",
+                "Kersen Sundae",
                 "add_cherry"
             )
 
 
         st.write("")
+        st.divider()
 
 
-        # GO TO CART
+        # ====================================================
+        # SNEL OVERZICHT WINKELWAGEN
+        # ====================================================
+
+        if len(st.session_state.cart) == 0:
+
+            st.info(
+                "🛒 Je winkelwagen is nog leeg."
+            )
+
+        else:
+
+            st.success(
+                f"🛒 Je hebt nu "
+                f"{len(st.session_state.cart)} "
+                f"ijsje(s) in je winkelwagen."
+            )
+
+
+        # ====================================================
+        # NAAR WINKELWAGEN
+        # ====================================================
+
         if st.button(
-            f"Go to Shopping Cart ({len(st.session_state.cart)}) →",
+            f"Bekijk winkelwagen "
+            f"({len(st.session_state.cart)}) →",
             type="primary",
             use_container_width=True
         ):
 
             st.session_state.shop_page = "Cart"
-
             st.rerun()
 
 
     # ========================================================
-    # SHOPPING CART
+    # WINKELWAGEN
     # ========================================================
 
     elif st.session_state.shop_page == "Cart":
 
-        # BACK BUTTON
         if st.button(
-            "← Back to Menu + Prices",
+            "← Terug naar menu + prijzen",
             key="cart_back"
         ):
 
             st.session_state.shop_page = "Menu"
-
             st.rerun()
 
 
-        st.markdown("# 🛒 Shopping Cart")
+        st.markdown(
+            "# 🛒 Winkelwagen"
+        )
 
         st.write("")
 
 
         # ====================================================
-        # EMPTY CART
+        # LEGE WINKELWAGEN
         # ====================================================
 
         if len(st.session_state.cart) == 0:
@@ -1301,7 +1296,7 @@ else:
 
                 st.markdown(
                     "<h2 style='text-align:center;'>"
-                    "Your cart is empty"
+                    "Je winkelwagen is leeg"
                     "</h2>",
                     unsafe_allow_html=True
                 )
@@ -1311,15 +1306,28 @@ else:
                     "text-align:center;"
                     "font-size:17px;"
                     "'>"
-                    "Visit Menu + Prices to add "
-                    "some delicious ice cream!"
+                    "Ga naar Menu + prijzen om lekker ijs "
+                    "aan je winkelwagen toe te voegen!"
                     "</p>",
                     unsafe_allow_html=True
                 )
 
 
+            st.write("")
+
+
+            if st.button(
+                "🍦 Naar het menu",
+                type="primary",
+                use_container_width=True
+            ):
+
+                st.session_state.shop_page = "Menu"
+                st.rerun()
+
+
         # ====================================================
-        # CART WITH ITEMS
+        # WINKELWAGEN MET PRODUCTEN
         # ====================================================
 
         else:
@@ -1341,7 +1349,6 @@ else:
             total_price = 0
 
 
-            # PRODUCT ROWS
             for product_name, quantity in cart_counts.items():
 
                 product = products[product_name]
@@ -1388,7 +1395,7 @@ else:
                 with quantity_col:
 
                     st.metric(
-                        "Amount",
+                        "Aantal",
                         quantity
                     )
 
@@ -1396,7 +1403,7 @@ else:
                 with price_col:
 
                     st.metric(
-                        "Subtotal",
+                        "Subtotaal",
                         f"€{subtotal:.2f}"
                     )
 
@@ -1408,14 +1415,13 @@ else:
                     if st.button(
                         "➖",
                         key="remove_" + product_name,
-                        help="Remove one"
+                        help="Verwijder één ijsje"
                     ):
 
                         st.session_state.cart.remove(
                             product_name
                         )
 
-                        # Stay in cart
                         st.session_state.shop_page = "Cart"
 
                         st.rerun()
@@ -1425,7 +1431,7 @@ else:
 
 
             # =================================================
-            # TOTAL
+            # TOTAAL
             # =================================================
 
             total_left, total_right = st.columns(
@@ -1435,7 +1441,9 @@ else:
 
             with total_right:
 
-                st.markdown("### Total")
+                st.markdown(
+                    "### Totaal"
+                )
 
                 st.markdown(
                     f"# €{total_price:.2f}"
@@ -1446,7 +1454,7 @@ else:
 
 
             # =================================================
-            # CART BUTTONS
+            # KNOPPEN
             # =================================================
 
             clear_col, order_col = st.columns(
@@ -1457,12 +1465,11 @@ else:
             with clear_col:
 
                 if st.button(
-                    "🗑️ Empty cart",
+                    "🗑️ Winkelwagen legen",
                     use_container_width=True
                 ):
 
                     st.session_state.cart = []
-
                     st.session_state.shop_page = "Cart"
 
                     st.rerun()
@@ -1471,45 +1478,39 @@ else:
             with order_col:
 
                 if st.button(
-                    "🍦 Place fake order",
+                    "🍦 Nepbestelling plaatsen",
                     type="primary",
                     use_container_width=True
                 ):
 
-                    # Save order before clearing cart
                     st.session_state.order_total = total_price
 
                     st.session_state.order_items = (
                         st.session_state.cart.copy()
                     )
 
-                    # Empty cart
                     st.session_state.cart = []
 
-                    # Go to confirmation page
                     st.session_state.shop_page = "Confirmation"
 
                     st.rerun()
 
 
     # ========================================================
-    # ORDER CONFIRMATION
+    # BESTELLING ONTVANGEN
     # ========================================================
 
     elif st.session_state.shop_page == "Confirmation":
 
-        # Balloons when arriving here
         st.balloons()
 
 
-        # BACK BUTTON
         if st.button(
-            "← Back to Shopping Cart",
+            "← Terug naar winkelwagen",
             key="confirmation_back"
         ):
 
             st.session_state.shop_page = "Cart"
-
             st.rerun()
 
 
@@ -1539,7 +1540,7 @@ else:
 
             st.markdown(
                 "<h1 style='text-align:center;'>"
-                "Order received!"
+                "Bestelling ontvangen!"
                 "</h1>",
                 unsafe_allow_html=True
             )
@@ -1550,22 +1551,24 @@ else:
                 "text-align:center;"
                 "font-size:19px;"
                 "'>"
-                "Thank you for your order!"
+                "Bedankt voor je bestelling!"
                 "</p>",
                 unsafe_allow_html=True
             )
 
 
             st.success(
-                "🍦 Your fake order was successfully received!"
+                "🍦 Je nepbestelling is succesvol binnengekomen!"
             )
 
 
-            # ================================================
-            # ORDER SUMMARY
-            # ================================================
+            # =================================================
+            # BESTELOVERZICHT
+            # =================================================
 
-            st.markdown("### 🧾 Order summary")
+            st.markdown(
+                "### 🧾 Besteloverzicht"
+            )
 
 
             order_counts = {}
@@ -1607,23 +1610,23 @@ else:
 
 
             st.markdown(
-                "## Total: €"
+                "## Totaal: €"
                 + f"{st.session_state.order_total:.2f}"
             )
 
 
             st.info(
-                "This is a demonstration order. "
-                "No real purchase or payment has been made."
+                "Dit is een demonstratiebestelling. "
+                "Er is geen echte aankoop of betaling gedaan."
             )
 
 
-            # ================================================
-            # NEW ORDER
-            # ================================================
+            # =================================================
+            # NIEUWE BESTELLING
+            # =================================================
 
             if st.button(
-                "🍦 Start a new order",
+                "🍦 Nieuwe bestelling plaatsen",
                 type="primary",
                 use_container_width=True
             ):
@@ -1642,8 +1645,8 @@ else:
 
 st.markdown(
     '<div class="footer-text">'
-    'SecureLogin &nbsp; | &nbsp; '
-    'Built for a safer digital world'
+    'VeiligInloggen &nbsp; | &nbsp; '
+    'Gebouwd voor een veiligere digitale wereld'
     '</div>',
     unsafe_allow_html=True
 )

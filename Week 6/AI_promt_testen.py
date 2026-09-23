@@ -99,155 +99,75 @@ def validate_password(password):
 
 
 # ============================================================
-# STREAMLIT PAGE SETTINGS
+# STREAMLIT SETTINGS
 # ============================================================
 
 st.set_page_config(
-    page_title="Data Validator",
-    page_icon="🔍",
+    page_title="Login System",
+    page_icon="🔐",
     layout="centered"
 )
 
 
 # ============================================================
-# TITLE
+# SESSION STATE
 # ============================================================
 
-st.title("🔍 Data Validator")
+# Stores the created account
+if "account_created" not in st.session_state:
+    st.session_state.account_created = False
 
-st.write(
-    "This application can validate an email address "
-    "or check the strength of a password."
-)
+if "saved_email" not in st.session_state:
+    st.session_state.saved_email = ""
 
-st.divider()
+if "saved_password" not in st.session_state:
+    st.session_state.saved_password = ""
 
-
-# ============================================================
-# MENU
-# ============================================================
-
-option = st.radio(
-    "Choose what you want to validate:",
-    ["📧 Email address", "🔐 Password"],
-    horizontal=True
-)
-
-st.divider()
+# Keeps track of login
+if "logged_in" not in st.session_state:
+    st.session_state.logged_in = False
 
 
 # ============================================================
-# EMAIL VALIDATOR
+# CREATE ACCOUNT PAGE
 # ============================================================
 
-if option == "📧 Email address":
+if not st.session_state.account_created:
 
-    st.header("📧 Email Validator")
+    st.title("👤 Create Account")
 
     st.write(
-        "Enter an email address below. The program will check "
-        "whether the email address has a valid format."
+        "Create an account by entering a valid email address "
+        "and a strong password."
     )
 
+    st.divider()
+
+    # Email input
     email = st.text_input(
         "Email address",
         placeholder="example@gmail.com"
     )
 
-    if st.button(
-        "Validate email",
-        type="primary",
-        use_container_width=True
-    ):
-
-        valid, message = validate_email(email)
-
-        if valid:
-
-            st.success("✅ Valid email address!")
-
-            st.write("The entered email address is:")
-
-            st.code(email)
-
-            st.balloons()
-
-        else:
-
-            st.error("❌ Invalid email address")
-
-            st.warning(message)
-
-            st.write(
-                "Please correct the email address and try again."
-            )
-
-    # Explanation
-    with st.expander("What does the email validator check?"):
-
-        st.write("""
-        The validator checks whether:
-
-        - The email contains exactly one @ symbol
-        - The username is valid
-        - The domain is valid
-        - The domain contains a dot
-        - There are no spaces
-        - There are no consecutive dots
-        - The domain extension contains at least 2 characters
-        - Only valid characters are used
-        """)
-
-
-# ============================================================
-# PASSWORD VALIDATOR
-# ============================================================
-
-elif option == "🔐 Password":
-
-    st.header("🔐 Password Validator")
-
-    st.write(
-        "Enter a password below. The program will check "
-        "whether the password meets all requirements."
-    )
-
+    # Password input
     password = st.text_input(
         "Password",
         type="password",
-        placeholder="Enter your password"
+        placeholder="Create a password"
     )
 
-    if st.button(
-        "Validate password",
-        type="primary",
-        use_container_width=True
-    ):
+    # Repeat password
+    repeat_password = st.text_input(
+        "Repeat password",
+        type="password",
+        placeholder="Repeat your password"
+    )
 
-        valid, message = validate_password(password)
+    # --------------------------------------------------------
+    # PASSWORD REQUIREMENTS
+    # --------------------------------------------------------
 
-        if valid:
-
-            st.success("✅ Strong password!")
-
-            st.write(
-                "Your password meets all the requirements."
-            )
-
-            st.balloons()
-
-        else:
-
-            st.error("❌ Invalid password")
-
-            st.warning(message)
-
-            st.write(
-                "Please change your password and try again."
-            )
-
-    # Explanation
-    with st.expander("What does the password validator check?"):
+    with st.expander("🔐 Password requirements"):
 
         st.write("""
         Your password must:
@@ -260,11 +180,143 @@ elif option == "🔐 Password":
         - Not contain spaces
         """)
 
+    # --------------------------------------------------------
+    # CREATE ACCOUNT BUTTON
+    # --------------------------------------------------------
+
+    if st.button(
+        "Create account",
+        type="primary",
+        use_container_width=True
+    ):
+
+        email_valid, email_message = validate_email(email)
+
+        password_valid, password_message = validate_password(password)
+
+        # Check email
+        if not email_valid:
+
+            st.error("❌ Invalid email address")
+            st.warning(email_message)
+
+        # Check password
+        elif not password_valid:
+
+            st.error("❌ Invalid password")
+            st.warning(password_message)
+
+        # Check if passwords match
+        elif password != repeat_password:
+
+            st.error("❌ Passwords do not match.")
+
+        # Everything is correct
+        else:
+
+            st.session_state.saved_email = email.strip()
+            st.session_state.saved_password = password
+            st.session_state.account_created = True
+
+            st.success("✅ Account successfully created!")
+
+            st.rerun()
+
 
 # ============================================================
-# FOOTER
+# LOGIN PAGE
 # ============================================================
 
-st.divider()
+elif not st.session_state.logged_in:
 
-st.caption("Data Science 5 - Validation Application")
+    st.title("🔐 Login")
+
+    st.write("Enter your email address and password to continue.")
+
+    st.divider()
+
+    # Login email
+    login_email = st.text_input(
+        "Email address",
+        placeholder="example@gmail.com"
+    )
+
+    # Login password
+    login_password = st.text_input(
+        "Password",
+        type="password",
+        placeholder="Enter your password"
+    )
+
+    # --------------------------------------------------------
+    # LOGIN BUTTON
+    # --------------------------------------------------------
+
+    if st.button(
+        "Login",
+        type="primary",
+        use_container_width=True
+    ):
+
+        # Check both email and password
+        if (
+            login_email.strip() == st.session_state.saved_email
+            and
+            login_password == st.session_state.saved_password
+        ):
+
+            st.session_state.logged_in = True
+
+            st.success("✅ Login successful!")
+
+            st.rerun()
+
+        else:
+
+            st.error("❌ Incorrect email address or password.")
+
+    st.divider()
+
+    # Option to create a new account
+    if st.button("Create a new account"):
+
+        st.session_state.account_created = False
+        st.session_state.saved_email = ""
+        st.session_state.saved_password = ""
+
+        st.rerun()
+
+
+# ============================================================
+# LOGGED IN PAGE
+# ============================================================
+
+else:
+
+    st.title("🎉 Welcome!")
+
+    st.success("You are successfully logged in.")
+
+    st.write("Logged in as:")
+
+    st.info(st.session_state.saved_email)
+
+    st.divider()
+
+    st.write(
+        "You have successfully created an account "
+        "and logged into the application."
+    )
+
+    # --------------------------------------------------------
+    # LOGOUT BUTTON
+    # --------------------------------------------------------
+
+    if st.button(
+        "🚪 Logout",
+        use_container_width=True
+    ):
+
+        st.session_state.logged_in = False
+
+        st.rerun()

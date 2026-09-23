@@ -934,7 +934,7 @@ else:
 
         "Cookie Crunch": {
             "emoji": "🍪",
-            "description": "Vanilla with cookie pieces",
+            "description": "Vanilla ice cream with cookie pieces",
             "price": 3.50
         },
 
@@ -964,37 +964,19 @@ else:
 
     with st.sidebar:
 
-        # Elmo image
         if ELMO_IMAGE.exists():
             st.image(
                 str(ELMO_IMAGE),
                 width=120
             )
 
-        st.markdown(
-            """
-            <h2 style="
-                color: #102a56;
-                margin-bottom: 0px;
-            ">
-                🍦 Elmo's
-            </h2>
-
-            <p style="
-                color: #526b91;
-                margin-top: 0px;
-            ">
-                Ice Cream Shop
-            </p>
-            """,
-            unsafe_allow_html=True
-        )
+        st.markdown("## 🍦 Elmo's")
+        st.caption("Ice Cream Shop")
 
         st.divider()
 
         st.markdown("### Navigation")
 
-        # Count products in cart
         cart_amount = len(st.session_state.cart)
 
         page = st.radio(
@@ -1009,13 +991,8 @@ else:
 
         st.divider()
 
-        st.caption(
-            "Logged in as:"
-        )
-
-        st.write(
-            st.session_state.saved_email
-        )
+        st.caption("Logged in as:")
+        st.write(st.session_state.saved_email)
 
         st.write("")
 
@@ -1025,7 +1002,6 @@ else:
         ):
 
             st.session_state.logged_in = False
-
             st.session_state.cart = []
 
             st.rerun()
@@ -1035,23 +1011,14 @@ else:
     # HEADER
     # ========================================================
 
-    header1, header2 = st.columns(
-        [5, 1]
-    )
+    header1, header2 = st.columns([5, 1])
 
     with header1:
 
-        st.markdown(
-            """
-            <div class="shop-title">
-                🍦 Elmo's Ice Cream Shop
-            </div>
+        st.markdown("# 🍦 Elmo's Ice Cream Shop")
 
-            <div class="shop-subtitle">
-                The coolest ice cream in town!
-            </div>
-            """,
-            unsafe_allow_html=True
+        st.markdown(
+            "### The coolest ice cream in town!"
         )
 
     with header2:
@@ -1060,7 +1027,6 @@ else:
             "🛒 Cart",
             len(st.session_state.cart)
         )
-
 
     st.divider()
 
@@ -1072,33 +1038,25 @@ else:
 
     if page == "🏠 Home":
 
-        st.markdown(
-            f"""
-            <div class="welcome-shop">
-
-                <div class="welcome-shop-title">
-                    👋 Welcome to Elmo's Ice Cream Shop!
-                </div>
-
-                <div class="welcome-shop-text">
-                    You are logged in as
-                    {st.session_state.saved_email}
-                </div>
-
-            </div>
-            """,
-            unsafe_allow_html=True
+        st.success(
+            "👋 Welcome to Elmo's Ice Cream Shop!"
         )
 
+        st.caption(
+            "You are logged in as "
+            + st.session_state.saved_email
+        )
 
-        # ----------------------------------------------------
-        # HOME COLUMNS
-        # ----------------------------------------------------
+        st.write("")
+
+        # ====================================================
+        # ELMO + WELCOME TEXT
+        # ====================================================
 
         elmo_col, text_col = st.columns(
-            [1, 2]
+            [1, 2],
+            gap="large"
         )
-
 
         with elmo_col:
 
@@ -1111,30 +1069,39 @@ else:
 
             else:
 
-                st.warning(
-                    "elmo.png was not found."
+                st.error(
+                    "Elmo image could not be found."
+                )
+
+                st.caption(
+                    "Make sure elmo.png is in the same "
+                    "folder as this Python file."
                 )
 
 
         with text_col:
 
-            st.markdown(
-                """
-                ## ❤️ Welcome!
+            st.markdown("## ❤️ Welcome!")
 
-                Welcome to **Elmo's Ice Cream Shop!**
+            st.write(
+                "Welcome to **Elmo's Ice Cream Shop!**"
+            )
 
-                Here you can discover our delicious
-                collection of fictional ice creams.
+            st.write(
+                "Here you can discover our delicious "
+                "collection of fictional ice creams."
+            )
 
-                Visit **Menu + Prices** to see all our
-                flavors and add your favorites to your
-                shopping cart.
+            st.write(
+                "Visit **Menu + Prices** to see all our "
+                "flavors and add your favorites to your "
+                "shopping cart."
+            )
 
-                When you're finished, open your
-                **Shopping Cart** to see your order and
-                total price.
-                """
+            st.write(
+                "When you're finished, open your "
+                "**Shopping Cart** to see your order "
+                "and total price."
             )
 
             st.info(
@@ -1143,81 +1110,65 @@ else:
 
 
         st.write("")
+        st.divider()
         st.write("")
 
 
-        # ----------------------------------------------------
-        # SPECIAL OFFER
-        # ----------------------------------------------------
+        # ====================================================
+        # TODAY'S SPECIAL
+        # ====================================================
 
-        st.markdown(
-            """
-            <div style="
-                background: rgba(255,255,255,0.70);
-                border-radius: 18px;
-                padding: 30px;
-                text-align: center;
-            ">
-
-                <div style="
-                    font-size: 35px;
-                ">
-                    🍓 🍦 🍫
-                </div>
-
-                <div style="
-                    color: #102a56;
-                    font-size: 25px;
-                    font-weight: 800;
-                    margin-top: 10px;
-                ">
-                    Today's Special
-                </div>
-
-                <div style="
-                    color: #405d83;
-                    font-size: 17px;
-                    margin-top: 8px;
-                ">
-                    Strawberry Special — only €2.95
-                </div>
-
-            </div>
-            """,
-            unsafe_allow_html=True
+        special_left, special_center, special_right = st.columns(
+            [1, 2, 1]
         )
 
+        with special_center:
 
-       # ========================================================
+            st.markdown(
+                "<p style='text-align:center; font-size:60px;'>🍓 🍦 🍫</p>",
+                unsafe_allow_html=True
+            )
+
+            st.markdown(
+                "<h2 style='text-align:center; color:#102a56;'>"
+                "Today's Special"
+                "</h2>",
+                unsafe_allow_html=True
+            )
+
+            st.markdown(
+                "<p style='text-align:center; color:#405d83; font-size:18px;'>"
+                "Strawberry Special — only €2.95"
+                "</p>",
+                unsafe_allow_html=True
+            )
+
+
+    # ========================================================
     # PAGE 2
     # MENU + PRICES
     # ========================================================
 
     elif page == "🍦 Menu + Prices":
 
-        st.markdown(
-            """
-            <h1 style="color:#102a56;">
-                🍦 Menu + Prices
-            </h1>
+        st.markdown("# 🍦 Menu + Prices")
 
-            <p style="
-                color:#405d83;
-                font-size:17px;
-                margin-bottom:30px;
-            ">
-                Choose your favorite ice cream and add it to your shopping cart.
-            </p>
-            """,
-            unsafe_allow_html=True
+        st.write(
+            "Choose your favorite ice cream and "
+            "add it to your shopping cart."
         )
+
+        st.write("")
 
 
         # ====================================================
         # FIRST ROW
         # ====================================================
 
-        col1, col2, col3 = st.columns(3, gap="medium")
+        col1, col2, col3 = st.columns(
+            3,
+            gap="medium"
+        )
 
 
         # ----------------------------------------------------
@@ -1232,19 +1183,19 @@ else:
             )
 
             st.markdown(
-                "<h3 style='text-align:center; color:#102a56;'>Strawberry</h3>",
+                "<h3 style='text-align:center;'>Strawberry</h3>",
                 unsafe_allow_html=True
             )
 
             st.markdown(
-                "<p style='text-align:center; color:#405d83;'>"
+                "<p style='text-align:center;'>"
                 "Sweet strawberry ice cream"
                 "</p>",
                 unsafe_allow_html=True
             )
 
             st.markdown(
-                "<h2 style='text-align:center; color:#102a56;'>€2.95</h2>",
+                "<h2 style='text-align:center;'>€2.95</h2>",
                 unsafe_allow_html=True
             )
 
@@ -1254,9 +1205,13 @@ else:
                 use_container_width=True
             ):
 
-                st.session_state.cart.append("Strawberry")
+                st.session_state.cart.append(
+                    "Strawberry"
+                )
 
-                st.toast("🍓 Strawberry added!")
+                st.toast(
+                    "🍓 Strawberry added!"
+                )
 
                 st.rerun()
 
@@ -1273,19 +1228,19 @@ else:
             )
 
             st.markdown(
-                "<h3 style='text-align:center; color:#102a56;'>Chocolate</h3>",
+                "<h3 style='text-align:center;'>Chocolate</h3>",
                 unsafe_allow_html=True
             )
 
             st.markdown(
-                "<p style='text-align:center; color:#405d83;'>"
+                "<p style='text-align:center;'>"
                 "Rich chocolate ice cream"
                 "</p>",
                 unsafe_allow_html=True
             )
 
             st.markdown(
-                "<h2 style='text-align:center; color:#102a56;'>€3.25</h2>",
+                "<h2 style='text-align:center;'>€3.25</h2>",
                 unsafe_allow_html=True
             )
 
@@ -1295,9 +1250,13 @@ else:
                 use_container_width=True
             ):
 
-                st.session_state.cart.append("Chocolate")
+                st.session_state.cart.append(
+                    "Chocolate"
+                )
 
-                st.toast("🍫 Chocolate added!")
+                st.toast(
+                    "🍫 Chocolate added!"
+                )
 
                 st.rerun()
 
@@ -1314,19 +1273,19 @@ else:
             )
 
             st.markdown(
-                "<h3 style='text-align:center; color:#102a56;'>Cookie Crunch</h3>",
+                "<h3 style='text-align:center;'>Cookie Crunch</h3>",
                 unsafe_allow_html=True
             )
 
             st.markdown(
-                "<p style='text-align:center; color:#405d83;'>"
+                "<p style='text-align:center;'>"
                 "Vanilla ice cream with cookie pieces"
                 "</p>",
                 unsafe_allow_html=True
             )
 
             st.markdown(
-                "<h2 style='text-align:center; color:#102a56;'>€3.50</h2>",
+                "<h2 style='text-align:center;'>€3.50</h2>",
                 unsafe_allow_html=True
             )
 
@@ -1336,9 +1295,13 @@ else:
                 use_container_width=True
             ):
 
-                st.session_state.cart.append("Cookie Crunch")
+                st.session_state.cart.append(
+                    "Cookie Crunch"
+                )
 
-                st.toast("🍪 Cookie Crunch added!")
+                st.toast(
+                    "🍪 Cookie Crunch added!"
+                )
 
                 st.rerun()
 
@@ -1351,7 +1314,10 @@ else:
         # SECOND ROW
         # ====================================================
 
-        col4, col5, col6 = st.columns(3, gap="medium")
+        col4, col5, col6 = st.columns(
+            3,
+            gap="medium"
+        )
 
 
         # ----------------------------------------------------
@@ -1366,19 +1332,19 @@ else:
             )
 
             st.markdown(
-                "<h3 style='text-align:center; color:#102a56;'>Rainbow</h3>",
+                "<h3 style='text-align:center;'>Rainbow</h3>",
                 unsafe_allow_html=True
             )
 
             st.markdown(
-                "<p style='text-align:center; color:#405d83;'>"
+                "<p style='text-align:center;'>"
                 "Elmo's colorful special"
                 "</p>",
                 unsafe_allow_html=True
             )
 
             st.markdown(
-                "<h2 style='text-align:center; color:#102a56;'>€3.75</h2>",
+                "<h2 style='text-align:center;'>€3.75</h2>",
                 unsafe_allow_html=True
             )
 
@@ -1388,9 +1354,13 @@ else:
                 use_container_width=True
             ):
 
-                st.session_state.cart.append("Rainbow")
+                st.session_state.cart.append(
+                    "Rainbow"
+                )
 
-                st.toast("🌈 Rainbow added!")
+                st.toast(
+                    "🌈 Rainbow added!"
+                )
 
                 st.rerun()
 
@@ -1407,19 +1377,19 @@ else:
             )
 
             st.markdown(
-                "<h3 style='text-align:center; color:#102a56;'>Vanilla Dream</h3>",
+                "<h3 style='text-align:center;'>Vanilla Dream</h3>",
                 unsafe_allow_html=True
             )
 
             st.markdown(
-                "<p style='text-align:center; color:#405d83;'>"
+                "<p style='text-align:center;'>"
                 "Classic creamy vanilla"
                 "</p>",
                 unsafe_allow_html=True
             )
 
             st.markdown(
-                "<h2 style='text-align:center; color:#102a56;'>€2.75</h2>",
+                "<h2 style='text-align:center;'>€2.75</h2>",
                 unsafe_allow_html=True
             )
 
@@ -1429,9 +1399,13 @@ else:
                 use_container_width=True
             ):
 
-                st.session_state.cart.append("Vanilla Dream")
+                st.session_state.cart.append(
+                    "Vanilla Dream"
+                )
 
-                st.toast("🍦 Vanilla Dream added!")
+                st.toast(
+                    "🍦 Vanilla Dream added!"
+                )
 
                 st.rerun()
 
@@ -1448,19 +1422,19 @@ else:
             )
 
             st.markdown(
-                "<h3 style='text-align:center; color:#102a56;'>Cherry Sundae</h3>",
+                "<h3 style='text-align:center;'>Cherry Sundae</h3>",
                 unsafe_allow_html=True
             )
 
             st.markdown(
-                "<p style='text-align:center; color:#405d83;'>"
+                "<p style='text-align:center;'>"
                 "Ice cream sundae with cherry"
                 "</p>",
                 unsafe_allow_html=True
             )
 
             st.markdown(
-                "<h2 style='text-align:center; color:#102a56;'>€4.25</h2>",
+                "<h2 style='text-align:center;'>€4.25</h2>",
                 unsafe_allow_html=True
             )
 
@@ -1470,11 +1444,17 @@ else:
                 use_container_width=True
             ):
 
-                st.session_state.cart.append("Cherry Sundae")
+                st.session_state.cart.append(
+                    "Cherry Sundae"
+                )
 
-                st.toast("🍒 Cherry Sundae added!")
+                st.toast(
+                    "🍒 Cherry Sundae added!"
+                )
 
                 st.rerun()
+
+
     # ========================================================
     # PAGE 3
     # SHOPPING CART
@@ -1482,69 +1462,49 @@ else:
 
     else:
 
-        st.markdown(
-            """
-            <h1 style="
-                color:#102a56;
-            ">
-                🛒 Shopping Cart
-            </h1>
-            """,
-            unsafe_allow_html=True
-        )
+        st.markdown("# 🛒 Shopping Cart")
+
+        st.write("")
 
 
         # ====================================================
-        # EMPTY CART
-        # ====================================================
+        # EMPTY SHOPPING CART
+        # ========================================================
 
         if len(st.session_state.cart) == 0:
 
-            st.markdown(
-                """
-                <div style="
-                    background:rgba(255,255,255,0.65);
-                    border-radius:18px;
-                    padding:50px;
-                    text-align:center;
-                    margin-top:25px;
-                ">
-
-                    <div style="
-                        font-size:70px;
-                    ">
-                        🛒
-                    </div>
-
-                    <div style="
-                        color:#102a56;
-                        font-size:25px;
-                        font-weight:700;
-                    ">
-                        Your cart is empty
-                    </div>
-
-                    <div style="
-                        color:#526b91;
-                        margin-top:10px;
-                    ">
-                        Visit Menu + Prices to add
-                        some delicious ice cream!
-                    </div>
-
-                </div>
-                """,
-                unsafe_allow_html=True
+            empty_left, empty_center, empty_right = st.columns(
+                [1, 2, 1]
             )
 
+            with empty_center:
+
+                st.markdown(
+                    "<p style='text-align:center; font-size:80px;'>🛒</p>",
+                    unsafe_allow_html=True
+                )
+
+                st.markdown(
+                    "<h2 style='text-align:center; color:#102a56;'>"
+                    "Your cart is empty"
+                    "</h2>",
+                    unsafe_allow_html=True
+                )
+
+                st.markdown(
+                    "<p style='text-align:center; color:#405d83; font-size:17px;'>"
+                    "Visit Menu + Prices to add some delicious ice cream!"
+                    "</p>",
+                    unsafe_allow_html=True
+                )
+
 
         # ====================================================
-        # CART HAS PRODUCTS
-        # ====================================================
+        # SHOPPING CART WITH PRODUCTS
+        # ========================================================
 
         else:
 
-            # Count how many of each product
             cart_counts = {}
 
             for item in st.session_state.cart:
@@ -1556,40 +1516,67 @@ else:
                     cart_counts[item] = 1
 
 
-            # =================================================
-            # CART ITEMS
-            # =================================================
-
             total_price = 0
 
+
+            # =================================================
+            # DISPLAY PRODUCTS
+            # =================================================
 
             for product_name, quantity in cart_counts.items():
 
                 product = products[product_name]
 
                 subtotal = (
-                    product["price"]
-                    * quantity
+                    product["price"] * quantity
                 )
 
                 total_price += subtotal
 
 
-                item_col, quantity_col, price_col, remove_col = st.columns(
-                    [4, 1, 1.5, 1]
+                # ---------------------------------------------
+                # PRODUCT ROW
+                # ---------------------------------------------
+
+                emoji_col, item_col, quantity_col, price_col, remove_col = (
+                    st.columns(
+                        [0.7, 3.3, 1, 1.4, 0.7]
+                    )
                 )
 
+
+                # ---------------------------------------------
+                # PRODUCT PICTURE / EMOJI
+                # ---------------------------------------------
+
+                with emoji_col:
+
+                    st.markdown(
+                        f"<div style='font-size:45px; text-align:center;'>"
+                        f"{product['emoji']}"
+                        f"</div>",
+                        unsafe_allow_html=True
+                    )
+
+
+                # ---------------------------------------------
+                # PRODUCT NAME
+                # ---------------------------------------------
 
                 with item_col:
 
                     st.markdown(
-                        f"""
-                        ### {product["emoji"]} {product_name}
-
-                        {product["description"]}
-                        """
+                        f"### {product_name}"
                     )
 
+                    st.caption(
+                        product["description"]
+                    )
+
+
+                # ---------------------------------------------
+                # QUANTITY
+                # ---------------------------------------------
 
                 with quantity_col:
 
@@ -1599,6 +1586,10 @@ else:
                     )
 
 
+                # ---------------------------------------------
+                # SUBTOTAL
+                # ---------------------------------------------
+
                 with price_col:
 
                     st.metric(
@@ -1607,11 +1598,18 @@ else:
                     )
 
 
+                # ---------------------------------------------
+                # REMOVE PRODUCT
+                # ---------------------------------------------
+
                 with remove_col:
+
+                    st.write("")
 
                     if st.button(
                         "➖",
-                        key=f"remove_{product_name}"
+                        key=f"remove_{product_name}",
+                        help="Remove one"
                     ):
 
                         st.session_state.cart.remove(
@@ -1628,48 +1626,34 @@ else:
             # TOTAL
             # =================================================
 
-            st.markdown(
-                f"""
-                <div style="
-                    background:rgba(255,255,255,0.75);
-                    border-radius:18px;
-                    padding:25px;
-                    margin-top:20px;
-                    text-align:right;
-                ">
-
-                    <div style="
-                        color:#526b91;
-                        font-size:15px;
-                    ">
-                        Total
-                    </div>
-
-                    <div style="
-                        color:#102a56;
-                        font-size:35px;
-                        font-weight:800;
-                    ">
-                        €{total_price:.2f}
-                    </div>
-
-                </div>
-                """,
-                unsafe_allow_html=True
+            total_left, total_right = st.columns(
+                [4, 1.5]
             )
+
+            with total_right:
+
+                st.markdown("### Total")
+
+                st.markdown(
+                    f"# €{total_price:.2f}"
+                )
 
 
             st.write("")
 
 
             # =================================================
-            # CART BUTTONS
+            # BUTTONS
             # =================================================
 
             clear_col, order_col = st.columns(
                 [1, 2]
             )
 
+
+            # -------------------------------------------------
+            # EMPTY CART
+            # -------------------------------------------------
 
             with clear_col:
 
@@ -1683,6 +1667,10 @@ else:
                     st.rerun()
 
 
+            # -------------------------------------------------
+            # PLACE ORDER
+            # -------------------------------------------------
+
             with order_col:
 
                 if st.button(
@@ -1692,7 +1680,8 @@ else:
                 ):
 
                     st.success(
-                        "🎉 Your fake ice cream order has been placed!"
+                        "🎉 Your fake ice cream order "
+                        "has been placed!"
                     )
 
                     st.balloons()
@@ -1706,6 +1695,8 @@ else:
 
     st.write("")
     st.write("")
+
+    st.divider()
 
     st.caption(
         "This is a fictional demonstration shop. "

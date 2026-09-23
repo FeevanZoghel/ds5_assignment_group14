@@ -106,7 +106,7 @@ def visualize_network(G):
     for node in G.nodes():
         sizes.append(10*m.exp(-N/1000)*G.degree(node))
         colors.append(G.degree(node))
-        nodes.append(node)
+        
     
     plt.figure(figsize=(18, 14))
     pos = nx.spring_layout(G)

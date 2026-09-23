@@ -21,411 +21,228 @@ st.set_page_config(
 st.markdown("""
 <style>
 
-/* ----------------------------------------------------------
-   GENERAL PAGE
----------------------------------------------------------- */
-
+/* Complete page */
 .stApp {
     background:
-        radial-gradient(circle at 15% 20%,
-            rgba(255,255,255,0.95) 0%,
-            rgba(255,255,255,0.15) 25%,
-            transparent 45%),
-
-        radial-gradient(circle at 85% 15%,
-            rgba(255,255,255,0.8) 0%,
-            transparent 35%),
-
-        linear-gradient(
-            135deg,
-            #f8fbff 0%,
-            #e9f2ff 35%,
-            #dcecff 65%,
-            #c5ddfb 100%
-        );
-
+        radial-gradient(circle at 10% 20%, #ffffff 0%, transparent 30%),
+        radial-gradient(circle at 90% 10%, #ffffff 0%, transparent 30%),
+        linear-gradient(135deg, #f8fbff 0%, #edf5ff 50%, #dcecff 100%);
     min-height: 100vh;
 }
 
-
-/* Hide Streamlit menu/footer */
-#MainMenu {
-    visibility: hidden;
-}
-
-footer {
-    visibility: hidden;
-}
-
-
-/* Main page width */
+/* Remove Streamlit default header spacing */
 .block-container {
-    max-width: 1450px;
-    padding-top: 25px;
-    padding-bottom: 30px;
+    max-width: 1400px;
+    padding-top: 2rem;
+    padding-bottom: 2rem;
 }
 
+/* Main Streamlit header */
+header[data-testid="stHeader"] {
+    background: transparent;
+}
 
-/* ----------------------------------------------------------
-   HEADER
----------------------------------------------------------- */
+/* --------------------------------------------------
+   BRAND
+-------------------------------------------------- */
 
-.logo-header {
-    font-size: 25px;
+.brand {
+    font-size: 22px;
     font-weight: 700;
     color: #102a56;
     margin-bottom: 25px;
 }
 
-.logo-light {
+.brand-light {
     font-weight: 400;
 }
 
 
-/* ----------------------------------------------------------
+/* --------------------------------------------------
    LEFT SIDE
----------------------------------------------------------- */
+-------------------------------------------------- */
 
-.left-container {
-    padding-top: 90px;
-    padding-right: 40px;
-}
-
-.big-text {
+.hero-title {
     font-family: Georgia, serif;
-    font-size: 58px;
-    line-height: 1.03;
+    font-size: 54px;
+    line-height: 1.02;
     color: #102a56;
+    margin-top: 100px;
     margin-bottom: 25px;
 }
 
-.blue-line {
+.hero-line {
     width: 45px;
     height: 3px;
-    background: #4d8cff;
-    margin-top: 25px;
-    margin-bottom: 30px;
+    background: #3b82f6;
+    border-radius: 10px;
+    margin-bottom: 28px;
 }
 
-.left-description {
-    color: #526b91;
-    font-size: 18px;
+.hero-text {
+    color: #60789c;
+    font-size: 17px;
     line-height: 1.6;
     max-width: 260px;
 }
 
 
-/* ----------------------------------------------------------
-   CENTER CARD
----------------------------------------------------------- */
+/* --------------------------------------------------
+   CENTER
+-------------------------------------------------- */
 
-.login-card {
-    background: rgba(255,255,255,0.94);
-
-    border-radius: 24px;
-
-    padding:
-        28px
-        36px
-        32px
-        36px;
-
-    box-shadow:
-        0px 20px 60px rgba(39, 73, 125, 0.15);
-
-    border:
-        1px solid rgba(255,255,255,0.9);
-
-    backdrop-filter: blur(15px);
-
-    margin-top: 10px;
-}
-
-
-/* Lock circle */
-.lock-circle {
-    width: 68px;
-    height: 68px;
-
-    margin:
-        0 auto
-        10px auto;
-
+.lock-icon {
+    width: 65px;
+    height: 65px;
+    margin: 5px auto 15px auto;
     border-radius: 50%;
-
-    background:
-        #e8f1ff;
-
+    background: #e7f0ff;
     display: flex;
     align-items: center;
     justify-content: center;
-
-    font-size: 31px;
+    font-size: 29px;
 }
 
-
-/* Titles */
-.card-title {
+.main-title {
     text-align: center;
-
-    font-size: 30px;
-
-    font-weight: 750;
-
     color: #10234b;
-
-    margin-bottom: 3px;
+    font-size: 31px;
+    font-weight: 750;
+    margin-bottom: 5px;
 }
 
-.card-subtitle {
+.main-subtitle {
     text-align: center;
-
-    color: #6e82a3;
-
+    color: #7185a5;
     font-size: 15px;
-
-    margin-bottom: 20px;
+    margin-bottom: 25px;
 }
 
 
-/* ----------------------------------------------------------
-   STREAMLIT INPUTS
----------------------------------------------------------- */
+/* --------------------------------------------------
+   INPUT FIELDS
+-------------------------------------------------- */
 
 .stTextInput label {
+    color: #172b4d !important;
     font-weight: 600 !important;
-    color: #15294e !important;
+    font-size: 14px !important;
 }
 
-
-/* Input box */
 div[data-baseweb="input"] {
-
-    background: #ffffff;
-
-    border-radius: 11px;
-
-    border:
-        1px solid #d6dfec;
-
-    min-height: 48px;
+    background-color: white !important;
+    border: 1px solid #d9e2ef !important;
+    border-radius: 10px !important;
+    min-height: 47px;
 }
 
-
-/* Input text */
 div[data-baseweb="input"] input {
-
-    color: #172b4d;
-
-    font-size: 15px;
+    color: #172b4d !important;
 }
 
 
-/* ----------------------------------------------------------
+/* --------------------------------------------------
+   PASSWORD REQUIREMENTS
+-------------------------------------------------- */
+
+.requirements {
+    background: rgba(255, 255, 255, 0.65);
+    border: 1px solid #e1e8f2;
+    border-radius: 14px;
+    padding: 16px 20px;
+    margin-top: 10px;
+    margin-bottom: 15px;
+}
+
+.requirements-title {
+    color: #14294f;
+    font-size: 14px;
+    font-weight: 700;
+    margin-bottom: 10px;
+}
+
+.req {
+    font-size: 13px;
+    margin: 5px 0;
+    color: #71819a;
+}
+
+.req-ok {
+    color: #26835a;
+    font-weight: 500;
+}
+
+
+/* --------------------------------------------------
    BUTTON
----------------------------------------------------------- */
+-------------------------------------------------- */
 
 .stButton > button {
-
     width: 100%;
+    height: 49px;
+    border: none !important;
+    border-radius: 10px !important;
 
-    min-height: 50px;
+    background: linear-gradient(
+        90deg,
+        #2463d4,
+        #3478ea
+    ) !important;
 
-    border: none;
+    color: white !important;
+    font-weight: 650 !important;
+    font-size: 15px !important;
 
-    border-radius: 12px;
+    box-shadow: 0 8px 18px rgba(36, 99, 212, 0.15);
 
-    background:
-        linear-gradient(
-            90deg,
-            #2864d7,
-            #3478e9
-        );
-
-    color: white;
-
-    font-size: 16px;
-
-    font-weight: 650;
-
-    box-shadow:
-        0 8px 20px rgba(41, 101, 215, 0.18);
-
-    transition:
-        transform 0.15s ease,
-        box-shadow 0.15s ease;
+    transition: all 0.2s ease;
 }
-
 
 .stButton > button:hover {
-
     transform: translateY(-1px);
-
-    color: white;
-
-    border: none;
-
-    box-shadow:
-        0 10px 25px rgba(41, 101, 215, 0.28);
+    box-shadow: 0 10px 24px rgba(36, 99, 212, 0.25);
 }
 
 
-/* ----------------------------------------------------------
-   PASSWORD REQUIREMENTS
----------------------------------------------------------- */
-
-.password-box {
-
-    background: #f4f7fc;
-
-    border-radius: 14px;
-
-    padding:
-        15px
-        18px;
-
-    margin:
-        10px 0
-        18px 0;
-
-    border:
-        1px solid #e5ebf4;
-}
-
-
-.requirement-title {
-
-    font-weight: 700;
-
-    color: #14294f;
-
-    margin-bottom: 8px;
-}
-
-
-.requirement {
-
-    color: #657999;
-
-    font-size: 13px;
-
-    margin: 4px 0;
-}
-
-
-.good {
-    color: #24794c;
-}
-
-
-.bad {
-    color: #8290a7;
-}
-
-
-/* ----------------------------------------------------------
+/* --------------------------------------------------
    RIGHT SIDE
----------------------------------------------------------- */
+-------------------------------------------------- */
 
-.right-container {
-
-    padding-top: 115px;
-
-    padding-left: 40px;
-}
-
-
-.security-item {
-
-    display: flex;
-
-    align-items: center;
-
-    margin-bottom: 38px;
-}
-
-
-.security-icon {
-
-    width: 58px;
-
-    height: 58px;
-
-    min-width: 58px;
-
-    border-radius: 50%;
-
-    background: rgba(220,233,252,0.9);
-
-    display: flex;
-
-    align-items: center;
-
-    justify-content: center;
-
-    font-size: 25px;
-
-    margin-right: 18px;
-}
-
-
-.security-title {
-
+.right-title {
     color: #102a56;
-
     font-size: 17px;
-
     font-weight: 700;
+    margin-bottom: 2px;
 }
 
-
-.security-description {
-
-    color: #62799d;
-
+.right-text {
+    color: #7185a5;
     font-size: 14px;
+    line-height: 1.4;
+}
 
-    line-height: 1.35;
-
-    margin-top: 3px;
+.feature {
+    margin-top: 70px;
+    margin-bottom: 45px;
 }
 
 
-/* ----------------------------------------------------------
+/* --------------------------------------------------
    FOOTER
----------------------------------------------------------- */
+-------------------------------------------------- */
 
-.page-footer {
-
+.footer-text {
     text-align: center;
-
-    color: #7c8fac;
-
+    color: #8b9bb5;
     font-size: 12px;
-
     margin-top: 30px;
-
-    letter-spacing: 1px;
+    letter-spacing: 0.5px;
 }
 
 
-/* ----------------------------------------------------------
-   RESPONSIVE
----------------------------------------------------------- */
-
-@media (max-width: 900px) {
-
-    .big-text {
-        font-size: 40px;
-    }
-
-    .left-container {
-        padding-top: 20px;
-    }
-
-    .right-container {
-        padding-top: 20px;
-    }
+/* Progress bar */
+.stProgress > div > div > div > div {
+    background-color: #3478ea;
 }
 
 </style>
@@ -433,7 +250,7 @@ div[data-baseweb="input"] input {
 
 
 # ============================================================
-# VALIDATE EMAIL
+# FUNCTIONS
 # ============================================================
 
 def validate_email(email):
@@ -496,10 +313,6 @@ def validate_email(email):
     return True, "Valid email address."
 
 
-# ============================================================
-# PASSWORD CHECKS
-# ============================================================
-
 def password_checks(password):
 
     special_characters = "!@#$%^&*()_+-=[]{};:,.?"
@@ -509,25 +322,21 @@ def password_checks(password):
             len(password) >= 8,
 
         "One uppercase letter (A-Z)":
-            any(char.isupper() for char in password),
+            any(c.isupper() for c in password),
 
         "One lowercase letter (a-z)":
-            any(char.islower() for char in password),
+            any(c.islower() for c in password),
 
         "One number (0-9)":
-            any(char.isdigit() for char in password),
+            any(c.isdigit() for c in password),
 
         "One special character":
-            any(char in special_characters for char in password),
+            any(c in special_characters for c in password),
 
         "No spaces":
             " " not in password
     }
 
-
-# ============================================================
-# PASSWORD VALIDATION
-# ============================================================
 
 def validate_password(password):
 
@@ -539,14 +348,10 @@ def validate_password(password):
     for requirement, passed in checks.items():
 
         if not passed:
-            return False, f"Password requirement not met: {requirement}"
+            return False, "Missing requirement: " + requirement
 
     return True, "Valid password."
 
-
-# ============================================================
-# PASSWORD STRENGTH
-# ============================================================
 
 def password_strength(password):
 
@@ -555,9 +360,7 @@ def password_strength(password):
 
     checks = password_checks(password)
 
-    passed = sum(checks.values())
-
-    return passed / len(checks)
+    return sum(checks.values()) / len(checks)
 
 
 # ============================================================
@@ -578,178 +381,176 @@ if "logged_in" not in st.session_state:
 
 
 # ============================================================
-# HEADER
+# BRAND
 # ============================================================
 
 st.markdown(
-    """
-    <div class="logo-header">
-        🔒 Secure<span class="logo-light">Login</span>
-    </div>
-    """,
+    '<div class="brand">🔒 Secure<span class="brand-light">Login</span></div>',
     unsafe_allow_html=True
 )
 
 
 # ============================================================
-# CREATE ACCOUNT PAGE
+# CREATE ACCOUNT
 # ============================================================
 
 if not st.session_state.account_created:
 
     left, center, right = st.columns(
-        [1.0, 1.7, 1.0],
+        [1, 1.55, 1],
         gap="large"
     )
 
 
     # ========================================================
-    # LEFT
+    # LEFT COLUMN
     # ========================================================
 
     with left:
 
-        st.markdown("""
-        <div class="left-container">
-
-            <div class="big-text">
-                A safer<br>
-                brighter<br>
-                tomorrow
-            </div>
-
-            <div class="blue-line"></div>
-
-            <div class="left-description">
-
-                Create your account
-                and take the first step
-                towards a more secure
-                digital experience.
-
-            </div>
-
-        </div>
-        """, unsafe_allow_html=True)
-
-
-    # ========================================================
-    # CENTER
-    # ========================================================
-
-    with center:
-
         st.markdown(
-            '<div class="lock-circle">🔒</div>',
-            unsafe_allow_html=True
-        )
-
-        st.markdown(
-            '<div class="card-title">'
-            'Create your account'
+            '<div class="hero-title">'
+            'A safer<br>'
+            'brighter<br>'
+            'tomorrow'
             '</div>',
             unsafe_allow_html=True
         )
 
         st.markdown(
-            '<div class="card-subtitle">'
+            '<div class="hero-line"></div>',
+            unsafe_allow_html=True
+        )
+
+        st.markdown(
+            '<div class="hero-text">'
+            'Create your account and take the first step '
+            'towards a more secure digital experience.'
+            '</div>',
+            unsafe_allow_html=True
+        )
+
+
+    # ========================================================
+    # CENTER COLUMN
+    # ========================================================
+
+    with center:
+
+        st.markdown(
+            '<div class="lock-icon">🔐</div>',
+            unsafe_allow_html=True
+        )
+
+        st.markdown(
+            '<div class="main-title">Create your account</div>',
+            unsafe_allow_html=True
+        )
+
+        st.markdown(
+            '<div class="main-subtitle">'
             'Create a secure account to continue'
             '</div>',
             unsafe_allow_html=True
         )
 
 
-        # ----------------------------------------------------
         # EMAIL
-        # ----------------------------------------------------
-
         email = st.text_input(
             "Email address",
-            placeholder="name@example.com",
-            key="register_email"
+            placeholder="name@example.com"
         )
 
 
-        # ----------------------------------------------------
         # PASSWORD
-        # ----------------------------------------------------
-
         password = st.text_input(
             "Password",
             type="password",
-            placeholder="Create a strong password",
-            key="register_password"
+            placeholder="Create a strong password"
         )
 
 
-        # ----------------------------------------------------
         # CONFIRM PASSWORD
-        # ----------------------------------------------------
-
         repeat_password = st.text_input(
             "Confirm password",
             type="password",
-            placeholder="Enter your password again",
-            key="repeat_password"
+            placeholder="Enter your password again"
         )
 
 
-        # ----------------------------------------------------
-        # REQUIREMENTS
-        # ----------------------------------------------------
+        # ====================================================
+        # PASSWORD REQUIREMENTS
+        # ====================================================
 
         checks = password_checks(password)
 
-        requirements = ""
+        requirement_html = ""
 
-        for requirement, passed in checks.items():
+        for name, passed in checks.items():
 
             if passed:
 
-                requirements += (
-                    f'<div class="requirement good">'
-                    f'✓ {requirement}'
-                    f'</div>'
+                requirement_html += (
+                    '<div class="req req-ok">'
+                    '✓ ' + name +
+                    '</div>'
                 )
 
             else:
 
-                requirements += (
-                    f'<div class="requirement bad">'
-                    f'○ {requirement}'
-                    f'</div>'
+                requirement_html += (
+                    '<div class="req">'
+                    '○ ' + name +
+                    '</div>'
                 )
 
 
+        # IMPORTANT:
+        # HTML IS ALL ON ONE LINE TO PREVENT STREAMLIT
+        # FROM TURNING IT INTO A CODE BLOCK
+
+        requirements_box = (
+            '<div class="requirements">'
+            '<div class="requirements-title">'
+            'Password requirements'
+            '</div>'
+            + requirement_html +
+            '</div>'
+        )
+
         st.markdown(
-            f"""
-            <div class="password-box">
-
-                <div class="requirement-title">
-                    Password requirements
-                </div>
-
-                {requirements}
-
-            </div>
-            """,
+            requirements_box,
             unsafe_allow_html=True
         )
 
 
-        # Password strength
+        # PASSWORD STRENGTH
         if password:
 
             strength = password_strength(password)
 
-            st.caption("Password strength")
+            if strength <= 0.35:
+                strength_text = "Weak"
+
+            elif strength <= 0.65:
+                strength_text = "Medium"
+
+            elif strength < 1:
+                strength_text = "Good"
+
+            else:
+                strength_text = "Strong"
+
+            st.caption(
+                "Password strength: " + strength_text
+            )
 
             st.progress(strength)
 
 
-        # ----------------------------------------------------
-        # CREATE ACCOUNT
-        # ----------------------------------------------------
+        # ====================================================
+        # CREATE ACCOUNT BUTTON
+        # ====================================================
 
         if st.button(
             "Create Account  →",
@@ -785,81 +586,40 @@ if not st.session_state.account_created:
 
 
     # ========================================================
-    # RIGHT
+    # RIGHT COLUMN
     # ========================================================
 
     with right:
 
-        st.markdown("""
-        <div class="right-container">
+        st.markdown(
+            '<div class="feature">'
+            '<div class="right-title">🛡️ &nbsp; Secure</div>'
+            '<div class="right-text">'
+            'Your information is protected.'
+            '</div>'
+            '</div>',
+            unsafe_allow_html=True
+        )
 
-            <div class="security-item">
+        st.markdown(
+            '<div class="feature">'
+            '<div class="right-title">👤 &nbsp; Private</div>'
+            '<div class="right-text">'
+            'We never share your data.'
+            '</div>'
+            '</div>',
+            unsafe_allow_html=True
+        )
 
-                <div class="security-icon">
-                    🛡️
-                </div>
-
-                <div>
-
-                    <div class="security-title">
-                        Secure
-                    </div>
-
-                    <div class="security-description">
-                        Your information<br>
-                        is protected
-                    </div>
-
-                </div>
-
-            </div>
-
-
-            <div class="security-item">
-
-                <div class="security-icon">
-                    👥
-                </div>
-
-                <div>
-
-                    <div class="security-title">
-                        Private
-                    </div>
-
-                    <div class="security-description">
-                        We never share<br>
-                        your data
-                    </div>
-
-                </div>
-
-            </div>
-
-
-            <div class="security-item">
-
-                <div class="security-icon">
-                    ⚡
-                </div>
-
-                <div>
-
-                    <div class="security-title">
-                        Simple
-                    </div>
-
-                    <div class="security-description">
-                        Fast and easy<br>
-                        to use
-                    </div>
-
-                </div>
-
-            </div>
-
-        </div>
-        """, unsafe_allow_html=True)
+        st.markdown(
+            '<div class="feature">'
+            '<div class="right-title">⚡ &nbsp; Simple</div>'
+            '<div class="right-text">'
+            'Fast and easy to use.'
+            '</div>'
+            '</div>',
+            unsafe_allow_html=True
+        )
 
 
 # ============================================================
@@ -868,33 +628,31 @@ if not st.session_state.account_created:
 
 elif not st.session_state.logged_in:
 
-    empty_left, login_column, empty_right = st.columns(
-        [1, 1.3, 1]
+    left_space, login, right_space = st.columns(
+        [1, 1.2, 1]
     )
 
-    with login_column:
+    with login:
 
         st.markdown(
-            '<div class="lock-circle">🔒</div>',
+            '<div class="lock-icon">🔐</div>',
             unsafe_allow_html=True
         )
 
         st.markdown(
-            '<div class="card-title">'
-            'Welcome back'
-            '</div>',
+            '<div class="main-title">Welcome back</div>',
             unsafe_allow_html=True
         )
 
         st.markdown(
-            '<div class="card-subtitle">'
-            'Sign in to your SecureLogin account'
+            '<div class="main-subtitle">'
+            'Sign in to your account'
             '</div>',
             unsafe_allow_html=True
         )
 
         st.success(
-            "✓ Your account was created successfully."
+            "✓ Account successfully created!"
         )
 
         login_email = st.text_input(
@@ -934,46 +692,33 @@ elif not st.session_state.logged_in:
                     "Incorrect email address or password."
                 )
 
-        st.write("")
-
-        if st.button(
-            "Create a different account",
-            use_container_width=True
-        ):
-
-            st.session_state.account_created = False
-            st.session_state.saved_email = ""
-            st.session_state.saved_password = ""
-
-            st.rerun()
-
 
 # ============================================================
-# LOGGED IN PAGE
+# LOGGED IN
 # ============================================================
 
 else:
 
-    empty_left, dashboard, empty_right = st.columns(
-        [1, 1.3, 1]
+    left_space, dashboard, right_space = st.columns(
+        [1, 1.2, 1]
     )
 
     with dashboard:
 
         st.markdown(
-            '<div class="lock-circle">✓</div>',
+            '<div class="lock-icon">✓</div>',
             unsafe_allow_html=True
         )
 
         st.markdown(
-            '<div class="card-title">'
+            '<div class="main-title">'
             'Welcome!'
             '</div>',
             unsafe_allow_html=True
         )
 
         st.markdown(
-            '<div class="card-subtitle">'
+            '<div class="main-subtitle">'
             'You are securely logged in'
             '</div>',
             unsafe_allow_html=True
@@ -984,25 +729,25 @@ else:
         )
 
         st.info(
-            f"Logged in as: "
-            f"**{st.session_state.saved_email}**"
+            "Logged in as: "
+            + st.session_state.saved_email
         )
 
         col1, col2 = st.columns(2)
 
         with col1:
+
             st.metric(
                 "Email status",
                 "Valid"
             )
 
         with col2:
+
             st.metric(
                 "Password",
                 "Strong"
             )
-
-        st.write("")
 
         if st.button(
             "Log out",
@@ -1019,11 +764,8 @@ else:
 # ============================================================
 
 st.markdown(
-    """
-    <div class="page-footer">
-        SecureLogin &nbsp; | &nbsp;
-        Built for a safer digital world
-    </div>
-    """,
+    '<div class="footer-text">'
+    'SecureLogin &nbsp; | &nbsp; Built for a safer digital world'
+    '</div>',
     unsafe_allow_html=True
 )

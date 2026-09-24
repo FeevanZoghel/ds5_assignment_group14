@@ -108,5 +108,5 @@ def visualize_network(G: nx.Graph) -> None:
     
     plt.show()
 
-G = create_network(5, 400, 4)
+G = create_network(5, 20, 4)
 visualize_network(G)

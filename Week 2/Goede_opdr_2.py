@@ -36,7 +36,7 @@ def complex_limiet(complex_getal: complex) -> int:
     Returns:
         int: De diverging index.
 
-    Mathijs
+    Matthijs
     """
     an = 0
 

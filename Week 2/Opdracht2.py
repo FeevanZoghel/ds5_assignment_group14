@@ -83,6 +83,7 @@ diverges, convergers = Overdracht(complex_list)
 import matplotlib.pyplot as plt
 
 complex_list = complex_number_list(x_values, y_values)
+
 def draw_mandel(width):
     x_values = []
     y_values = []
